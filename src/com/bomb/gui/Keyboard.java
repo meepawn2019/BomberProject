@@ -4,9 +4,16 @@ import com.bomb.OBJECT.OBJECT;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Keyboard implements KeyListener {
-    TEST test = new TEST();
+    TEST test;
+
+    public Keyboard()  {
+        this.test = new TEST();
+    }
     @Override
     public void keyTyped(KeyEvent e) {
 

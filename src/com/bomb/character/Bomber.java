@@ -90,7 +90,7 @@ public class Bomber extends Character implements  CanMove{
 
     @Override
     public void drawCharacter(Graphics2D g2) {
-        g2.drawImage(this.image, this.x, this.y, null);
+        g2.drawImage(this.image, this.x, this.y,this.image.getWidth(null),this.image.getWidth(null), null);
     }
 
     @Override

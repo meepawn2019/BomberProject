@@ -1,7 +1,9 @@
 package com.bomb.gui;
 
 import com.bomb.BackGround.Background;
+import com.bomb.OBJECT.Brick;
 import com.bomb.OBJECT.OBJECT;
+import com.bomb.OBJECT.Wall;
 import com.bomb.character.Bomber;
 
 import javax.swing.*;
@@ -15,8 +17,11 @@ public class TEST extends JPanel {
     Background background = new Background();
     public static ArrayList<OBJECT> listObject = new ArrayList<>();
     Camera camera = new Camera(0, 0);
-    @Override
 
+    public TEST(){
+        this.addObject(new Brick(100, 100));
+        this.addObject(new Wall(100,200));
+    }
     protected void paintComponent(Graphics g){
         Graphics2D g2d = (Graphics2D) g;
         super.paintComponent(g);
@@ -52,6 +57,7 @@ public class TEST extends JPanel {
     public void addObject(OBJECT object){
         listObject.add(object);
     }
-
+    
+    
 
 }

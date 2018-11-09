@@ -65,9 +65,9 @@ public class Bomber extends Character implements  CanMove{
         }
     }
 
-    public Bomber(){
-        this.x = 0;
-        this.y = 0;
+    public Bomber(int x,int y){
+        this.x = x;
+        this.y = y;
         this.image = new ImageIcon(getClass().getResource("/Character/bomber_down.png")).getImage();
     }
 

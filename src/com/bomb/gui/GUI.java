@@ -1,26 +1,22 @@
 package com.bomb.gui;
 
-import com.bomb.OBJECT.OBJECT;
-
 import javax.swing.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 
 public class GUI extends JFrame {
 
     //private TEST test = new TEST();
-    Keyboard keyboard;
+    TEST test;
 
     public GUI() {
         //setSize(WIDTHJF, HEIGHTJF);
-        keyboard = new Keyboard();
-        add(keyboard.test);
+        test = new TEST();
+        add(test);
         pack();
         setLocationRelativeTo(null);
-        addKeyListener(keyboard);
+        addKeyListener(test.myAdapter);
         setResizable(false);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
 
     }
 

@@ -11,4 +11,7 @@ abstract public class OBJECT {
     public abstract void drawObject(Graphics2D g2);
 
 
+    public Rectangle getBound() {
+        return new Rectangle(x, y+20, image.getWidth(null), image.getHeight(null)-20);
+    }
 }

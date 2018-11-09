@@ -13,7 +13,7 @@ public class Brick extends OBJECT{
         this.x=x;
         this.y=y;
         try {
-            this.image=ImageIO.read(getClass().getResourceAsStream("/Character/box2.png"));
+            this.image=ImageIO.read(getClass().getResourceAsStream("/Character/wood.png"));
         } catch (IOException ex) {
             Logger.getLogger(Brick.class.getName()).log(Level.SEVERE, null, ex);
         }

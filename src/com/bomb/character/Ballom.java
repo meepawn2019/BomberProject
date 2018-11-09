@@ -11,7 +11,7 @@ public class Ballom extends Character implements CanMove {
     }
 
     @Override
-    public void move(int huong) {
+    public void move() {
 
     }
 }

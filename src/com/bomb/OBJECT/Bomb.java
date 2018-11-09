@@ -1,17 +1,18 @@
 package com.bomb.OBJECT;
 
-import javax.swing.*;
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 
 public class Bomb extends OBJECT {
 
+    public int c;
     public Bomb(int x, int y){
         this.x = x;
         this.y = y;
+        c=0;
         try {
             this.image=ImageIO.read(getClass().getResourceAsStream("/Character/bomb.png"));
         } catch (IOException ex) {

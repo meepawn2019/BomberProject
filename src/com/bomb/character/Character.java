@@ -19,4 +19,8 @@ public abstract class Character {
     public int getY() {
         return y;
     }
+
+    public Rectangle getBound() {
+        return new Rectangle(x, y, image.getWidth(null), image.getWidth(null));
+    }
 }

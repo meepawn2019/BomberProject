@@ -20,7 +20,7 @@ public class Wall extends OBJECT{
     }
     @Override
     public void drawObject(Graphics2D g2) {
-        g2.drawImage(this.image, this.x, this.y+10,this.image.getWidth() ,this.image.getHeight(), null);
+        g2.drawImage(this.image, this.x, this.y,this.image.getWidth() ,this.image.getHeight(), null);
     }
     
 }

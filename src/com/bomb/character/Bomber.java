@@ -1,5 +1,6 @@
 package com.bomb.character;
 
+import com.bomb.OBJECT.Bomb;
 import com.bomb.OBJECT.OBJECT;
 import com.bomb.gui.TEST;
 
@@ -8,44 +9,48 @@ import java.awt.*;
 
 public class Bomber extends Character implements  CanMove{
     static public int HUONG = 2;
-    static public int MOVE = 45;
+    static public int MOVE = 1;
+    static public int SPEED = 15;
+    public int dx = 0;
+    public int dy = 0;
 
     @Override
-    public void move(int huong) {
-        boolean canmove = true;
+    public void move() {
+       /* boolean canMove = true;
         switch (huong){
             case TREN:
-                for(OBJECT object : TEST.listObject){
-                    if(this.y == object.y+MOVE && this.x == object.x) {
-                        canmove = false;
-                        break;
+                this.y-=MOVE;
+                if(this.y< 0) this.y+=MOVE;
+                else {
+                    for(OBJECT object : TEST.listObject){
+                        if(getBound().intersects(object.getBound())) {
+                            this.y+=MOVE;
+                            break;
+                        }
                     }
                 }
-                if(this.y - MOVE < 0 || !canmove) break;
-                else {
-                    this.y -= MOVE;
-                    break;
-                }
+                break;
+
             case DUOI:
-                for(OBJECT object : TEST.listObject){
-                    if(this.y == object.y-MOVE && this.x == object.x) {
-                        canmove = false;
-                        break;
+                this.y+=MOVE;
+                if(this.y + image.getHeight(null) > TEST.D_H) this.y-=MOVE;
+                else {
+                    for(OBJECT object : TEST.listObject){
+                        if(getBound().intersects(object.getBound())) {
+                            this.y-=MOVE;
+                            break;
+                        }
                     }
                 }
-                if(this.y + image.getHeight(null) + MOVE > TEST.D_H  || !canmove) break;
-                else {
-                    this.y += MOVE;
-                    break;
-                }
+                break;
             case TRAI:
                 for(OBJECT object : TEST.listObject){
                     if(this.x == object.x+MOVE && this.y == object.y) {
-                        canmove = false;
+                        canMove = false;
                         break;
                     }
                 }
-                if(this.x - MOVE < 0 || !canmove) break;
+                if(this.x - MOVE < 0 || !canMove) break;
                 else {
                     this.x -= MOVE;
                     break;
@@ -53,22 +58,30 @@ public class Bomber extends Character implements  CanMove{
             case PHAI:
                 for(OBJECT object : TEST.listObject){
                     if(this.x == object.x-MOVE && this.y == object.y) {
-                        canmove = false;
+                        canMove = false;
                         break;
                     }
                 }
-                if(this.x + image.getWidth(null) + MOVE > 45*31 || !canmove) break; // Thay 45*31 bang chieu dai brick*31
+                if(this.x + image.getWidth(null) + MOVE > 45*31 || !canMove) break; // Thay 45*31 bang chieu dai brick*31
                 else {
                     this.x += MOVE;
                     break;
                 }
-        }
+        }*/
+       /*if(this.x + dx < 0 || this.x + image.getWidth(null) + dx > 45*31 || collision()) return;
+       else this.x+=dx;
+       if(this.y + dy <0 || this.y + image.getHeight(null) + dy >TEST.D_H || collision()) return;
+       else this.y+=dy;*/
+       this.x+=dx;
+       if(this.x + dx < 0 || this.x + image.getWidth(null) + dx > 45*31 || collision()) this.x-=dx;
+       this.y+=dy;
+       if(this.y + dy <0 || this.y + image.getHeight(null) + dy >TEST.D_H || collision()) this.y-=dy;
     }
 
     public Bomber(){
         this.x = 0;
         this.y = 0;
-        this.image = new ImageIcon(getClass().getResource("/Character/bomber_down.png")).getImage();
+        image = new ImageIcon(getClass().getResource("/Character/bomber_down.png")).getImage();
     }
 
     public void doiHuong(int huong){
@@ -90,11 +103,25 @@ public class Bomber extends Character implements  CanMove{
 
     @Override
     public void drawCharacter(Graphics2D g2) {
-        g2.drawImage(this.image, this.x, this.y,this.image.getWidth(null),this.image.getWidth(null), null);
+        g2.drawImage(image, this.x, this.y, image.getWidth(null), image.getWidth(null), null);
     }
 
     @Override
     public int getX() {
         return super.getX();
+    }
+
+
+    public boolean collision(){
+        for(OBJECT object : TEST.listObject){
+            if(object instanceof Bomb){
+                if(!getBound().intersects(object.getBound())) ((Bomb )object).c = 1;
+                if(((Bomb) object).c==0) return false;
+            }
+            if(getBound().intersects(object.getBound())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

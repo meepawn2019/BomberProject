@@ -4,12 +4,10 @@ import com.bomb.OBJECT.OBJECT;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Keyboard implements KeyListener {
     TEST test;
+    private boolean key[] = new boolean[120];
 
     public Keyboard()  {
         this.test = new TEST();
@@ -39,11 +37,9 @@ public class Keyboard implements KeyListener {
     public void keyReleased(KeyEvent e) {
         if(e.getKeyCode() == KeyEvent.VK_SPACE){
             test.addObject(new com.bomb.OBJECT.Bomb(test.bomber.x, test.bomber.y));
-            System.out.println(test.bomber.x  + " " + test.bomber.y);
             for(OBJECT object : TEST.listObject){
                 System.out.println(object.x + " " + object.y);
             }
         }
     }
-
 }

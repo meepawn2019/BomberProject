@@ -2,26 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="53c7505c-4a4b-434e-b86f-91d9eeff9296" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bomberman.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Bomberman.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bomberman/META-INF/Bomberman.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bomberman/com/bomb/OBJECT/Bomb.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bomberman/com/bomb/OBJECT/Bomb.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bomberman/com/bomb/OBJECT/OBJECT.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Bomberman/com/bomb/character/Bomber.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bomberman/com/bomb/character/Bomber.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bomberman/com/bomb/character/Character.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bomberman/com/bomb/character/Character.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bomberman/com/bomb/gui/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bomberman/com/bomb/gui/GUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bomberman/com/bomb/gui/Keyboard.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bomberman/com/bomb/gui/TEST.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bomberman/com/bomb/gui/TEST.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bomb/OBJECT/Bomb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bomb/OBJECT/Bomb.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bomb/OBJECT/Brick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bomb/OBJECT/Brick.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bomb/OBJECT/OBJECT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bomb/OBJECT/OBJECT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bomb/OBJECT/Wall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bomb/OBJECT/Wall.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bomb/character/Ballom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bomb/character/Ballom.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/bomb/character/Bomber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bomb/character/Bomber.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bomb/character/CanMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bomb/character/CanMove.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bomb/character/Character.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bomb/character/Character.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bomb/gui/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bomb/gui/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bomb/gui/Keyboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bomb/gui/Keyboard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/bomb/gui/TEST.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bomb/gui/TEST.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -36,8 +18,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/bomb/character/Bomber.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="433">
-              <caret line="118" column="16" selection-start-line="118" selection-start-column="16" selection-end-line="118" selection-end-column="16" />
+            <state relative-caret-position="151">
+              <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#doiHuong#0;class#Bomber#0" />
@@ -80,25 +62,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/bomb/gui/Keyboard.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="23" column="9" lean-forward="true" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
+            <state relative-caret-position="345">
+              <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#255#256#0" expanded="true" />
                 <element signature="e#293#294#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/bomb/OBJECT/OBJECT.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="14" column="34" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
-              <folding>
-                <element signature="e#248#249#0" expanded="true" />
-                <element signature="e#334#335#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -113,11 +82,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/bomb/gui/TEST.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="26" column="44" lean-forward="true" selection-start-line="26" selection-start-column="44" selection-end-line="26" selection-end-column="44" />
+            <state relative-caret-position="-300">
+              <caret line="28" column="34" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -128,7 +97,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/bomb/OBJECT/Bomb.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
+            <state relative-caret-position="150">
               <caret line="14" column="12" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -174,9 +143,9 @@
         <option value="$PROJECT_DIR$/src/com/bomb/OBJECT/Brick.java" />
         <option value="$PROJECT_DIR$/src/com/bomb/OBJECT/Wall.java" />
         <option value="$PROJECT_DIR$/src/com/bomb/OBJECT/Bomb.java" />
+        <option value="$PROJECT_DIR$/src/com/bomb/OBJECT/OBJECT.java" />
         <option value="$PROJECT_DIR$/src/com/bomb/character/Bomber.java" />
         <option value="$PROJECT_DIR$/src/com/bomb/gui/TEST.java" />
-        <option value="$PROJECT_DIR$/src/com/bomb/OBJECT/OBJECT.java" />
       </list>
     </option>
   </component>
@@ -192,8 +161,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -230,6 +197,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -295,8 +264,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="30" width="1920" height="1050" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20704375" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20917822" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -305,7 +275,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.29641694" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.29641694" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3984799" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -375,17 +345,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/bomb/character/Character.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="23" column="77" selection-start-line="23" selection-start-column="77" selection-end-line="23" selection-end-column="77" />
-          <folding>
-            <element signature="e#474#475#0" expanded="true" />
-            <element signature="e#560#561#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bomb/character/CanMove.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -393,10 +352,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/bomb/OBJECT/Brick.java">
+    <entry file="file://$PROJECT_DIR$/src/com/bomb/OBJECT/Bomb.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="22" column="47" selection-start-line="22" selection-start-column="47" selection-end-line="22" selection-end-column="47" />
+        <state relative-caret-position="150">
+          <caret line="14" column="12" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -407,14 +369,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/bomb/gui/Keyboard.java">
+    <entry file="file://$PROJECT_DIR$/src/com/bomb/OBJECT/OBJECT.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="23" column="9" lean-forward="true" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
+        <state relative-caret-position="195">
+          <caret line="14" column="34" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#255#256#0" expanded="true" />
-            <element signature="e#293#294#0" expanded="true" />
+            <element signature="e#248#249#0" expanded="true" />
+            <element signature="e#341#342#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -426,20 +387,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/bomb/OBJECT/Bomb.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="12" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bomb/character/Bomber.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="433">
-          <caret line="118" column="16" selection-start-line="118" selection-start-column="16" selection-end-line="118" selection-end-column="16" />
+        <state relative-caret-position="151">
+          <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#doiHuong#0;class#Bomber#0" />
@@ -447,23 +398,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/bomb/gui/TEST.java">
+    <entry file="file://$PROJECT_DIR$/src/com/bomb/character/Character.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="44" lean-forward="true" selection-start-line="26" selection-start-column="44" selection-end-line="26" selection-end-column="44" />
+        <state relative-caret-position="285">
+          <caret line="23" column="77" selection-start-line="23" selection-start-column="77" selection-end-line="23" selection-end-column="77" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#474#475#0" expanded="true" />
+            <element signature="e#560#561#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/bomb/OBJECT/OBJECT.java">
+    <entry file="file://$PROJECT_DIR$/src/com/bomb/OBJECT/Brick.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="14" column="34" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
+        <state relative-caret-position="270">
+          <caret line="22" column="47" selection-start-line="22" selection-start-column="47" selection-end-line="22" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/bomb/gui/Keyboard.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
           <folding>
-            <element signature="e#248#249#0" expanded="true" />
-            <element signature="e#334#335#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#255#256#0" expanded="true" />
+            <element signature="e#293#294#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/bomb/gui/TEST.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-300">
+          <caret line="28" column="34" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

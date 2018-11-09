@@ -26,7 +26,7 @@ public class TEST extends JPanel implements ActionListener {
     TEST(){
         this.addObject(new Brick(100, 100));
         this.addObject(new Wall(100,200));
-        Timer timer = new Timer(15, this);
+        Timer timer = new Timer(10, this);
         timer.start();
     }
     protected void paintComponent(Graphics g){

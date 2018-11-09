@@ -9,69 +9,12 @@ import java.awt.*;
 
 public class Bomber extends Character implements  CanMove{
     static public int HUONG = 2;
-    static public int MOVE = 1;
-    static public int SPEED = 15;
+    static public int MOVE = 2;
     public int dx = 0;
     public int dy = 0;
 
     @Override
     public void move() {
-       /* boolean canMove = true;
-        switch (huong){
-            case TREN:
-                this.y-=MOVE;
-                if(this.y< 0) this.y+=MOVE;
-                else {
-                    for(OBJECT object : TEST.listObject){
-                        if(getBound().intersects(object.getBound())) {
-                            this.y+=MOVE;
-                            break;
-                        }
-                    }
-                }
-                break;
-
-            case DUOI:
-                this.y+=MOVE;
-                if(this.y + image.getHeight(null) > TEST.D_H) this.y-=MOVE;
-                else {
-                    for(OBJECT object : TEST.listObject){
-                        if(getBound().intersects(object.getBound())) {
-                            this.y-=MOVE;
-                            break;
-                        }
-                    }
-                }
-                break;
-            case TRAI:
-                for(OBJECT object : TEST.listObject){
-                    if(this.x == object.x+MOVE && this.y == object.y) {
-                        canMove = false;
-                        break;
-                    }
-                }
-                if(this.x - MOVE < 0 || !canMove) break;
-                else {
-                    this.x -= MOVE;
-                    break;
-                }
-            case PHAI:
-                for(OBJECT object : TEST.listObject){
-                    if(this.x == object.x-MOVE && this.y == object.y) {
-                        canMove = false;
-                        break;
-                    }
-                }
-                if(this.x + image.getWidth(null) + MOVE > 45*31 || !canMove) break; // Thay 45*31 bang chieu dai brick*31
-                else {
-                    this.x += MOVE;
-                    break;
-                }
-        }*/
-       /*if(this.x + dx < 0 || this.x + image.getWidth(null) + dx > 45*31 || collision()) return;
-       else this.x+=dx;
-       if(this.y + dy <0 || this.y + image.getHeight(null) + dy >TEST.D_H || collision()) return;
-       else this.y+=dy;*/
        this.x+=dx;
        if(this.x + dx < 0 || this.x + image.getWidth(null) + dx > 45*31 || collision()) this.x-=dx;
        this.y+=dy;

@@ -13,6 +13,7 @@ public class Bomber extends Character implements  CanMove{
     public int dx = 0;
     public int dy = 0;
 
+
     @Override
     public void move() {
        this.x+=dx;
@@ -21,16 +22,16 @@ public class Bomber extends Character implements  CanMove{
        if(this.y + dy <0 || this.y + image.getHeight(null) + dy >TEST.D_H || collision()) this.y-=dy;
     }
 
-    public Bomber(){
-        this.x = 0;
-        this.y = 0;
-        image = new ImageIcon(getClass().getResource("/Character/bomber_down.png")).getImage();
-    }
     public Bomber(int x,int y){
         this.x = x;
         this.y = y;
         image = new ImageIcon(getClass().getResource("/Character/bomber_down.png")).getImage();
     }
+
+    public Bomber(){
+        image = new ImageIcon(getClass().getResource("/Character/bomber_down.png")).getImage();
+    }
+
 
     public void doiHuong(int huong){
         switch(huong){

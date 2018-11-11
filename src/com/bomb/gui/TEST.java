@@ -19,13 +19,21 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static com.bomb.character.Bomber.MOVE;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TEST extends JPanel implements ActionListener {
     static final int D_W = 905;
     public static final int D_H = 610;
+
     private static final int ix=45;
     private static final int iy=45;
-    Bomber bomber = new Bomber();
+    Bomber bomber;
+
     private Background background = new Background();
     public static ArrayList<OBJECT> listObject = new ArrayList<>();
     private Camera camera = new Camera(0, 0);
@@ -34,6 +42,7 @@ public class TEST extends JPanel implements ActionListener {
     TEST(){
         BufferedReader br;
         String s;
+
         int i,row=0,line=0;
         try {
             br=new BufferedReader(new FileReader("map1.txt"));
@@ -47,15 +56,14 @@ public class TEST extends JPanel implements ActionListener {
                         case '*': this.addObject(new Brick(row*ix,line*iy));
                             break;
                         case 'p': bomber = new Bomber(row*ix,line*iy);
-
+                        break;
                     }
                     row++;
                 }
                 s=br.readLine();
                 line++;
             }
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(TEST.class.getName()).log(Level.SEVERE, null, ex);
+            br.close();
         } catch (IOException ex) {
             Logger.getLogger(TEST.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -78,10 +86,7 @@ public class TEST extends JPanel implements ActionListener {
 
 
     void move(int huong){
-        if(Bomber.HUONG != huong){
-            bomber.doiHuong(huong);
-            Bomber.HUONG = huong;
-        }
+        bomber.doiHuong(huong);
         bomber.move();
 
     }
@@ -147,5 +152,4 @@ public class TEST extends JPanel implements ActionListener {
         repaint();
     }
 }
-/*    int x = mBomber.getX() + mBomber.getWidth() / 2;
-    int y = mBomber.getY() + mBomber.getHeart() / 2;*/
+

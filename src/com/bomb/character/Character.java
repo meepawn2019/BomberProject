@@ -20,7 +20,5 @@ public abstract class Character {
         return y;
     }
 
-    public Rectangle getBound() {
-        return new Rectangle(x, y, image.getWidth(null), image.getWidth(null));
-    }
+
 }

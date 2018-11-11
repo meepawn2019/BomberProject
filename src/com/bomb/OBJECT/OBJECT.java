@@ -12,6 +12,6 @@ abstract public class OBJECT {
 
 
     public Rectangle getBound() {
-        return new Rectangle(x, y+20, image.getWidth(null), image.getHeight(null)-20);
+        return new Rectangle(x, y, image.getWidth(null), image.getHeight(null));
     }
 }

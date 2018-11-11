@@ -10,6 +10,8 @@ public class Bomb extends OBJECT {
 
     public int c;
     public Bomb(int x, int y){
+        x=(x/45)*45;
+        y=(y/45)*45;
         this.x = x;
         this.y = y;
         c=0;
@@ -23,6 +25,6 @@ public class Bomb extends OBJECT {
    
     @Override
     public void drawObject(Graphics2D g2) {
-        g2.drawImage(this.image, this.x, this.y,this.image.getWidth() ,this.image.getHeight() , null);
+        g2.drawImage(this.image, this.x, this.y, null);
     }
 }

@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class Bomber extends Character implements  CanMove{
     static public int HUONG = 2;
-    static public int MOVE = 2;
+    static public int MOVE = 1;
     public int dx = 0;
     public int dy = 0;
 
@@ -24,6 +24,11 @@ public class Bomber extends Character implements  CanMove{
     public Bomber(){
         this.x = 0;
         this.y = 0;
+        image = new ImageIcon(getClass().getResource("/Character/bomber_down.png")).getImage();
+    }
+    public Bomber(int x,int y){
+        this.x = x;
+        this.y = y;
         image = new ImageIcon(getClass().getResource("/Character/bomber_down.png")).getImage();
     }
 
@@ -46,7 +51,7 @@ public class Bomber extends Character implements  CanMove{
 
     @Override
     public void drawCharacter(Graphics2D g2) {
-        g2.drawImage(image, this.x, this.y, image.getWidth(null), image.getWidth(null), null);
+        g2.drawImage(image, this.x, this.y-20, null);
     }
 
     @Override
@@ -55,7 +60,7 @@ public class Bomber extends Character implements  CanMove{
     }
 
 
-    public boolean collision(){
+    private boolean collision(){
         for(OBJECT object : TEST.listObject){
             if(object instanceof Bomb){
                 if(!getBound().intersects(object.getBound())) ((Bomb )object).c = 1;
@@ -67,4 +72,11 @@ public class Bomber extends Character implements  CanMove{
         }
         return false;
     }
+
+    private Rectangle getBound() {
+        return new Rectangle(x, y, image.getWidth(null), image.getHeight(null)-20);
+    }
+
+    public int getHeight(){return image.getHeight(null)-20;}
+    public int getWidth(){return image.getWidth(null);}
 }

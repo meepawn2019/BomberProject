@@ -10,13 +10,21 @@ import com.bomb.character.Character;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static com.bomb.character.Bomber.MOVE;
 
 public class TEST extends JPanel implements ActionListener {
     static final int D_W = 905;
     public static final int D_H = 610;
+    private static final int ix=45;
+    private static final int iy=45;
     Bomber bomber = new Bomber();
     private Background background = new Background();
     public static ArrayList<OBJECT> listObject = new ArrayList<>();
@@ -24,8 +32,33 @@ public class TEST extends JPanel implements ActionListener {
     private int huong;
 
     TEST(){
-        this.addObject(new Brick(100, 100));
-        this.addObject(new Wall(100,200));
+        BufferedReader br;
+        String s;
+        int i,row=0,line=0;
+        try {
+            br=new BufferedReader(new FileReader("map1.txt"));
+            s=br.readLine();
+            while(s!=null){
+                row=0;
+                for(i=0;i<s.length();i++){
+                    switch(s.charAt(i)){
+                        case '#': this.addObject(new Wall(row*ix,line*iy));
+                            break;
+                        case '*': this.addObject(new Brick(row*ix,line*iy));
+                            break;
+                        case 'p': bomber = new Bomber(row*ix,line*iy);
+
+                    }
+                    row++;
+                }
+                s=br.readLine();
+                line++;
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(TEST.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(TEST.class.getName()).log(Level.SEVERE, null, ex);
+        }
         Timer timer = new Timer(10, this);
         timer.start();
     }
@@ -88,7 +121,7 @@ public class TEST extends JPanel implements ActionListener {
         @Override
         public void keyReleased(KeyEvent e) {
             if(e.getKeyCode() == KeyEvent.VK_SPACE){
-                addObject(new com.bomb.OBJECT.Bomb(bomber.x, bomber.y));
+                addObject(new com.bomb.OBJECT.Bomb(bomber.x + bomber.getWidth() / 2, bomber.y + bomber.getHeight() / 2 ));
             }
             if(e.getKeyCode() == KeyEvent.VK_UP){
                 bomber.dy = 0;
@@ -114,3 +147,5 @@ public class TEST extends JPanel implements ActionListener {
         repaint();
     }
 }
+/*    int x = mBomber.getX() + mBomber.getWidth() / 2;
+    int y = mBomber.getY() + mBomber.getHeart() / 2;*/

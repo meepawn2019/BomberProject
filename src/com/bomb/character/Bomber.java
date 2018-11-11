@@ -36,16 +36,16 @@ public class Bomber extends Character implements  CanMove{
     public void doiHuong(int huong){
         switch(huong){
             case TREN:
-                this.image = new ImageIcon(getClass().getResource("/Character/bomber_up.png")).getImage();
+                image = new ImageIcon(getClass().getResource("/Character/bomber_up.png")).getImage();
                 break;
             case DUOI:
-                this.image = new ImageIcon(getClass().getResource("/Character/bomber_down.png")).getImage();
+                image = new ImageIcon(getClass().getResource("/Character/bomber_down.png")).getImage();
                 break;
             case TRAI:
-                this.image = new ImageIcon(getClass().getResource("/Character/bomber_left.png")).getImage();
+                image = new ImageIcon(getClass().getResource("/Character/bomber_left.png")).getImage();
                 break;
             case PHAI:
-                this.image = new ImageIcon(getClass().getResource("/Character/bomber_right.png")).getImage();
+                image = new ImageIcon(getClass().getResource("/Character/bomber_right.png")).getImage();
                 break;
         }
     }
@@ -75,7 +75,7 @@ public class Bomber extends Character implements  CanMove{
     }
 
     private Rectangle getBound() {
-        return new Rectangle(x, y, image.getWidth(null), image.getHeight(null)-20);
+        return new Rectangle(x, y, image.getWidth(null)-5, image.getHeight(null)-20);
     }
 
     public int getHeight(){return image.getHeight(null)-20;}

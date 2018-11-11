@@ -9,9 +9,11 @@ import com.bomb.character.Character;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,12 +21,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static com.bomb.character.Bomber.MOVE;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class TEST extends JPanel implements ActionListener {
     static final int D_W = 905;
@@ -85,11 +81,6 @@ public class TEST extends JPanel implements ActionListener {
     }
 
 
-    void move(int huong){
-        bomber.doiHuong(huong);
-        bomber.move();
-
-    }
     @Override
 
     public Dimension getPreferredSize() {
@@ -147,8 +138,8 @@ public class TEST extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         bomber.doiHuong(huong);
-        if(huong == 3 || huong == 4) camera.moveCamera(bomber);
         bomber.move();
+        camera.moveCamera(bomber);
         repaint();
     }
 }

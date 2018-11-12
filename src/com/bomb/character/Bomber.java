@@ -75,7 +75,7 @@ public class Bomber extends Character implements  CanMove{
     }
 
     private Rectangle getBound() {
-        return new Rectangle(x, y, image.getWidth(null)-5, image.getHeight(null)-20);
+        return new Rectangle(x, y, image.getWidth(null), image.getHeight(null)-20);
     }
 
     public int getHeight(){return image.getHeight(null)-20;}

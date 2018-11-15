@@ -18,6 +18,16 @@ public class Brick extends OBJECT{
             Logger.getLogger(Brick.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public void isImpactBombbang(){
+
+    }
+
+    @Override
+    public Rectangle getBound() {
+        return super.getBound();
+    }
+
     @Override
     public void drawObject(Graphics2D g2) {
         g2.drawImage(this.image, this.x, this.y,this.image.getWidth() ,this.image.getHeight(), null);

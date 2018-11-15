@@ -28,10 +28,6 @@ public class Bomber extends Character implements  CanMove{
         image = new ImageIcon(getClass().getResource("/Character/bomber_down.png")).getImage();
     }
 
-    public Bomber(){
-        image = new ImageIcon(getClass().getResource("/Character/bomber_down.png")).getImage();
-    }
-
 
     public void doiHuong(int huong){
         switch(huong){

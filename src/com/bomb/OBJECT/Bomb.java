@@ -3,13 +3,15 @@ package com.bomb.OBJECT;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Bomb extends OBJECT {
 
     public int c;
-    public Bomb(int x, int y){
+    public int lifeTime;
+    private Bomb(int x, int y){
         x=(x/45)*45;
         y=(y/45)*45;
         this.x = x;
@@ -22,7 +24,15 @@ public class Bomb extends OBJECT {
         }
     }
 
-   
+    public Bomb(int x, int y, int lifeTime){
+        this(x, y);
+        this.lifeTime = lifeTime;
+    }
+
+    public void explose(){
+        lifeTime -=15;
+    }
+
     @Override
     public void drawObject(Graphics2D g2) {
         g2.drawImage(this.image, this.x, this.y, null);

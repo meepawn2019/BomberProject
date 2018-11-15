@@ -1,9 +1,7 @@
 package com.bomb.gui;
 
 import com.bomb.BackGround.Background;
-import com.bomb.OBJECT.Brick;
-import com.bomb.OBJECT.OBJECT;
-import com.bomb.OBJECT.Wall;
+import com.bomb.OBJECT.*;
 import com.bomb.character.Bomber;
 import com.bomb.character.Character;
 
@@ -17,6 +15,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,6 +31,7 @@ public class TEST extends JPanel implements ActionListener {
 
     private Background background = new Background();
     public static ArrayList<OBJECT> listObject = new ArrayList<>();
+    public static ArrayList<Bombbang> listBombbang = new ArrayList<>();
     private Camera camera = new Camera(0, 0);
     private int huong;
 
@@ -74,7 +74,13 @@ public class TEST extends JPanel implements ActionListener {
         g2d.translate(camera.getX(), camera.getY());
         background.drawBackGround(g2d);
         for(OBJECT object : listObject){
+            if(object instanceof Brick || object instanceof Bomb)
             object.drawObject(g2d);
+        }
+        for(Bombbang bombb : listBombbang) bombb.drawObject(g2d);
+        for(OBJECT object : listObject){
+            if(object instanceof Wall)
+                object.drawObject(g2d);
         }
         bomber.drawCharacter(g2d);
         g2d.translate(-camera.getX(), -camera.getY());
@@ -117,7 +123,7 @@ public class TEST extends JPanel implements ActionListener {
         @Override
         public void keyReleased(KeyEvent e) {
             if(e.getKeyCode() == KeyEvent.VK_SPACE){
-                addObject(new com.bomb.OBJECT.Bomb(bomber.x + bomber.getWidth() / 2, bomber.y + bomber.getHeight() / 2 ));
+                addObject(new com.bomb.OBJECT.Bomb(bomber.x + bomber.getWidth() / 2, bomber.y + bomber.getHeight() / 2, 3000 ));
             }
             if(e.getKeyCode() == KeyEvent.VK_UP){
                 bomber.dy = 0;
@@ -133,13 +139,39 @@ public class TEST extends JPanel implements ActionListener {
             }
         }
     };
+    public void checkBomb(){
+        Iterator<OBJECT> ite = listObject.iterator();
+        while(ite.hasNext()){
+            OBJECT object = ite.next();
+            if(object instanceof Bomb ){
+                ((Bomb) object).explose();
+                if(((Bomb) object).lifeTime == 0)
+                {
+                    int x = object.x;
+                    int y = object.y;
+                    ite.remove();
+                    listBombbang.add(new Bombbang(x,y,2000, 2));
+                }
+            }
+        }
+    }
 
+    public void checkBombbang(){
+        Iterator<Bombbang> ite = listBombbang.iterator();
+        while(ite.hasNext()){
+            Bombbang bombb = ite.next();
+            bombb.remove();
+            if(bombb.lifeTime == 0) ite.remove();
+        }
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         bomber.doiHuong(huong);
         bomber.move();
         camera.moveCamera(bomber);
+        checkBomb();
+        //checkBombbang();
         repaint();
     }
 }

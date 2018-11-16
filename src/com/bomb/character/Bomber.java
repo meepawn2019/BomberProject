@@ -8,7 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Bomber extends Character implements  CanMove{
-    static public int HUONG = 2;
     static public int MOVE = 1;
     public int dx = 0;
     public int dy = 0;

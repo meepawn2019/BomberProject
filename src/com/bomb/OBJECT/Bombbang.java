@@ -29,7 +29,7 @@ public class Bombbang extends OBJECT{
     }
 
     @Override
-    public void drawObject(Graphics2D g2) {
+    public void drawObject( Graphics2D g2) {
         g2.drawImage(img_left, x, y,null);
         g2.drawImage(img_right, x, y,null);
         g2.drawImage(img_up, x, y,null);

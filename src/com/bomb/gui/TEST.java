@@ -167,11 +167,11 @@ public class TEST extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        bomber.doiHuong(huong);
         bomber.move();
+        bomber.doiHuong(huong);
         camera.moveCamera(bomber);
         checkBomb();
-        //checkBombbang();
+        checkBombbang();
         repaint();
     }
 }

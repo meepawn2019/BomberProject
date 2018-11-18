@@ -3,7 +3,6 @@ package com.bomb.OBJECT;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

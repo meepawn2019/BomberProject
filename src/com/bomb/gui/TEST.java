@@ -150,7 +150,7 @@ public class TEST extends JPanel implements ActionListener {
                     int x = object.x;
                     int y = object.y;
                     ite.remove();
-                    listBombbang.add(new Bombbang(x,y,2000, 2));
+                    listBombbang.add(new Bombbang(x,y,2000,5));
                 }
             }
         }

@@ -1,14 +1,18 @@
 package com.bomb.OBJECT;
 
 import com.bomb.gui.TEST;
-import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 public class Bombbang extends OBJECT{
 
-    private Image img_left, img_right, img_up, img_down;
+    private BufferedImage img_left, img_right, img_up, img_down,img_center;
     public int lifeTime;
     int size;
 
@@ -17,10 +21,16 @@ public class Bombbang extends OBJECT{
         this.y = y;
         this.size = size;
         this.lifeTime = lifeTime;
-        img_left = new ImageIcon(getClass().getResource("/Character/paopaoleft1.png")).getImage();
-        img_right = new ImageIcon(getClass().getResource("/Character/paopaoright1.png")).getImage();
-        img_up = new ImageIcon(getClass().getResource("/Character/paopaoup1.png")).getImage();
-        img_down = new ImageIcon(getClass().getResource("/Character/paopaodown1.png")).getImage();
+        try {
+            img_left = ImageIO.read(getClass().getResourceAsStream("/Character/paopaoleft1.png"));
+            img_right = ImageIO.read(getClass().getResourceAsStream("/Character/paopaoright1.png"));
+            img_up = ImageIO.read(getClass().getResourceAsStream("/Character/paopaoup1.png"));
+            img_down = ImageIO.read(getClass().getResourceAsStream("/Character/paopaodown1.png"));
+            img_center=ImageIO.read(getClass().getResourceAsStream("/Character/paopaoup.png"));
+        } catch (IOException ex) {
+            Logger.getLogger(Bombbang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     public void remove(){
@@ -38,19 +48,27 @@ public class Bombbang extends OBJECT{
             }
         }
     }
-    public boolean isImpactBrick(ArrayList<OBJECT>list,int x,int y){
-        int i,b=0;
+    public boolean isImpactBrickUp(ArrayList<OBJECT>list,int x,int y,int size){
+        int i;
         OBJECT object;
         for(i=0;i<list.size();i++){
             object=list.get(i);
             if(object instanceof Brick ){
-                if(((Brick) object).x==x||((Brick)object).y==y){
-                    removeBrick(list,(Brick)object);
-                    b=1;
-                    return true;
+                if(((Brick) object).x==x){
+                   if(((Brick) object).y==y-45*size+45) return true;
                 }
             }
-            if(b==1) break;
+        }
+        return false;
+    }
+    public boolean isImpactBrickDown(ArrayList<OBJECT>list,int x,int y,int size){
+        int i;
+        OBJECT object;
+        for(i=0;i<list.size();i++){
+            object=list.get(i);
+            if(object instanceof Brick){
+                if(((Brick) object).y==y+45*size) return true;
+            }
         }
         return false;
     }
@@ -59,12 +77,15 @@ public class Bombbang extends OBJECT{
     public void drawObject( Graphics2D g2) {
         int i;
         for(i=1;i<=size;i++){
-            g2.drawImage(img_left, x-45*i,y, null);
-            g2.drawImage(img_right, x+45*i, y, null);
-            g2.drawImage(img_up, x, y-45*i, null);
-            g2.drawImage(img_down, x, y+45*i, null);
+            if(!isImpactBrickUp(TEST.listObject,this.x,this.y,i)){
+                g2.drawImage(img_up, x, y-45*i,45,45, null);
+            }
+            if(isImpactBrickDown(TEST.listObject,this.x,this.y,i)){
+                g2.drawImage(img_down, x, y+45*i,45,45, null);
+            }
             
         }
-        isImpactBrick(TEST.listObject,this.x,this.y);
+        //g2.drawImage(img_center, x, y, 45, 45, null);
+        
     }
 }

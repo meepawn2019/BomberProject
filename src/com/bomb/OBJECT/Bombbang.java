@@ -15,7 +15,7 @@ public class Bombbang extends OBJECT{
     private BufferedImage img_left, img_right, img_up, img_down,img_center;
     public int lifeTime;
     int size;
-
+    private Brick delete;
     public Bombbang(int x, int y, int lifeTime, int size) {
         this.x = x;
         this.y = y;
@@ -37,13 +37,13 @@ public class Bombbang extends OBJECT{
         lifeTime -=50;
     }
     public void removeBrick(ArrayList<OBJECT> list,Brick brick){//hàm xóa
-        Iterator<OBJECT> ite = list.iterator();//dùng Iterator để xóa, nếu dùng list.move thì sẽ ko đấm dồn lên mà phần tử đó sẽ trở thành null và lần duyệt tiếp theo sẽ sai 
+        Iterator<OBJECT> ite = list.iterator();//dùng Iterator để xóa, nếu dùng list.remove thì sẽ ko dồn lên mà phần tử đó sẽ trở thành null và lần duyệt tiếp theo sẽ sai 
         while(ite.hasNext()){
             OBJECT object = ite.next();//ite.next sẽ trả về đối tượng tiếp theo của list
             if(object instanceof Brick){
                 if(object.equals(brick)){
                     ite.remove();
-                    
+                    break;
                 }
             }
         }
@@ -55,7 +55,10 @@ public class Bombbang extends OBJECT{
             object=list.get(i);
             if(object instanceof Brick ){
                 if(((Brick) object).x==x){
-                   if(((Brick) object).y==y-45*size+45) return true;
+                   if(((Brick) object).y==y-45*size+45) {
+                       delete=(Brick) object;
+                       return true;
+                   }
                 }
             }
         }
@@ -67,25 +70,63 @@ public class Bombbang extends OBJECT{
         for(i=0;i<list.size();i++){
             object=list.get(i);
             if(object instanceof Brick){
-                if(((Brick) object).y==y+45*size) return true;
+                if(((Brick) object).x==x){
+                    if(((Brick) object).y==y+45*size-45) return true;
+                }
             }
         }
         return false;
     }
-
+    public boolean isImpactBrickRight(ArrayList<OBJECT>list,int x,int y,int size){
+        int i;
+        OBJECT object;
+        for(i=0;i<list.size();i++){
+            object=list.get(i);
+            if(object instanceof Brick){
+                if(((Brick) object).y==y){
+                    if(((Brick) object).x==x+45*size-45) return true;
+                }
+            }
+        }
+        return false;
+    }
+    public boolean isImpactBrickLeft(ArrayList<OBJECT>list,int x,int y,int size){
+        int i;
+        OBJECT object;
+        for(i=0;i<list.size();i++){
+            object=list.get(i);
+            if(object instanceof Brick){
+                if(((Brick) object).y==y){
+                    if(((Brick) object).x==x-45*size+45) return true;
+                }
+            }
+        }
+        return false;
+    }
     @Override
     public void drawObject( Graphics2D g2) {
         int i;
         for(i=1;i<=size;i++){
             if(!isImpactBrickUp(TEST.listObject,this.x,this.y,i)){
                 g2.drawImage(img_up, x, y-45*i,45,45, null);
-            }
-            if(isImpactBrickDown(TEST.listObject,this.x,this.y,i)){
-                g2.drawImage(img_down, x, y+45*i,45,45, null);
-            }
-            
+            }else break;
         }
-        //g2.drawImage(img_center, x, y, 45, 45, null);
-        
+        removeBrick(TEST.listObject,delete);
+        System.out.println("1");
+        for(i=1;i<=size;i++){
+            if(!isImpactBrickDown(TEST.listObject,this.x,this.y,i)){
+                g2.drawImage(img_down, x, y+45*i,45,45, null);
+            }else break;
+        }
+        for(i=1;i<=size;i++){
+            if(!isImpactBrickRight(TEST.listObject,this.x,this.y,i)){
+                g2.drawImage(img_right, x+45*i, y,45,45, null);
+            }else break;
+        }
+        for(i=1;i<=size;i++){
+            if(!isImpactBrickLeft(TEST.listObject,this.x,this.y,i)){
+                g2.drawImage(img_left, x-45*i, y,45,45, null);
+            }else break;
+        }
     }
 }

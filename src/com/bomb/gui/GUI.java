@@ -9,7 +9,7 @@ public class GUI extends JFrame {
     TEST test;
 
     public GUI() {
-        //setSize(WIDTHJF, HEIGHTJF);
+        //setSize(WIDTHJF, HEI`GHTJF);
         test = new TEST();
         add(test);
         pack();

@@ -8,7 +8,7 @@ public abstract class Character {
     public static final int DUOI= 2;
     public static final int TRAI = 3;
     public static final int PHAI = 4;
-    public  static Image image;
+    public  Image image;
 
     abstract void drawCharacter(Graphics2D g2);
 

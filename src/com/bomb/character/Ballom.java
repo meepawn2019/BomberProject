@@ -5,6 +5,7 @@ import com.bomb.gui.TEST;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Random;
 
 public class Ballom extends Character implements CanMove {
 
@@ -14,25 +15,40 @@ public class Ballom extends Character implements CanMove {
     public Ballom(int x, int y){
         this.x = x;
         this.y = y;
-        image = new ImageIcon(getClass().getResource("/Character/monster_down")).getImage();
+        image = new ImageIcon(getClass().getResource("/Character/monster_down-2.png")).getImage();
     }
     @Override
-    void drawCharacter(Graphics2D g2) {
+    public void drawCharacter(Graphics2D g2) {
         g2.drawImage(image, x, y, null);
     }
 
     @Override
     public void move() {
-        this.x+=dx;
-        if(this.x + dx < 0 || this.x + image.getWidth(null) + dx > 45*31 || collision()) {
-            dx = -dx;
-            this.x+=dx;
+        this.x += dx;
+        this.y += dy;
+        if(this.x + dx < 0 || this.x + image.getWidth(null) + dx > 45*31 || collision()){
+            this.x -= dx;
+            this.y -= dy;
+            Random random = new Random();
+            int randomInt = random.nextInt(4) + 1;
+            if(randomInt == 1) {
+                dx = 0;
+                dy = -1;
+            }
+            if(randomInt == 2){
+                dx = 0;
+                dy = 1;
+            }
+            if(randomInt == 3){
+                dx = -1;
+                dy = 0;
+            }
+            if(randomInt == 4){
+                dx = 1;
+                dy = 0;
+            }
         }
-        this.y+=dy;
-        if(this.y + dy <0 || this.y + image.getHeight(null) + dy > TEST.D_H || collision()) {
-            dy = -dy;
-            this.y+=dy;
-        }
+
     }
 
     private boolean collision(){
@@ -44,6 +60,33 @@ public class Ballom extends Character implements CanMove {
         return false;
     }
     private Rectangle getBound() {
-        return new Rectangle(x, y, image.getWidth(null), image.getHeight(null)-20);
+        return new Rectangle(x, y, image.getWidth(null), image.getHeight(null));
+    }
+
+    private int isCrossWay(){
+        if(dx == 0){
+            this.x+=dx;
+            if(!collision()){
+                this.x-=dx;
+                this.x-=dx;
+                if(!collision()) {
+                    this.x+=dx;
+                    return 2;
+                }
+                else return 1;
+            }
+        }
+        else if(dy == 0){
+            this.y+=dy;
+            if(!collision()){
+                this.y-=dy;
+                this.y-=dy;
+                if(!collision()){
+                    this.y+=dy;
+                    return 2;
+                }
+                else return 1;
+            }
+        }
     }
 }

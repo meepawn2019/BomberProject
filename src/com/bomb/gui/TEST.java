@@ -2,6 +2,7 @@ package com.bomb.gui;
 
 import com.bomb.BackGround.Background;
 import com.bomb.OBJECT.*;
+import com.bomb.character.Ballom;
 import com.bomb.character.Bomber;
 import com.bomb.character.Character;
 
@@ -31,7 +32,8 @@ public class TEST extends JPanel implements ActionListener {
 
     private Background background = new Background();
     public static ArrayList<OBJECT> listObject = new ArrayList<>();
-    public static ArrayList<Bombbang> listBombbang = new ArrayList<>();
+    private static ArrayList<Bombbang> listBombbang = new ArrayList<>();
+    static ArrayList<Character> listMonster = new ArrayList<>();
     private Camera camera = new Camera(0, 0);
     private int huong;
 
@@ -47,12 +49,23 @@ public class TEST extends JPanel implements ActionListener {
                 row=0;
                 for(i=0;i<s.length();i++){
                     switch(s.charAt(i)){
-                        case '#': this.addObject(new Wall(row*ix,line*iy));
+                        case '#': {
+                            this.addObject(new Wall(row*ix,line*iy));
                             break;
-                        case '*': this.addObject(new Brick(row*ix,line*iy));
+                        }
+                        case '*': {
+                            this.addObject(new Brick(row*ix,line*iy));
                             break;
-                        case 'p': bomber = new Bomber(row*ix,line*iy);
-                        break;
+                        }
+                        case '1': {
+                            listMonster.add(new Ballom(row*ix, line*iy));
+                            break;
+                        }
+                        case 'p': {
+                            bomber = new Bomber(row*ix,line*iy);
+                            break;
+                        }
+
                     }
                     row++;
                 }
@@ -81,6 +94,9 @@ public class TEST extends JPanel implements ActionListener {
         for(OBJECT object : listObject){
             if(object instanceof Wall)
                 object.drawObject(g2d);
+        }
+        for(Character character : listMonster){
+            ((Ballom) character).drawCharacter(g2d);
         }
         bomber.drawCharacter(g2d);
         g2d.translate(-camera.getX(), -camera.getY());
@@ -165,11 +181,18 @@ public class TEST extends JPanel implements ActionListener {
         }
     }
 
+    public void moveMonster(){
+        for(Character character : listMonster){
+            ((Ballom)character).move();
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         bomber.move();
         bomber.doiHuong(huong);
         camera.moveCamera(bomber);
+        moveMonster();
         checkBomb();
         checkBombbang();
         repaint();

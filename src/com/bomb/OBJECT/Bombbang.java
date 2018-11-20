@@ -53,10 +53,16 @@ public class Bombbang extends OBJECT{
         OBJECT object;
         for(i=0;i<list.size();i++){
             object=list.get(i);
+            if(object instanceof Wall ){
+                if(((Wall) object).x==x){
+                   if(((Wall) object).y==y-45*size+45) {
+                       return true;
+                   }
+                }
+            }
             if(object instanceof Brick ){
                 if(((Brick) object).x==x){
                    if(((Brick) object).y==y-45*size+45) {
-                       delete=(Brick) object;
                        return true;
                    }
                 }
@@ -69,6 +75,11 @@ public class Bombbang extends OBJECT{
         OBJECT object;
         for(i=0;i<list.size();i++){
             object=list.get(i);
+            if(object instanceof Wall){
+                if(((Wall)object).x==x) {
+                    if(((Wall) object).y==y+45*size-45) return true;
+                }
+                } 
             if(object instanceof Brick){
                 if(((Brick) object).x==x){
                     if(((Brick) object).y==y+45*size-45) return true;
@@ -82,6 +93,11 @@ public class Bombbang extends OBJECT{
         OBJECT object;
         for(i=0;i<list.size();i++){
             object=list.get(i);
+            if(object instanceof Wall){
+                if(((Wall) object).y==y){
+                    if(((Wall) object).x==x+45*size-45) return true;
+                }
+            }
             if(object instanceof Brick){
                 if(((Brick) object).y==y){
                     if(((Brick) object).x==x+45*size-45) return true;
@@ -95,6 +111,11 @@ public class Bombbang extends OBJECT{
         OBJECT object;
         for(i=0;i<list.size();i++){
             object=list.get(i);
+            if(object instanceof Wall){
+                if(((Wall) object).y==y){
+                    if(((Wall) object).x==x-45*size+45) return true;
+                }
+            }
             if(object instanceof Brick){
                 if(((Brick) object).y==y){
                     if(((Brick) object).x==x-45*size+45) return true;
@@ -111,8 +132,6 @@ public class Bombbang extends OBJECT{
                 g2.drawImage(img_up, x, y-45*i,45,45, null);
             }else break;
         }
-        removeBrick(TEST.listObject,delete);
-        System.out.println("1");
         for(i=1;i<=size;i++){
             if(!isImpactBrickDown(TEST.listObject,this.x,this.y,i)){
                 g2.drawImage(img_down, x, y+45*i,45,45, null);

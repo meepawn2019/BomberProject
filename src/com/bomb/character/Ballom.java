@@ -100,4 +100,12 @@ public class Ballom extends Character implements CanMove {
             dy = 0;
         }
     }
+
+    public void doiHuong(){
+        if(dx == 0 && dy > 0) this.image = new ImageIcon(getClass().getResource("/Character/monster_down.png")).getImage();
+        if(dx == 0 && dy < 0) this.image = new ImageIcon(getClass().getResource("/Character/monster_up.png")).getImage();
+        if(dx > 0 && dy == 0) this.image = new ImageIcon(getClass().getResource("/Character/monster_right.png")).getImage();
+        if(dx < 0 && dy == 0) this.image = new ImageIcon(getClass().getResource("/Character/monster_left.png")).getImage();
+    }
+
 }

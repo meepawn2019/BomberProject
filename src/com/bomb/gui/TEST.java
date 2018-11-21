@@ -28,14 +28,21 @@ public class TEST extends JPanel implements ActionListener {
 
     private static final int ix=45;
     private static final int iy=45;
-    Bomber bomber;
+    private Bomber bomber;
 
     private Background background = new Background();
     public static ArrayList<OBJECT> listObject = new ArrayList<>();
     private static ArrayList<Bombbang> listBombbang = new ArrayList<>();
-    static ArrayList<Character> listMonster = new ArrayList<>();
+    private static ArrayList<Character> listMonster = new ArrayList<>();
     private Camera camera = new Camera(0, 0);
     private int huong;
+    static public int framesUp=0;
+    static public int framesDown=0;
+    static public int framesLeft=0;
+    static public int framesRight=0;
+    public static boolean isKeyPressed = false;
+    private int dem = 0;
+    int demBomb = 0;
 
     TEST(){
         BufferedReader br;
@@ -76,7 +83,7 @@ public class TEST extends JPanel implements ActionListener {
         } catch (IOException ex) {
             Logger.getLogger(TEST.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Timer timer = new Timer(10, this);
+        Timer timer = new Timer(20, this);
         timer.start();
     }
     protected void paintComponent(Graphics g){
@@ -118,19 +125,24 @@ public class TEST extends JPanel implements ActionListener {
     KeyAdapter myAdapter = new KeyAdapter() {
         @Override
         public void keyPressed(KeyEvent e) {
+            isKeyPressed = true;
             if(e.getKeyCode() == KeyEvent.VK_UP){
+                Bomber.huong = 1;
                 huong = Character.TREN;
                 bomber.dy = -MOVE;
             }
             if(e.getKeyCode() == KeyEvent.VK_DOWN){
+                Bomber.huong = 2;
                 huong = Character.DUOI;
                 bomber.dy = MOVE;
             }
             if(e.getKeyCode() == KeyEvent.VK_LEFT){
+                Bomber.huong = 3;
                 huong = Character.TRAI;
                 bomber.dx = -MOVE;
             }
             if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+                Bomber.huong = 4;
                 huong = Character.PHAI;
                 bomber.dx = MOVE;
             }
@@ -142,15 +154,27 @@ public class TEST extends JPanel implements ActionListener {
                 addObject(new com.bomb.OBJECT.Bomb(bomber.x + bomber.getWidth() / 2, bomber.y + bomber.getHeight() / 2, 3000 ));
             }
             if(e.getKeyCode() == KeyEvent.VK_UP){
+                dem =10;
+                isKeyPressed = false;
+                framesUp = 0;
                 bomber.dy = 0;
             }
             if(e.getKeyCode() == KeyEvent.VK_DOWN){
+                dem =10;
+                isKeyPressed = false;
+                framesDown=0;
                 bomber.dy = 0;
             }
             if(e.getKeyCode() == KeyEvent.VK_LEFT){
+                dem =10;
+                isKeyPressed = false;
+                framesLeft = 0;
                 bomber.dx = 0;
             }
             if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+                dem =10;
+                isKeyPressed = false;
+                framesRight = 0;
                 bomber.dx = 0;
             }
         }
@@ -189,6 +213,30 @@ public class TEST extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(isKeyPressed){
+            dem++;
+            if(dem >= 10){
+                dem = 0;
+                if(Bomber.huong == 1) framesUp++;
+                if(Bomber.huong == 2) framesDown++;
+                if(Bomber.huong == 3) framesLeft++;
+                if(Bomber.huong == 4) framesRight++;
+            }
+        }
+        demBomb++;
+        if(demBomb == 20){
+            demBomb = 0;
+            for(OBJECT object : listObject){
+                if(object instanceof Bomb){
+                    ((Bomb) object).framesBomb++;
+                }
+            }
+        }
+        for(Character ballom : listMonster){
+            if(ballom instanceof Ballom){
+                ((Ballom) ballom).doiHuong();
+            }
+        }
         bomber.move();
         bomber.doiHuong(huong);
         camera.moveCamera(bomber);

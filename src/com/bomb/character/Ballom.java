@@ -15,40 +15,25 @@ public class Ballom extends Character implements CanMove {
     public Ballom(int x, int y){
         this.x = x;
         this.y = y;
-        image = new ImageIcon(getClass().getResource("/Character/monster_down-2.png")).getImage();
+        image = new ImageIcon(getClass().getResource("/Character/monster_down.png")).getImage();
     }
     @Override
     public void drawCharacter(Graphics2D g2) {
-        g2.drawImage(image, x, y, null);
+        g2.drawImage(image, x, y-23, null);
     }
 
     @Override
     public void move() {
-        this.x += dx;
-        this.y += dy;
-        if(this.x + dx < 0 || this.x + image.getWidth(null) + dx > 45*31 || collision()){
-            this.x -= dx;
-            this.y -= dy;
-            Random random = new Random();
-            int randomInt = random.nextInt(4) + 1;
-            if(randomInt == 1) {
-                dx = 0;
-                dy = -1;
-            }
-            if(randomInt == 2){
-                dx = 0;
-                dy = 1;
-            }
-            if(randomInt == 3){
-                dx = -1;
-                dy = 0;
-            }
-            if(randomInt == 4){
-                dx = 1;
-                dy = 0;
+        if(isCrossWay()) random();
+        else {
+            this.x += dx;
+            this.y += dy;
+            if(this.x + dx < 0 || this.x + image.getWidth(null) + dx > 45*31 || collision()){
+                this.x -= dx;
+                this.y -= dy;
+                random();
             }
         }
-
     }
 
     private boolean collision(){
@@ -60,33 +45,59 @@ public class Ballom extends Character implements CanMove {
         return false;
     }
     private Rectangle getBound() {
-        return new Rectangle(x, y, image.getWidth(null), image.getHeight(null));
+        return new Rectangle(x, y, image.getWidth(null), image.getHeight(null)-23);
     }
 
-    private int isCrossWay(){
+    private boolean isCrossWay(){
         if(dx == 0){
             this.x+=dx;
-            if(!collision()){
+            if(collision()){
                 this.x-=dx;
                 this.x-=dx;
-                if(!collision()) {
+                if(collision()) {
                     this.x+=dx;
-                    return 2;
+                    return false;
                 }
-                else return 1;
+                else{
+                    this.x+=dx;
+                    return true;
+                }
             }
         }
         else if(dy == 0){
             this.y+=dy;
-            if(!collision()){
-                this.y-=dy;
-                this.y-=dy;
-                if(!collision()){
-                    this.y+=dy;
-                    return 2;
+            if(collision()) {
+                this.y -= dy;
+                this.y -= dy;
+                if (collision()) {
+                    this.y += dy;
+                    return false;
+                } else {
+                    this.y += dy;
+                    return true;
                 }
-                else return 1;
             }
+        }
+        return false;
+    }
+    private void random(){
+        Random random = new Random();
+        int randomInt = random.nextInt(4) + 1;
+        if(randomInt == 1) {
+            dx = 0;
+            dy = -1;
+        }
+        if(randomInt == 2){
+            dx = 0;
+            dy = 1;
+        }
+        if(randomInt == 3){
+            dx = -1;
+            dy = 0;
+        }
+        if(randomInt == 4){
+            dx = 1;
+            dy = 0;
         }
     }
 }

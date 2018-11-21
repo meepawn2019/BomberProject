@@ -14,8 +14,8 @@ public class Bombbang extends OBJECT{
 
     private BufferedImage img_left, img_right, img_up, img_down,img_center;
     public int lifeTime;
-    int size;
-    private Brick delete;
+    private int size;
+    private int right = 0;
     public Bombbang(int x, int y, int lifeTime, int size) {
         this.x = x;
         this.y = y;
@@ -62,7 +62,7 @@ public class Bombbang extends OBJECT{
             }
             if(object instanceof Brick ){
                 if(((Brick) object).x==x){
-                   if(((Brick) object).y==y-45*size+45) {
+                   if(((Brick) object).y==y-45*size) {
                        return true;
                    }
                 }
@@ -77,12 +77,14 @@ public class Bombbang extends OBJECT{
             object=list.get(i);
             if(object instanceof Wall){
                 if(((Wall)object).x==x) {
-                    if(((Wall) object).y==y+45*size-45) return true;
+                    if(((Wall) object).y==y+45*size) return true;
                 }
                 } 
             if(object instanceof Brick){
                 if(((Brick) object).x==x){
-                    if(((Brick) object).y==y+45*size-45) return true;
+                    if(((Brick) object).y==y+45*size-45) {
+                        return true;
+                    }
                 }
             }
         }
@@ -93,14 +95,15 @@ public class Bombbang extends OBJECT{
         OBJECT object;
         for(i=0;i<list.size();i++){
             object=list.get(i);
-            if(object instanceof Wall){
-                if(((Wall) object).y==y){
-                    if(((Wall) object).x==x+45*size-45) return true;
-                }
-            }
-            if(object instanceof Brick){
-                if(((Brick) object).y==y){
-                    if(((Brick) object).x==x+45*size-45) return true;
+            if(!(object instanceof Bomb)){
+                if(object.y==y){
+                    if(object.x==x+45*size){
+                        if(object instanceof Brick && right == 0){
+                            removeBrick(TEST.listObject,(Brick) object);
+                            right++;
+                        }
+                        return true;
+                    }
                 }
             }
         }
@@ -111,14 +114,9 @@ public class Bombbang extends OBJECT{
         OBJECT object;
         for(i=0;i<list.size();i++){
             object=list.get(i);
-            if(object instanceof Wall){
-                if(((Wall) object).y==y){
-                    if(((Wall) object).x==x-45*size+45) return true;
-                }
-            }
-            if(object instanceof Brick){
-                if(((Brick) object).y==y){
-                    if(((Brick) object).x==x-45*size+45) return true;
+            if(!(object instanceof Bomb)){
+                if(object.y==y){
+                    if(object.x==x-45*size+45) return true;
                 }
             }
         }
@@ -135,7 +133,9 @@ public class Bombbang extends OBJECT{
         for(i=1;i<=size;i++){
             if(!isImpactBrickDown(TEST.listObject,this.x,this.y,i)){
                 g2.drawImage(img_down, x, y+45*i,45,45, null);
-            }else break;
+            }else {
+                break;
+            }
         }
         for(i=1;i<=size;i++){
             if(!isImpactBrickRight(TEST.listObject,this.x,this.y,i)){

@@ -11,6 +11,7 @@ public class Ballom extends Character implements CanMove {
 
     private int dx = 1;
     private int dy = 0;
+    int turn = 0;
 
     public Ballom(int x, int y){
         this.x = x;
@@ -24,7 +25,21 @@ public class Ballom extends Character implements CanMove {
 
     @Override
     public void move() {
-        if(isCrossWay()) random();
+        if(isCrossWay()){
+            turn++;
+            if(turn % 2 == 0){
+                {
+                    random();
+                    this.x+=dx;
+                    this.y+=dy;
+                    if(this.x + dx < 0 || this.x + image.getWidth(null) + dx > 45*31 || collision()){
+                        this.x -= dx;
+                        this.y -= dy;
+                        random();
+                    }
+                }
+            }
+        }
         else {
             this.x += dx;
             this.y += dy;
@@ -50,33 +65,32 @@ public class Ballom extends Character implements CanMove {
 
     private boolean isCrossWay(){
         if(dx == 0){
-            this.x+=dx;
-            if(collision()){
-                this.x-=dx;
-                this.x-=dx;
-                if(collision()) {
-                    this.x+=dx;
-                    return false;
-                }
-                else{
-                    this.x+=dx;
-                    return true;
-                }
+            this.x+=1;
+            if(!collision()){
+                this.x-=1;
+                return true;
             }
+            this.x-=1;
+            this.x-=1;
+            if(!collision()){
+                this.x+=1;
+                return true;
+            }
+            this.x+=1;
         }
-        else if(dy == 0){
-            this.y+=dy;
-            if(collision()) {
-                this.y -= dy;
-                this.y -= dy;
-                if (collision()) {
-                    this.y += dy;
-                    return false;
-                } else {
-                    this.y += dy;
-                    return true;
-                }
+        else if(dy==0){
+            this.y+=1;
+            if(!collision()){
+                this.y-=1;
+                return true;
             }
+            this.y-=1;
+            this.y-=1;
+            if(!collision()){
+                this.y+=1;
+                return true;
+            }
+            this.y+=1;
         }
         return false;
     }

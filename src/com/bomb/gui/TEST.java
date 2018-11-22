@@ -201,7 +201,10 @@ public class TEST extends JPanel implements ActionListener {
         while(ite.hasNext()){
             Bombbang bombb = ite.next();
             bombb.remove();
-            if(bombb.lifeTime <= 0) ite.remove();
+            if(bombb.lifeTime <= 0) {
+                bombb.isRemove = true;
+                ite.remove();
+            }
         }
     }
 

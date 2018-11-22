@@ -16,10 +16,13 @@ public class Bombbang extends OBJECT{
     public int lifeTime;
     private int size;
     private int right = 0;
+    public boolean isRemove = false;
+    int tempRight;
     public Bombbang(int x, int y, int lifeTime, int size) {
         this.x = x;
         this.y = y;
         this.size = size;
+        tempRight = size;
         this.lifeTime = lifeTime;
         try {
             img_left = ImageIO.read(getClass().getResourceAsStream("/Character/paopaoleft1.png"));
@@ -43,7 +46,7 @@ public class Bombbang extends OBJECT{
             if(object instanceof Brick){
                 if(object.equals(brick)){
                     ite.remove();
-                    break;
+                    return;
                 }
             }
         }
@@ -99,6 +102,7 @@ public class Bombbang extends OBJECT{
                 if(object.y==y){
                     if(object.x==x+45*size){
                         if(object instanceof Brick && right == 0){
+                            tempRight = size;
                             removeBrick(TEST.listObject,(Brick) object);
                             right++;
                         }
@@ -137,10 +141,12 @@ public class Bombbang extends OBJECT{
                 break;
             }
         }
-        for(i=1;i<=size;i++){
+        for(i=1;i<=tempRight;i++){
             if(!isImpactBrickRight(TEST.listObject,this.x,this.y,i)){
                 g2.drawImage(img_right, x+45*i, y,45,45, null);
-            }else break;
+            }else {
+                break;
+            }
         }
         for(i=1;i<=size;i++){
             if(!isImpactBrickLeft(TEST.listObject,this.x,this.y,i)){

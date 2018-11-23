@@ -139,6 +139,44 @@ public class Bombbang extends OBJECT{
         }
         return false;
     }
+    public boolean DOWN(ArrayList<OBJECT> list,int x,int y,int size){
+        for(OBJECT obj:list){
+            if(obj.x==x){
+                if(obj.y==y+45*size){
+                    if(!(obj instanceof Bomb)){
+                        if(obj instanceof Brick &&down == 0){
+                            down++;
+                            removeBrick(TEST.listObject, (Brick) obj);
+                            tempDown=size;
+                        }
+                        return true;
+                    }else{
+                        ((Bomb) obj).lifeTime=15;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    public boolean UP(ArrayList<OBJECT> list,int x,int y,int size){
+        for(OBJECT obj:list){
+            if(obj.x==x){
+                if(obj.y==y-45*size){
+                    if(!(obj instanceof Bomb)){
+                        if(obj instanceof Brick &&up == 0){
+                            up++;
+                            removeBrick(TEST.listObject, (Brick) obj);
+                            tempUp=size;
+                        }
+                        return true;
+                    }else{
+                        ((Bomb) obj).lifeTime=15;
+                    }
+                }
+            }
+        }
+        return false;
+    }
     public boolean LEFT(ArrayList<OBJECT>list,int x,int y,int size){
         int i;
         OBJECT object;
@@ -147,7 +185,7 @@ public class Bombbang extends OBJECT{
             if(object.y==y){
                 if(object.x==x-45*size){
                     if(!(object instanceof Bomb)){
-                        if(object instanceof Brick){
+                        if(object instanceof Brick && left==0){
                             tempLeft=size;
                             removeBrick(TEST.listObject, (Brick) object);
                             left++;
@@ -161,27 +199,46 @@ public class Bombbang extends OBJECT{
         }
         return false;
     }
-    public boolean isImpactBoom(ArrayList<OBJECT> listBom,int x,int y,int size){
-        
+    public boolean RIGHT(ArrayList<OBJECT>list,int x,int y,int size){
+        int i;
+        OBJECT object;
+        for(i=0;i<list.size();i++){
+            object=list.get(i);
+            if(object.y==y){
+                if(object.x==x+45*size){
+                    if(!(object instanceof Bomb)){
+                        if(object instanceof Brick && right==0){
+                            tempRight=size;
+                            removeBrick(TEST.listObject, (Brick) object);
+                            right++;
+                        }
+                    }else{
+                        ((Bomb)object).lifeTime=15;
+                    }
+                    return true;
+                }
+            }
+        }
         return false;
     }
+    
     @Override
     public void drawObject( Graphics2D g2) {
         int i;
         for(i=1;i<=tempUp;i++){
-            if(!isImpactBrickUp(TEST.listObject,this.x,this.y,i)){
+            if(!UP(TEST.listObject,this.x,this.y,i)){
                 g2.drawImage(img_up, x, y-45*i,45,45, null);
             }else break;
         }
         for(i=1;i<=tempDown;i++){
-            if(!isImpactBrickDown(TEST.listObject,this.x,this.y,i)){
+            if(!DOWN(TEST.listObject,this.x,this.y,i)){
                 g2.drawImage(img_down, x, y+45*i,45,45, null);
             }else {
                 break;
             }
         }
         for(i=1;i<=tempRight;i++){
-            if(!isImpactBrickRight(TEST.listObject,this.x,this.y,i)){
+            if(!RIGHT(TEST.listObject,this.x,this.y,i)){
                 g2.drawImage(img_right, x+45*i, y,45,45, null);
             }else {
                 break;

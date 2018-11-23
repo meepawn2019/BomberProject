@@ -15,14 +15,17 @@ public class Bombbang extends OBJECT{
     private BufferedImage img_left, img_right, img_up, img_down,img_center;
     public int lifeTime;
     private int size;
-    private int right = 0;
+    private int right = 0,left=0,up=0,down=0;
     public boolean isRemove = false;
-    int tempRight;
+    int tempRight,tempLeft,tempUp,tempDown;
     public Bombbang(int x, int y, int lifeTime, int size) {
         this.x = x;
         this.y = y;
         this.size = size;
         tempRight = size;
+        tempUp=size;
+        tempDown=size;
+        tempLeft=size;
         this.lifeTime = lifeTime;
         try {
             img_left = ImageIO.read(getClass().getResourceAsStream("/Character/paopaoleft1.png"));
@@ -56,20 +59,19 @@ public class Bombbang extends OBJECT{
         OBJECT object;
         for(i=0;i<list.size();i++){
             object=list.get(i);
-            if(object instanceof Wall ){
-                if(((Wall) object).x==x){
-                   if(((Wall) object).y==y-45*size+45) {
+            if(!(object instanceof Bomb) ){
+                if( object.x==x){
+                   if( object.y==y-45*size) {
+                       if(object instanceof Brick&&up==0){
+                           tempUp=size;
+                           removeBrick(TEST.listObject, (Brick) object);
+                           up++;
+                       }
                        return true;
                    }
                 }
             }
-            if(object instanceof Brick ){
-                if(((Brick) object).x==x){
-                   if(((Brick) object).y==y-45*size) {
-                       return true;
-                   }
-                }
-            }
+            
         }
         return false;
     }
@@ -78,18 +80,19 @@ public class Bombbang extends OBJECT{
         OBJECT object;
         for(i=0;i<list.size();i++){
             object=list.get(i);
-            if(object instanceof Wall){
-                if(((Wall)object).x==x) {
-                    if(((Wall) object).y==y+45*size) return true;
-                }
-                } 
-            if(object instanceof Brick){
-                if(((Brick) object).x==x){
-                    if(((Brick) object).y==y+45*size-45) {
+            if(!(object instanceof Bomb)){
+                if(object.x==x) {
+                    if( object.y==y+45*size) {
+                        if(object instanceof Brick&&down==0){
+                            tempDown=size;
+                            removeBrick(TEST.listObject, (Brick) object);
+                            down++;
+                        }
                         return true;
                     }
                 }
-            }
+                } 
+           
         }
         return false;
     }
@@ -120,7 +123,14 @@ public class Bombbang extends OBJECT{
             object=list.get(i);
             if(!(object instanceof Bomb)){
                 if(object.y==y){
-                    if(object.x==x-45*size+45) return true;
+                    if(object.x==x-45*size) {
+                        if(object instanceof Brick&& left==0){
+                            tempLeft=size;
+                            removeBrick(TEST.listObject, (Brick) object);
+                            left++;
+                        }
+                        return true;
+                    }
                 }
             }
         }
@@ -129,12 +139,12 @@ public class Bombbang extends OBJECT{
     @Override
     public void drawObject( Graphics2D g2) {
         int i;
-        for(i=1;i<=size;i++){
+        for(i=1;i<=tempUp;i++){
             if(!isImpactBrickUp(TEST.listObject,this.x,this.y,i)){
                 g2.drawImage(img_up, x, y-45*i,45,45, null);
             }else break;
         }
-        for(i=1;i<=size;i++){
+        for(i=1;i<=tempDown;i++){
             if(!isImpactBrickDown(TEST.listObject,this.x,this.y,i)){
                 g2.drawImage(img_down, x, y+45*i,45,45, null);
             }else {
@@ -148,7 +158,7 @@ public class Bombbang extends OBJECT{
                 break;
             }
         }
-        for(i=1;i<=size;i++){
+        for(i=1;i<=tempLeft;i++){
             if(!isImpactBrickLeft(TEST.listObject,this.x,this.y,i)){
                 g2.drawImage(img_left, x-45*i, y,45,45, null);
             }else break;

@@ -133,7 +133,36 @@ public class Bombbang extends OBJECT{
                     }
                 }
             }
+            else{
+                
+            }
         }
+        return false;
+    }
+    public boolean LEFT(ArrayList<OBJECT>list,int x,int y,int size){
+        int i;
+        OBJECT object;
+        for(i=0;i<list.size();i++){
+            object=list.get(i);
+            if(object.y==y){
+                if(object.x==x-45*size){
+                    if(!(object instanceof Bomb)){
+                        if(object instanceof Brick){
+                            tempLeft=size;
+                            removeBrick(TEST.listObject, (Brick) object);
+                            left++;
+                        }
+                    }else{
+                        ((Bomb)object).lifeTime=15;
+                    }
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public boolean isImpactBoom(ArrayList<OBJECT> listBom,int x,int y,int size){
+        
         return false;
     }
     @Override
@@ -159,7 +188,7 @@ public class Bombbang extends OBJECT{
             }
         }
         for(i=1;i<=tempLeft;i++){
-            if(!isImpactBrickLeft(TEST.listObject,this.x,this.y,i)){
+            if(!LEFT(TEST.listObject,this.x,this.y,i)){
                 g2.drawImage(img_left, x-45*i, y,45,45, null);
             }else break;
         }

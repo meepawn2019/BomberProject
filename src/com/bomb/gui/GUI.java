@@ -16,7 +16,7 @@ public class GUI extends JFrame {
         setLocationRelativeTo(null);
         addKeyListener(test.myAdapter);
         setResizable(true);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE) ;
 
     }
 

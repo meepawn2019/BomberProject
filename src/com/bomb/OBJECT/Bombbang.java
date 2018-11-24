@@ -1,5 +1,7 @@
 package com.bomb.OBJECT;
 
+import com.bomb.character.Ballom;
+import com.bomb.character.Character;
 import com.bomb.gui.TEST;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -15,7 +17,7 @@ public class Bombbang extends OBJECT{
     private BufferedImage img_left, img_right, img_up, img_down,img_center;
     public int lifeTime;
     private int size;
-    private int right = 0,left=0,up=0,down=0;
+    private int right = 0,left=0,up=0,down=0,bRight=0,bLeft=0,bUp=0,bDown=0;
     public boolean isRemove = false;
     int tempRight,tempLeft,tempUp,tempDown;
     public Bombbang(int x, int y, int lifeTime, int size) {
@@ -26,6 +28,10 @@ public class Bombbang extends OBJECT{
         tempUp=size;
         tempDown=size;
         tempLeft=size;
+        bUp=0;
+        bDown=0;
+        bLeft=0;
+        bRight=0;
         this.lifeTime = lifeTime;
         try {
             img_left = ImageIO.read(getClass().getResourceAsStream("/Character/paopaoleft1.png"));
@@ -54,91 +60,7 @@ public class Bombbang extends OBJECT{
             }
         }
     }
-    public boolean isImpactBrickUp(ArrayList<OBJECT>list,int x,int y,int size){
-        int i;
-        OBJECT object;
-        for(i=0;i<list.size();i++){
-            object=list.get(i);
-            if(!(object instanceof Bomb) ){
-                if( object.x==x){
-                   if( object.y==y-45*size) {
-                       if(object instanceof Brick&&up==0){
-                           tempUp=size;
-                           removeBrick(TEST.listObject, (Brick) object);
-                           up++;
-                       }
-                       return true;
-                   }
-                }
-            }
-            
-        }
-        return false;
-    }
-    public boolean isImpactBrickDown(ArrayList<OBJECT>list,int x,int y,int size){
-        int i;
-        OBJECT object;
-        for(i=0;i<list.size();i++){
-            object=list.get(i);
-            if(!(object instanceof Bomb)){
-                if(object.x==x) {
-                    if( object.y==y+45*size) {
-                        if(object instanceof Brick&&down==0){
-                            tempDown=size;
-                            removeBrick(TEST.listObject, (Brick) object);
-                            down++;
-                        }
-                        return true;
-                    }
-                }
-                } 
-           
-        }
-        return false;
-    }
-    public boolean isImpactBrickRight(ArrayList<OBJECT>list,int x,int y,int size){
-        int i;
-        OBJECT object;
-        for(i=0;i<list.size();i++){
-            object=list.get(i);
-            if(!(object instanceof Bomb)){
-                if(object.y==y){
-                    if(object.x==x+45*size){
-                        if(object instanceof Brick && right == 0){
-                            tempRight = size;
-                            removeBrick(TEST.listObject,(Brick) object);
-                            right++;
-                        }
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-    public boolean isImpactBrickLeft(ArrayList<OBJECT>list,int x,int y,int size){
-        int i;
-        OBJECT object;
-        for(i=0;i<list.size();i++){
-            object=list.get(i);
-            if(!(object instanceof Bomb)){
-                if(object.y==y){
-                    if(object.x==x-45*size) {
-                        if(object instanceof Brick&& left==0){
-                            tempLeft=size;
-                            removeBrick(TEST.listObject, (Brick) object);
-                            left++;
-                        }
-                        return true;
-                    }
-                }
-            }
-            else{
-                
-            }
-        }
-        return false;
-    }
+    
     public boolean DOWN(ArrayList<OBJECT> list,int x,int y,int size){
         for(OBJECT obj:list){
             if(obj.x==x){
@@ -149,10 +71,12 @@ public class Bombbang extends OBJECT{
                             removeBrick(TEST.listObject, (Brick) obj);
                             tempDown=size;
                         }
-                        return true;
-                    }else{
+                    }else if(obj instanceof Bomb && bDown==0){
+                        bDown=1;
                         ((Bomb) obj).lifeTime=15;
+                        tempDown=size-1;
                     }
+                    return true;
                 }
             }
         }
@@ -168,10 +92,12 @@ public class Bombbang extends OBJECT{
                             removeBrick(TEST.listObject, (Brick) obj);
                             tempUp=size;
                         }
-                        return true;
-                    }else{
+                    }else if(obj instanceof Bomb && bUp==0){
+                        bUp=1;
                         ((Bomb) obj).lifeTime=15;
+                        tempUp=size-1;
                     }
+                    return true;
                 }
             }
         }
@@ -190,10 +116,56 @@ public class Bombbang extends OBJECT{
                             removeBrick(TEST.listObject, (Brick) object);
                             left++;
                         }
-                    }else{
+                    }else if(object instanceof Bomb && bLeft==0){
+                        bLeft=1;
                         ((Bomb)object).lifeTime=15;
+                        tempLeft=size-1;
                     }
                     return true;
+                }
+            }
+        }
+        return false;
+    }
+    public boolean LEFT1(ArrayList<OBJECT>list,int x,int y,int size){
+        for(OBJECT obj: list){
+            if(obj.y==y){
+                if(obj.x==x-45*size){
+                    if(obj instanceof Bomb &&bLeft==0){
+                        tempLeft=size;
+                        bLeft++;
+                        ((Bomb) obj).lifeTime=15;
+                    }
+                    else{
+                        if(obj instanceof Brick && left==0){
+                            tempLeft=size;
+                            left++;
+                            removeBrick(TEST.listObject, (Brick) obj);
+                        }
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    public boolean RIGHT1(ArrayList<OBJECT>list,int x,int y,int size){
+        for(OBJECT obj: list){
+            if(obj.y==y){
+                if(obj.x==x+45*size){
+                    if(obj instanceof Bomb &&bRight==0){
+                        tempRight=size;
+                        bRight++;
+                        ((Bomb) obj).lifeTime=15;
+                    }
+                    else{
+                        if(obj instanceof Brick && right==0){
+                            tempRight=size;
+                            right++;
+                            removeBrick(TEST.listObject, (Brick) obj);
+                        }
+                        return true;
+                    }
                 }
             }
         }
@@ -209,11 +181,13 @@ public class Bombbang extends OBJECT{
                     if(!(object instanceof Bomb)){
                         if(object instanceof Brick && right==0){
                             tempRight=size;
-                            removeBrick(TEST.listObject, (Brick) object);
+                            if(bRight==0)removeBrick(TEST.listObject, (Brick) object);
                             right++;
                         }
-                    }else{
+                    }else if(object instanceof Bomb && bRight==0){
                         ((Bomb)object).lifeTime=15;
+                        bRight=1;
+                        tempRight=size-1;
                     }
                     return true;
                 }
@@ -221,7 +195,67 @@ public class Bombbang extends OBJECT{
         }
         return false;
     }
-    
+    public void removeMonster(ArrayList<Character> list, Ballom ballom){
+        Iterator<Character> ite = list.iterator();
+        Character character;
+        while(ite.hasNext()){
+            character =ite.next();
+            if(character instanceof Ballom){
+                if(character.equals(ballom)) {
+                    ite.remove();
+                    break;
+                }
+            }
+        }
+    }
+    public void monsterRight(ArrayList<Character> list,int x,int y,int size){
+        for(Character c:list){
+            if(c instanceof Ballom){
+                if(((Ballom) c).y==y){
+                    if(((Ballom) c).x==x+45*size) {
+                        removeMonster(list, (Ballom) c);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    public void monsterLeft(ArrayList<Character> list,int x,int y,int size){
+        for(Character c:list){
+            if(c instanceof Ballom){
+                if(((Ballom) c).y==y){
+                    if(((Ballom) c).x==x-45*size) {
+                        removeMonster(list, (Ballom) c);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    public void monsterUp(ArrayList<Character> list,int x,int y,int size){
+        for(Character c:list){
+            if(c instanceof Ballom){
+                if(((Ballom) c).x==x){
+                    if(((Ballom) c).y==y-45*size) {
+                        removeMonster(list, (Ballom) c);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    public void monsterDown(ArrayList<Character> list,int x,int y,int size){
+        for(Character c:list){
+            if(c instanceof Ballom){
+                if(((Ballom) c).x==x){
+                    if(((Ballom) c).y==y+45*size) {
+                        removeMonster(list, (Ballom) c);
+                        break;
+                    }
+                }
+            }
+        }
+    }
     @Override
     public void drawObject( Graphics2D g2) {
         int i;
@@ -238,16 +272,20 @@ public class Bombbang extends OBJECT{
             }
         }
         for(i=1;i<=tempRight;i++){
-            if(!RIGHT(TEST.listObject,this.x,this.y,i)){
+            if(!RIGHT1(TEST.listObject,this.x,this.y,i)){
                 g2.drawImage(img_right, x+45*i, y,45,45, null);
             }else {
                 break;
             }
         }
         for(i=1;i<=tempLeft;i++){
-            if(!LEFT(TEST.listObject,this.x,this.y,i)){
+            if(!LEFT1(TEST.listObject,this.x,this.y,i)){
                 g2.drawImage(img_left, x-45*i, y,45,45, null);
             }else break;
         }
+//        monsterRight(TEST.listMonster,this.x,this.y, tempRight);
+//        monsterLeft(TEST.listMonster,this.x,this.y, tempLeft);
+//        monsterUp(TEST.listMonster,this.x,this.y, tempUp);
+//        monsterDown(TEST.listMonster,this.x,this.y, tempDown);
     }
 }

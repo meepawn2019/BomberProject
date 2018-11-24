@@ -33,7 +33,7 @@ public class TEST extends JPanel implements ActionListener {
     private Background background = new Background();
     public static ArrayList<OBJECT> listObject = new ArrayList<>();
     private static ArrayList<Bombbang> listBombbang = new ArrayList<>();
-    private static ArrayList<Character> listMonster = new ArrayList<>();
+    public static ArrayList<Character> listMonster = new ArrayList<>();
     private Camera camera = new Camera(0, 0);
     private int huong;
     static public int framesUp=0;

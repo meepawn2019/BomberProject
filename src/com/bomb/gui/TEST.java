@@ -245,7 +245,7 @@ public class TEST extends JPanel implements ActionListener {
         camera.moveCamera(bomber);
         moveMonster();
         checkBomb();
-        //checkBombbang();
+        checkBombbang();
         repaint();
     }
 }

@@ -19,6 +19,7 @@ public class Bombbang extends OBJECT {
     private int size;
     private int right = 0, left = 0, up = 0, down = 0;
     public boolean isRemove = false;
+    int bLeft = 0, bRight = 0, bUp = 0, bDown = 0;
     int tempRight, tempLeft, tempUp, tempDown;
 
     public Bombbang(int x, int y, int lifeTime, int size) {
@@ -60,20 +61,17 @@ public class Bombbang extends OBJECT {
         }
     }
 
-    public boolean DOWN(ArrayList<OBJECT> list, int x, int y, int size) {
+    public boolean Right0(ArrayList<OBJECT> list, int x, int y, int size) {
         for (OBJECT obj : list) {
-            if (obj.x == x) {
-                if (obj.y == y + 45 * size) {
-                    if (!(obj instanceof Bomb)) {
-                        if (obj instanceof Brick && down == 0) {
-                            down++;
-                            removeBrick(TEST.listObject, (Brick) obj);
-                            tempDown = size;
-                        }
-                    } else if (obj instanceof Bomb ) {
+            if (obj.y == y) {
+                if (obj.x == x + 45 * size) {
+                    if (obj instanceof Bomb ) {
                         ((Bomb) obj).lifeTime = 15;
-                        tempDown = size - 1;
+                    } else if (obj instanceof Brick && right == 0) {
+                        removeBrick(TEST.listObject, (Brick) obj);
+                        right++;
                     }
+                    tempRight = size;
                     return true;
                 }
             }
@@ -81,207 +79,93 @@ public class Bombbang extends OBJECT {
         return false;
     }
 
-    public boolean UP(ArrayList<OBJECT> list, int x, int y, int size) {
-        for (OBJECT obj : list) {
-            if (obj.x == x) {
-                if (obj.y == y - 45 * size) {
-                    if (!(obj instanceof Bomb)) {
-                        if (obj instanceof Brick && up == 0) {
-                            up++;
-                            removeBrick(TEST.listObject, (Brick) obj);
-                            tempUp = size;
-                        }
-                    } else if (obj instanceof Bomb ) {
-                        ((Bomb) obj).lifeTime = 15;
-                        tempUp = size - 1;
-                    }
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    public boolean LEFT(ArrayList<OBJECT> list, int x, int y, int size) {
-        int i;
-        OBJECT object;
-        for (i = 0; i < list.size(); i++) {
-            object = list.get(i);
-            if (object.y == y) {
-                if (object.x == x - 45 * size) {
-                    if (!(object instanceof Bomb)) {
-                        if (object instanceof Brick && left == 0) {
-                            tempLeft = size;
-                            removeBrick(TEST.listObject, (Brick) object);
-                            left++;
-                        }
-                    } else if (object instanceof Bomb ) {
-                        ((Bomb) object).lifeTime = 15;
-                        tempLeft = size - 1;
-                    }
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-    public boolean UP1(ArrayList<OBJECT> list, int x, int y, int size) {
-        for (OBJECT obj : list) {
-            if (obj.x == x) {
-                if (obj.y == y - 45 * size) {
-                    if (obj instanceof Bomb) {
-                        //((Bomb) obj).lifeTime = 15;
-                        tempUp = size;
-                        removeBomb(TEST.listObject, (Bomb) obj);
-                        makeBombbangLeft(((Bomb) obj).x,((Bomb) obj).y,tempUp);
-                    } else {
-                        if (obj instanceof Brick && up == 0) {
-                            tempUp = size;
-                            up++;
-                            removeBrick(TEST.listObject, (Brick) obj);
-                        }
-
-                    }
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-    public boolean DOWN1(ArrayList<OBJECT> list, int x, int y, int size) {
-        for (OBJECT obj : list) {
-            if (obj.x == x) {
-                if (obj.y == y + 45 * size) {
-                    if (obj instanceof Bomb) {
-                        //((Bomb) obj).lifeTime = 15;
-                        tempUp = size;
-                        removeBomb(TEST.listObject, (Bomb) obj);
-                        makeBombbangLeft(((Bomb) obj).x,((Bomb) obj).y,tempDown);
-                    } else {
-                        if (obj instanceof Brick && down == 0) {
-                            tempDown = size;
-                            down++;
-                            removeBrick(TEST.listObject, (Brick) obj);
-                        }
-
-                    }
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-    public boolean LEFT1(ArrayList<OBJECT> list, int x, int y, int size) {
+    public boolean Left0(ArrayList<OBJECT> list, int x, int y, int size) {
         for (OBJECT obj : list) {
             if (obj.y == y) {
                 if (obj.x == x - 45 * size) {
                     if (obj instanceof Bomb) {
-                        //((Bomb) obj).lifeTime = 15;
-                        tempLeft = size;
-                        removeBomb(TEST.listObject, (Bomb) obj);
-                        makeBombbangLeft(((Bomb) obj).x,((Bomb) obj).y,tempLeft);
-                    } else {
-                        if (obj instanceof Brick && left == 0) {
-                            tempLeft = size;
-                            left++;
-                            removeBrick(TEST.listObject, (Brick) obj);
-                        }
-
+                        ((Bomb) obj).lifeTime = 15;
+                    } else if (obj instanceof Brick && left == 0) {
+                        removeBrick(TEST.listObject, (Brick) obj);
+                        left++;                        
+                        
                     }
+                    tempLeft = size;
                     return true;
                 }
             }
         }
         return false;
     }
-
-    public boolean RIGHT1(ArrayList<OBJECT> list, int x, int y, int size) {
+    public boolean Up0(ArrayList<OBJECT> list, int x, int y, int size) {
         for (OBJECT obj : list) {
-            if (obj.y == y) {
-                if (obj.x == x + 45 * size) {
+            if (obj.x == x) {
+                if (obj.y == y - 45 * size) {
                     if (obj instanceof Bomb) {
-                        tempRight = size;
-                        //((Bomb) obj).lifeTime = 15;
-                        removeBomb(TEST.listObject, (Bomb) obj);
-                        makeBombbangRight(((Bomb) obj).x,((Bomb) obj).y,tempRight);
+                        ((Bomb) obj).lifeTime = 15;
+                    } else if (obj instanceof Brick && up == 0) {
+                        removeBrick(TEST.listObject, (Brick) obj);
+                        up++;                        
                         
-                        
-                    } else {
-                        if (obj instanceof Brick && right == 0) {
-                            tempRight = size;
-                            right++;
-                            removeBrick(TEST.listObject, (Brick) obj);
-                        }
-
                     }
+                    tempUp = size;
                     return true;
                 }
             }
         }
         return false;
     }
-    
-    public void removeBomb(ArrayList<OBJECT> list, Bomb bomb){
-        
+    public boolean Down0(ArrayList<OBJECT> list, int x, int y, int size) {
+        for (OBJECT obj : list) {
+            if (obj.x == x) {
+                if (obj.y == y + 45 * size) {
+                    if (obj instanceof Bomb) {
+                        ((Bomb) obj).lifeTime = 15;
+                    } else if (obj instanceof Brick && down == 0) {
+                        removeBrick(TEST.listObject, (Brick) obj);
+                        down++;                        
+                        
+                    }
+                    tempDown = size;
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public void removeBomb(ArrayList<OBJECT> list, Bomb bomb) {
+
         Iterator<OBJECT> ite = list.iterator();
-        while(ite.hasNext()){
+        while (ite.hasNext()) {
             OBJECT object = ite.next();
-            if(object instanceof Bomb ){
-                if(bomb.equals(object))
-                {
+            if (object instanceof Bomb) {
+                if (bomb.equals(object)) {
                     ite.remove();
                     break;
                 }
             }
         }
     }
-    public void makeBombbangLeft(int x,int y,int tempLeft){
-        Bombbang b=new Bombbang(x,y,2000,5);
-        b.tempLeft=tempLeft;
-        TEST.listBombbang.add(b);
-    }
-    public void makeBombbangRight(int x,int y,int tempRight){
-        Bombbang b=new Bombbang(x,y,2000,5);
-        b.tempRight=tempRight;
-        TEST.listBombbang.add(b);
-    }
-    public void makeBombbangUp(int x,int y,int tempUp){
-        Bombbang b=new Bombbang(x,y,2000,5);
-        b.tempUp=tempUp;
-        TEST.listBombbang.add(b);
-    }
-    public void makeBombbangDown(int x,int y,int tempDown){
-        Bombbang b=new Bombbang(x,y,2000,5);
-        b.tempDown=tempDown;
+
+    public void makeBombbangLeft(int x, int y) {
+        Bombbang b = new Bombbang(x, y, 2000, 5);
         TEST.listBombbang.add(b);
     }
 
-//    public boolean RIGHT(ArrayList<OBJECT> list, int x, int y, int size) {
-//        int i;
-//        OBJECT object;
-//        for (i = 0; i < list.size(); i++) {
-//            object = list.get(i);
-//            if (object.y == y) {
-//                if (object.x == x + 45 * size) {
-//                    if (!(object instanceof Bomb)) {
-//                        if (object instanceof Brick && right == 0) {
-//                            tempRight = size;
-//                            if (bRight == 0) {
-//                                removeBrick(TEST.listObject, (Brick) object);
-//                            }
-//                            right++;
-//                        }
-//                    } else if (object instanceof Bomb && bRight == 0) {
-//                        ((Bomb) object).lifeTime = 15;
-//                        bRight = 1;
-//                        tempRight = size - 1;
-//                    }
-//                    return true;
-//                }
-//            }
-//        }
-//        return false;
-//    }
+    public void makeBombbangRight(int x, int y) {
+        Bombbang b = new Bombbang(x, y, 2000, 5);
+        TEST.listBombbang.add(b);
+    }
+
+    public void makeBombbangUp(int x, int y, int tempUp) {
+        Bombbang b = new Bombbang(x, y, 2000, 5);
+        TEST.listBombbang.add(b);
+    }
+
+    public void makeBombbangDown(int x, int y, int tempDown) {
+        Bombbang b = new Bombbang(x, y, 2000, 5);
+        TEST.listBombbang.add(b);
+    }
 
     public void removeMonster(ArrayList<Character> list, Ballom ballom) {
         Iterator<Character> ite = list.iterator();
@@ -353,36 +237,36 @@ public class Bombbang extends OBJECT {
     public void drawObject(Graphics2D g2) {
         int i;
         for (i = 1; i <= tempUp; i++) {
-            if (!UP1(TEST.listObject, this.x, this.y, i)) {
+            if (!Up0(TEST.listObject, this.x, this.y, i)) {
                 g2.drawImage(img_up, x, y - 45 * i, 45, 45, null);
             } else {
                 break;
             }
         }
         for (i = 1; i <= tempDown; i++) {
-            if (!DOWN1(TEST.listObject, this.x, this.y, i)) {
+            if (!Down0(TEST.listObject, this.x, this.y, i)) {
                 g2.drawImage(img_down, x, y + 45 * i, 45, 45, null);
             } else {
                 break;
             }
         }
         for (i = 1; i <= tempRight; i++) {
-            if (!RIGHT1(TEST.listObject, this.x, this.y, i)) {
+            if (!Right0(TEST.listObject, this.x, this.y, i)) {
                 g2.drawImage(img_right, x + 45 * i, y, 45, 45, null);
             } else {
                 break;
             }
         }
         for (i = 1; i <= tempLeft; i++) {
-            if (!LEFT1(TEST.listObject, this.x, this.y, i)) {
+            if (!Left0(TEST.listObject, this.x, this.y, i)) {
                 g2.drawImage(img_left, x - 45 * i, y, 45, 45, null);
             } else {
                 break;
             }
         }
-//        monsterRight(TEST.listMonster,this.x,this.y, tempRight);
-//        monsterLeft(TEST.listMonster,this.x,this.y, tempLeft);
-//        monsterUp(TEST.listMonster,this.x,this.y, tempUp);
-//        monsterDown(TEST.listMonster,this.x,this.y, tempDown);
+        monsterRight(TEST.listMonster,this.x,this.y, tempRight);
+        monsterLeft(TEST.listMonster,this.x,this.y, tempLeft);
+        monsterUp(TEST.listMonster,this.x,this.y, tempUp);
+        monsterDown(TEST.listMonster,this.x,this.y, tempDown);
     }
 }

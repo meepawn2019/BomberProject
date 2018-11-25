@@ -32,7 +32,7 @@ public class TEST extends JPanel implements ActionListener {
 
     private Background background = new Background();
     public static ArrayList<OBJECT> listObject = new ArrayList<>();
-    private static ArrayList<Bombbang> listBombbang = new ArrayList<>();
+    public static ArrayList<Bombbang> listBombbang = new ArrayList<>();
     public static ArrayList<Character> listMonster = new ArrayList<>();
     private Camera camera = new Camera(0, 0);
     private int huong;
@@ -245,7 +245,7 @@ public class TEST extends JPanel implements ActionListener {
         camera.moveCamera(bomber);
         moveMonster();
         checkBomb();
-        checkBombbang();
+        //checkBombbang();
         repaint();
     }
 }

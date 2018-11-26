@@ -300,4 +300,10 @@ public class Bombbang extends OBJECT {
         monsterDown(TEST.listMonster,this.x,this.y, tempDown);
     }
 
+    public void impactWithBomber(){
+        Rectangle rec1 = new Rectangle(this.x,this.y+45, img_down_2.getWidth(null),img_down_2.getHeight(null)*tempDown);
+        Rectangle rec2 = rec1.intersection(TEST.bomber.getBound());
+        System.out.println(rec2.getWidth());
+        if(rec2.getWidth() > 10) System.out.println("Chet");
+    }
 }

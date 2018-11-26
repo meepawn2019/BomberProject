@@ -249,6 +249,9 @@ public class TEST extends JPanel implements ActionListener {
                 ((Ballom) ballom).doiHuong();
             }
         }
+        for(Bombbang object : listBombbang){
+                object.impactWithBomber();
+        }
         bomber.move();
         bomber.doiHuong(huong);
         camera.moveCamera(bomber);

@@ -21,6 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static com.bomb.character.Bomber.MOVE;
+import item.*;
 
 public class TEST extends JPanel implements ActionListener {
     static final int D_W = 905;
@@ -34,6 +35,7 @@ public class TEST extends JPanel implements ActionListener {
     public static ArrayList<OBJECT> listObject = new ArrayList<>();
     public static ArrayList<Bombbang> listBombbang = new ArrayList<>();
     public static ArrayList<Character> listMonster = new ArrayList<>();
+    public static ArrayList<item> listItem =new ArrayList<>();
     private Camera camera = new Camera(0, 0);
     private int huong;
     static public int framesUp=0;
@@ -72,6 +74,14 @@ public class TEST extends JPanel implements ActionListener {
                             bomber = new Bomber(row*ix,line*iy);
                             break;
                         }
+                        case 'f': {
+                            listItem.add(new flame(row*ix,line*iy));
+                            break;
+                        }
+                        case 's': {
+                            listItem.add(new speed(row*ix,line*iy));
+                            break;
+                        }
 
                     }
                     row++;
@@ -98,6 +108,7 @@ public class TEST extends JPanel implements ActionListener {
             object.drawObject(g2d);
         }
         for(Bombbang bombb : listBombbang) bombb.drawObject(g2d);
+        for(item i:listItem) i.drawItem(g2d);
         for(OBJECT object : listObject){
             if(object instanceof Wall)
                 object.drawObject(g2d);

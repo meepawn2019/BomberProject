@@ -14,6 +14,10 @@ public class Bomb extends OBJECT {
     public int framesBomb = 0;
     private Image imageBomb1 = new ImageIcon(getClass().getResource("/Character/bomb_2.png")).getImage();
     private Image imageBomb2 = new ImageIcon(getClass().getResource("/Character/bomb_3.png")).getImage();
+    public boolean impactRightBomb = false;
+    public boolean impactLeftBomb = false;
+    public boolean impactUpBomb = false;
+    public boolean impactDownBomb = false;
     private Bomb(int x, int y){
         x=(x/45)*45;
         y=(y/45)*45;

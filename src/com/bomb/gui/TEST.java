@@ -189,8 +189,9 @@ public class TEST extends JPanel implements ActionListener {
                 {
                     int x = object.x;
                     int y = object.y;
+                    listBombbang.add(new Bombbang(x,y,2000,5,!((Bomb) object).impactRightBomb, !((Bomb) object).impactLeftBomb, ((Bomb) object).impactDownBomb, ((Bomb) object).impactUpBomb));
                     ite.remove();
-                    listBombbang.add(new Bombbang(x,y,2000,5));
+
                 }
             }
         }

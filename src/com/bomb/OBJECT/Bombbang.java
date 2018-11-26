@@ -19,10 +19,13 @@ public class Bombbang extends OBJECT {
     private int size;
     private int right = 0, left = 0, up = 0, down = 0;
     public boolean isRemove = false;
-    int bLeft = 0, bRight = 0, bUp = 0, bDown = 0;
-    int tempRight, tempLeft, tempUp, tempDown;
+    private int tempRight, tempLeft, tempUp, tempDown;
+    private boolean isDrawLeft;
+    private boolean isDrawRight;
+    private boolean isDrawUp;
+    private boolean isDrawDown;
 
-    public Bombbang(int x, int y, int lifeTime, int size) {
+    public Bombbang(int x, int y, int lifeTime, int size, boolean isDrawRight, boolean isDrawLeft, boolean isDrawDown, boolean isDrawUp) {
         this.x = x;
         this.y = y;
         this.size = size;
@@ -30,7 +33,10 @@ public class Bombbang extends OBJECT {
         tempUp = size;
         tempDown = size;
         tempLeft = size;
-
+        this.isDrawRight = isDrawRight;
+        this.isDrawLeft = isDrawLeft;
+        this.isDrawUp = isDrawUp;
+        this.isDrawDown = isDrawDown;
         this.lifeTime = lifeTime;
         try {
             img_left = ImageIO.read(getClass().getResourceAsStream("/Character/paopaoleft1.png"));
@@ -48,7 +54,7 @@ public class Bombbang extends OBJECT {
         lifeTime -= 50;
     }
 
-    public void removeBrick(ArrayList<OBJECT> list, Brick brick) {//hàm xóa
+    private void removeBrick(ArrayList<OBJECT> list, Brick brick) {//hàm xóa
         Iterator<OBJECT> ite = list.iterator();//dùng Iterator để xóa, nếu dùng list.remove thì sẽ ko dồn lên mà phần tử đó sẽ trở thành null và lần duyệt tiếp theo sẽ sai 
         while (ite.hasNext()) {
             OBJECT object = ite.next();//ite.next sẽ trả về đối tượng tiếp theo của list
@@ -61,12 +67,13 @@ public class Bombbang extends OBJECT {
         }
     }
 
-    public boolean Right0(ArrayList<OBJECT> list, int x, int y, int size) {
+    private boolean Right0(ArrayList<OBJECT> list, int x, int y, int size) {
         for (OBJECT obj : list) {
             if (obj.y == y) {
                 if (obj.x == x + 45 * size) {
                     if (obj instanceof Bomb ) {
                         ((Bomb) obj).lifeTime = 15;
+                        ((Bomb) obj).impactLeftBomb = true;
                     } else if (obj instanceof Brick && right == 0) {
                         removeBrick(TEST.listObject, (Brick) obj);
                         right++;
@@ -79,16 +86,16 @@ public class Bombbang extends OBJECT {
         return false;
     }
 
-    public boolean Left0(ArrayList<OBJECT> list, int x, int y, int size) {
+    private boolean Left0(ArrayList<OBJECT> list, int x, int y, int size) {
         for (OBJECT obj : list) {
             if (obj.y == y) {
                 if (obj.x == x - 45 * size) {
                     if (obj instanceof Bomb) {
                         ((Bomb) obj).lifeTime = 15;
+                        ((Bomb) obj).impactRightBomb = true;
                     } else if (obj instanceof Brick && left == 0) {
                         removeBrick(TEST.listObject, (Brick) obj);
-                        left++;                        
-                        
+                        left++;
                     }
                     tempLeft = size;
                     return true;
@@ -97,12 +104,13 @@ public class Bombbang extends OBJECT {
         }
         return false;
     }
-    public boolean Up0(ArrayList<OBJECT> list, int x, int y, int size) {
+    private boolean Up0(ArrayList<OBJECT> list, int x, int y, int size) {
         for (OBJECT obj : list) {
             if (obj.x == x) {
                 if (obj.y == y - 45 * size) {
                     if (obj instanceof Bomb) {
                         ((Bomb) obj).lifeTime = 15;
+                        ((Bomb) obj).impactDownBomb = true;
                     } else if (obj instanceof Brick && up == 0) {
                         removeBrick(TEST.listObject, (Brick) obj);
                         up++;                        
@@ -115,12 +123,13 @@ public class Bombbang extends OBJECT {
         }
         return false;
     }
-    public boolean Down0(ArrayList<OBJECT> list, int x, int y, int size) {
+    private boolean Down0(ArrayList<OBJECT> list, int x, int y, int size) {
         for (OBJECT obj : list) {
             if (obj.x == x) {
                 if (obj.y == y + 45 * size) {
                     if (obj instanceof Bomb) {
                         ((Bomb) obj).lifeTime = 15;
+                        ((Bomb) obj).impactUpBomb = true;
                     } else if (obj instanceof Brick && down == 0) {
                         removeBrick(TEST.listObject, (Brick) obj);
                         down++;                        
@@ -147,27 +156,7 @@ public class Bombbang extends OBJECT {
         }
     }
 
-    public void makeBombbangLeft(int x, int y) {
-        Bombbang b = new Bombbang(x, y, 2000, 5);
-        TEST.listBombbang.add(b);
-    }
-
-    public void makeBombbangRight(int x, int y) {
-        Bombbang b = new Bombbang(x, y, 2000, 5);
-        TEST.listBombbang.add(b);
-    }
-
-    public void makeBombbangUp(int x, int y, int tempUp) {
-        Bombbang b = new Bombbang(x, y, 2000, 5);
-        TEST.listBombbang.add(b);
-    }
-
-    public void makeBombbangDown(int x, int y, int tempDown) {
-        Bombbang b = new Bombbang(x, y, 2000, 5);
-        TEST.listBombbang.add(b);
-    }
-
-    public void removeMonster(ArrayList<Character> list, Ballom ballom) {
+    private void removeMonster(ArrayList<Character> list, Ballom ballom) {
         Iterator<Character> ite = list.iterator();
         Character character;
         while (ite.hasNext()) {
@@ -251,7 +240,7 @@ public class Bombbang extends OBJECT {
             }
         }
         for (i = 1; i <= tempRight; i++) {
-            if (!Right0(TEST.listObject, this.x, this.y, i)) {
+            if (!Right0(TEST.listObject, this.x, this.y, i) && isDrawRight) {
                 g2.drawImage(img_right, x + 45 * i, y, 45, 45, null);
             } else {
                 break;

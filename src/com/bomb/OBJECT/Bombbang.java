@@ -11,10 +11,21 @@ import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.*;
 
 public class Bombbang extends OBJECT {
 
+    public int framesBombb = 0;
     private BufferedImage img_left, img_right, img_up, img_down, img_center;
+    ImageIcon imageIcon;
+    private Image img_down_2 = new  ImageIcon(getClass().getResource("/Character/paopaodown.png")).getImage();
+    private Image img_up_2 = new  ImageIcon(getClass().getResource("/Character/paopaoup.png")).getImage();
+    private Image img_left_2 = new  ImageIcon(getClass().getResource("/Character/paopaoleft.png")).getImage();
+    private Image img_right_2 = new  ImageIcon(getClass().getResource("/Character/paopaoright.png")).getImage();
+    private Image img_center_2 = new ImageIcon(getClass().getResource("/Character/paopao2.png")).getImage();
+    private Image img_center_3 = new ImageIcon(getClass().getResource("/Character/paopao3.png")).getImage();
+    private Image img_center_4 = new ImageIcon(getClass().getResource("/Character/paopao4.png")).getImage();
+    private Image img_center_5 = new ImageIcon(getClass().getResource("/Character/paopao5.png")).getImage();
     public int lifeTime;
     private int size;
     private int right = 0, left = 0, up = 0, down = 0;
@@ -24,6 +35,10 @@ public class Bombbang extends OBJECT {
     private boolean isDrawRight;
     private boolean isDrawUp;
     private boolean isDrawDown;
+    private boolean endUp = false;
+    private boolean endDown = false;
+    private boolean endLeft = false;
+    private boolean endRight = false;
 
     public Bombbang(int x, int y, int lifeTime, int size, boolean isDrawRight, boolean isDrawLeft, boolean isDrawDown, boolean isDrawUp) {
         this.x = x;
@@ -51,7 +66,7 @@ public class Bombbang extends OBJECT {
     }
 
     public void remove() {
-        lifeTime -= 50;
+        lifeTime -= 20;
     }
 
     private void removeBrick(ArrayList<OBJECT> list, Brick brick) {//hàm xóa
@@ -93,6 +108,7 @@ public class Bombbang extends OBJECT {
                     if (obj instanceof Bomb) {
                         ((Bomb) obj).lifeTime = 15;
                         ((Bomb) obj).impactRightBomb = true;
+                        endLeft = true;
                     } else if (obj instanceof Brick && left == 0) {
                         removeBrick(TEST.listObject, (Brick) obj);
                         left++;
@@ -108,16 +124,22 @@ public class Bombbang extends OBJECT {
         for (OBJECT obj : list) {
             if (obj.x == x) {
                 if (obj.y == y - 45 * size) {
-                    if (obj instanceof Bomb) {
-                        ((Bomb) obj).lifeTime = 15;
-                        ((Bomb) obj).impactDownBomb = true;
-                    } else if (obj instanceof Brick && up == 0) {
-                        removeBrick(TEST.listObject, (Brick) obj);
-                        up++;                        
-                        
+                    if(obj instanceof  Wall){
+                        tempUp = size-1;
+                        return true;
                     }
-                    tempUp = size;
-                    return true;
+                    else{
+                        if (obj instanceof Bomb) {
+                            ((Bomb) obj).lifeTime = 15;
+                            ((Bomb) obj).impactDownBomb = true;
+                            endUp = true;
+                        } else if (obj instanceof Brick && up == 0) {
+                            removeBrick(TEST.listObject, (Brick) obj);
+                            up++;
+                        }
+                        tempUp = size;
+                        return true;
+                    }
                 }
             }
         }
@@ -130,10 +152,10 @@ public class Bombbang extends OBJECT {
                     if (obj instanceof Bomb) {
                         ((Bomb) obj).lifeTime = 15;
                         ((Bomb) obj).impactUpBomb = true;
+                        endDown = true;
                     } else if (obj instanceof Brick && down == 0) {
                         removeBrick(TEST.listObject, (Brick) obj);
-                        down++;                        
-                        
+                        down++;
                     }
                     tempDown = size;
                     return true;
@@ -143,7 +165,6 @@ public class Bombbang extends OBJECT {
         return false;
     }
     public void removeBomb(ArrayList<OBJECT> list, Bomb bomb) {
-
         Iterator<OBJECT> ite = list.iterator();
         while (ite.hasNext()) {
             OBJECT object = ite.next();
@@ -224,31 +245,51 @@ public class Bombbang extends OBJECT {
 
     @Override
     public void drawObject(Graphics2D g2) {
+        if(lifeTime <=800 && lifeTime > 600) g2.drawImage(img_center_2, x, y, 45, 45, null);
+        if(lifeTime <=600 && lifeTime > 400) g2.drawImage(img_center_3, x, y, 45, 45, null);
+        if(lifeTime <=400 && lifeTime > 200) g2.drawImage(img_center_4, x, y, 45, 45, null);
+        if(lifeTime <= 200) g2.drawImage(img_center_5, x, y, 45, 45, null);
         int i;
         for (i = 1; i <= tempUp; i++) {
-            if (!Up0(TEST.listObject, this.x, this.y, i)) {
-                g2.drawImage(img_up, x, y - 45 * i, 45, 45, null);
+            if (!Up0(TEST.listObject, this.x, this.y, i) && isDrawUp) {
+                if(i==tempUp) {
+                    if(!endUp) g2.drawImage(img_up, x, y - 45 * i, 45, 45, null);
+                    else g2.drawImage(img_up_2, x, y - 45 * i, 45, 45, null);
+                }
+                else g2.drawImage(img_up_2, x, y - 45 * i, 45, 45, null);
             } else {
                 break;
             }
         }
         for (i = 1; i <= tempDown; i++) {
-            if (!Down0(TEST.listObject, this.x, this.y, i)) {
-                g2.drawImage(img_down, x, y + 45 * i, 45, 45, null);
+            if (!Down0(TEST.listObject, this.x, this.y, i) && isDrawDown) {
+                if(i==tempDown){
+                    if(!endDown)  g2.drawImage(img_down, x, y + 45 * i, 45, 45, null);
+                    else  g2.drawImage(img_down_2, x, y + 45 * i, 45, 45, null);
+                }
+                else g2.drawImage(img_down_2, x, y + 45 * i, 45, 45, null);
             } else {
                 break;
             }
         }
         for (i = 1; i <= tempRight; i++) {
             if (!Right0(TEST.listObject, this.x, this.y, i) && isDrawRight) {
-                g2.drawImage(img_right, x + 45 * i, y, 45, 45, null);
+                if(i==tempRight) {
+                    if(!endRight) g2.drawImage(img_right, x + 45 * i, y, 45, 45, null);
+                    else g2.drawImage(img_right_2, x + 45 * i, y, 45, 45, null);
+                }
+                else g2.drawImage(img_right_2, x + 45 * i, y, 45, 45, null);
             } else {
                 break;
             }
         }
         for (i = 1; i <= tempLeft; i++) {
-            if (!Left0(TEST.listObject, this.x, this.y, i)) {
-                g2.drawImage(img_left, x - 45 * i, y, 45, 45, null);
+            if (!Left0(TEST.listObject, this.x, this.y, i) && isDrawLeft) {
+                if(i==tempLeft) {
+                    if(!endLeft) g2.drawImage(img_left, x - 45 * i, y, 45, 45, null);
+                    else g2.drawImage(img_left_2, x - 45 * i, y, 45, 45, null);
+                }
+                else g2.drawImage(img_left_2, x - 45 * i, y, 45, 45, null);
             } else {
                 break;
             }
@@ -258,4 +299,5 @@ public class Bombbang extends OBJECT {
         monsterUp(TEST.listMonster,this.x,this.y, tempUp);
         monsterDown(TEST.listMonster,this.x,this.y, tempDown);
     }
+
 }

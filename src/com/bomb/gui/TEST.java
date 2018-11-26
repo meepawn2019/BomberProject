@@ -28,7 +28,7 @@ public class TEST extends JPanel implements ActionListener {
 
     private static final int ix=45;
     private static final int iy=45;
-    private Bomber bomber;
+    public static Bomber bomber;
 
     private Background background = new Background();
     public static ArrayList<OBJECT> listObject = new ArrayList<>();
@@ -125,7 +125,7 @@ public class TEST extends JPanel implements ActionListener {
     KeyAdapter myAdapter = new KeyAdapter() {
         @Override
         public void keyPressed(KeyEvent e) {
-            isKeyPressed = true;
+            if(e.getKeyCode() != KeyEvent.VK_SPACE) isKeyPressed = true;
             if(e.getKeyCode() == KeyEvent.VK_UP){
                 Bomber.huong = 1;
                 huong = Character.TREN;
@@ -151,7 +151,15 @@ public class TEST extends JPanel implements ActionListener {
         @Override
         public void keyReleased(KeyEvent e) {
             if(e.getKeyCode() == KeyEvent.VK_SPACE){
-                addObject(new com.bomb.OBJECT.Bomb(bomber.x + bomber.getWidth() / 2, bomber.y + bomber.getHeight() / 2, 3000 ));
+                boolean isDraw = true;
+                Bomb bomb = new com.bomb.OBJECT.Bomb(bomber.x + bomber.getWidth() / 2, bomber.y + bomber.getHeight() / 2, 3000 );
+                for(OBJECT object : listObject){
+                    if(object instanceof Bomb ) {
+                        if(object.x == bomb.x && object.y == bomb.y) isDraw = false;
+                    }
+                }
+
+                if(isDraw) addObject(bomb);
             }
             if(e.getKeyCode() == KeyEvent.VK_UP){
                 dem =10;
@@ -185,11 +193,11 @@ public class TEST extends JPanel implements ActionListener {
             OBJECT object = ite.next();
             if(object instanceof Bomb ){
                 ((Bomb) object).explose();
-                if(((Bomb) object).lifeTime == 0)
+                if(((Bomb) object).lifeTime <= 0)
                 {
                     int x = object.x;
                     int y = object.y;
-                    listBombbang.add(new Bombbang(x,y,2000,5,!((Bomb) object).impactRightBomb, !((Bomb) object).impactLeftBomb, ((Bomb) object).impactDownBomb, ((Bomb) object).impactUpBomb));
+                    listBombbang.add(new Bombbang(x,y,800,5,!((Bomb) object).impactRightBomb, !((Bomb) object).impactLeftBomb, !((Bomb) object).impactDownBomb, !((Bomb) object).impactUpBomb));
                     ite.remove();
 
                 }

@@ -18,6 +18,7 @@ public class Bomb extends OBJECT {
     public boolean impactLeftBomb = false;
     public boolean impactUpBomb = false;
     public boolean impactDownBomb = false;
+    public boolean isConnect = false;
     private Bomb(int x, int y){
         x=(x/45)*45;
         y=(y/45)*45;
@@ -37,7 +38,7 @@ public class Bomb extends OBJECT {
     }
 
     public void explose(){
-        lifeTime -=15;
+        lifeTime -=20;
     }
 
     @Override
@@ -45,5 +46,8 @@ public class Bomb extends OBJECT {
         if(framesBomb % 3 == 0) g2.drawImage(this.image, this.x, this.y, null);
         if(framesBomb % 3 == 1) g2.drawImage(imageBomb1, this.x, this.y, null);
         if(framesBomb % 3 == 2) g2.drawImage(imageBomb2, this.x, this.y, null);
+    }
+    public Rectangle getBound() {
+        return new Rectangle(x, y, image.getWidth(null), image.getHeight(null));
     }
 }

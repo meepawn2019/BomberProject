@@ -261,6 +261,7 @@ public class TEST extends JPanel implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent e) {
+        
         if(isKeyPressed){
             dem++;
             if(dem >= 10){
@@ -307,6 +308,13 @@ public class TEST extends JPanel implements ActionListener {
         bomber.doiHuong(huong);
         camera.moveCamera(bomber);
         moveMonster();
+        if(asd) {
+            listObject.clear();
+            listMonster.clear();
+            listItem.clear();
+            listPortal.clear();
+            loadMap("map2.txt");
+        }
         checkBomb();
         checkBombbang();
         repaint();

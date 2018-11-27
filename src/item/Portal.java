@@ -16,7 +16,7 @@ public class Portal {
         this.x=x;
         this.y=y;
         try {
-            this.image=ImageIO.read(getClass().getResourceAsStream("/Character/portal0.png"));
+            this.image=ImageIO.read(getClass().getResourceAsStream("/Character/portal1.png"));
         } catch (IOException ex) {
             Logger.getLogger(Portal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -25,6 +25,6 @@ public class Portal {
         g.drawImage(image, x, y, 45, 45,null);
     }
     public Rectangle getBound(){
-        return new Rectangle(x, y, image.getWidth(),image.getHeight());
+        return new Rectangle(x, y, 45   ,45);
     }
 }

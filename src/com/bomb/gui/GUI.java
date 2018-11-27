@@ -11,17 +11,20 @@ public class GUI extends JFrame {
     public GUI() {
         //setSize(WIDTHJF, HEI`GHTJF);
         String[] map={"map1.txt","map2.txt","map3.txt","map4.txt"};
-        int n=0;
-        do{
-            test = new TEST(map[n]);
-            add(test);
-            pack();
-            setLocationRelativeTo(null);
-            addKeyListener(test.myAdapter);
-            setResizable(true);
-            setDefaultCloseOperation(EXIT_ON_CLOSE) ;
-            n++;
-        }while(test.asd==true);
+        test = new TEST(map[0]);
+        add(test);
+        pack();
+        setLocationRelativeTo(null);
+        addKeyListener(test.myAdapter);
+        
+        if(test.asd) test=new TEST(map[1]);
+        add(test);
+        pack();
+        setLocationRelativeTo(null);
+        addKeyListener(test.myAdapter);
+        setResizable(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE) ;
+        
 
     }
 

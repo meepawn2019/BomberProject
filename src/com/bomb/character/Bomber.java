@@ -167,12 +167,7 @@ public class Bomber extends Character implements CanMove {
         }
         return false;
     }
-    public static void init(){
-        TEST.listObject.clear();
-        TEST.listPortal.clear();
-        TEST.listMonster.clear();
-        TEST.listItem.clear();
-    }
+    
     public boolean isInsertPortal(Portal p){
         Rectangle rec=p.getBound();
         if(rec.intersects(getBound())){

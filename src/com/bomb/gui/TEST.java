@@ -2,9 +2,7 @@ package com.bomb.gui;
 
 import com.bomb.BackGround.Background;
 import com.bomb.OBJECT.*;
-import com.bomb.character.Ballom;
-import com.bomb.character.Bomber;
-import com.bomb.character.Character;
+import com.bomb.character.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,6 +19,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static com.bomb.character.Bomber.MOVE;
+
+import com.bomb.character.Character;
 import item.*;
 
 public class TEST extends JPanel implements ActionListener {
@@ -68,7 +68,7 @@ public class TEST extends JPanel implements ActionListener {
                             break;
                         }
                         case '1': {
-                            listMonster.add(new Ballom(row*ix, line*iy));
+                            listMonster.add(new Oneal(row*ix, line*iy));
                             break;
                         }
                         case 'p': {
@@ -115,7 +115,7 @@ public class TEST extends JPanel implements ActionListener {
                 object.drawObject(g2d);
         }
         for(Character character : listMonster){
-            ((Ballom) character).drawCharacter(g2d);
+            ((Monster) character).drawCharacter(g2d);
         }
         bomber.drawCharacter(g2d);
         g2d.translate(-camera.getX(), -camera.getY());
@@ -231,7 +231,7 @@ public class TEST extends JPanel implements ActionListener {
 
     public void moveMonster(){
         for(Character character : listMonster){
-            ((Ballom)character).move();
+            ((Monster)character).move();
         }
     }
 
@@ -256,9 +256,9 @@ public class TEST extends JPanel implements ActionListener {
                 }
             }
         }
-        for(Character ballom : listMonster){
-            if(ballom instanceof Ballom){
-                ((Ballom) ballom).doiHuong();
+        for(Character character : listMonster){
+            if(character instanceof Monster){
+                ((Monster) character).doiHuong();
             }
         }
         for(Bombbang object : listBombbang){

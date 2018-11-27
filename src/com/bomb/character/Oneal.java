@@ -7,13 +7,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 
-public class Ballom extends Monster implements CanMove {
-
+public class Oneal extends Monster implements CanMove{
     private int dx = 1;
     private int dy = 0;
     int turn = 0;
 
-    public Ballom(int x, int y){
+    public Oneal(int x, int y){
         this.x = x;
         this.y = y;
         image = new ImageIcon(getClass().getResource("/Character/monster_down.png")).getImage();
@@ -25,7 +24,7 @@ public class Ballom extends Monster implements CanMove {
 
     @Override
     public void move() {
-        if(isCrossWay()){
+        /*if(isCrossWay()){
             turn++;
             if(turn % 2 == 0){
                 {
@@ -48,7 +47,38 @@ public class Ballom extends Monster implements CanMove {
                 this.y -= dy;
                 random();
             }
+        }*/
+        int tempX = TEST.bomber.x - this.x;
+        int tempY = TEST.bomber.y - this.y;
+        if(Math.abs(tempX) > Math.abs(tempY)){
+            if(tempX < 0){
+                dx = -1;
+                dy = 0;
+            }
+            else{
+                dx = 1;
+                dy = 0;
+            }
+        } else if(Math.abs(tempX) < Math.abs(tempY)){
+            if(tempY < 0){
+                dy = -1;
+                dx = 0;
+            } else{
+                dy = 1;
+                dx = 0;
+            }
+        } else if(tempX == 0){
+            this.dx = TEST.bomber.dx;
+            this.dy = TEST.bomber.dy;
         }
+
+        this.x += dx;
+        this.y += dy;
+        if(this.x + dx < 0 || this.x + image.getWidth(null) + dx > 45*31 || collision()){
+            this.x -= dx;
+            this.y -= dy;
+        }
+
     }
 
     private boolean collision(){
@@ -63,7 +93,7 @@ public class Ballom extends Monster implements CanMove {
         return new Rectangle(x, y, image.getWidth(null), image.getHeight(null)-23);
     }
 
-    private boolean isCrossWay(){
+/*    private boolean isCrossWay(){
         if(dx == 0){
             this.x+=1;
             if(!collision()){
@@ -93,8 +123,8 @@ public class Ballom extends Monster implements CanMove {
             this.y+=1;
         }
         return false;
-    }
-    private void random(){
+    }*/
+/*    private void random(){
         Random random = new Random();
         int randomInt = random.nextInt(4) + 1;
         if(randomInt == 1) {
@@ -113,7 +143,7 @@ public class Ballom extends Monster implements CanMove {
             dx = 1;
             dy = 0;
         }
-    }
+    }*/
 
     public void doiHuong(){
         if(dx == 0 && dy > 0) this.image = new ImageIcon(getClass().getResource("/Character/monster_down.png")).getImage();

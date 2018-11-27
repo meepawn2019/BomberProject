@@ -10,7 +10,7 @@ public abstract class Character {
     public static final int PHAI = 4;
     public  Image image;
 
-    abstract void drawCharacter(Graphics2D g2);
+    public abstract void drawCharacter(Graphics2D g2);
 
     public int getX() {
         return x;

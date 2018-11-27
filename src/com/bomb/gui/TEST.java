@@ -176,7 +176,10 @@ public class TEST extends JPanel implements ActionListener {
                     }
                 }
 
-                if(isDraw) addObject(bomb);
+                if(isDraw && TEST.bomber.currentBomb < TEST.bomber.maxBomb) {
+                    addObject(bomb);
+                    TEST.bomber.currentBomb++;
+                }
             }
             if(e.getKeyCode() == KeyEvent.VK_UP){
                 dem =10;
@@ -216,6 +219,7 @@ public class TEST extends JPanel implements ActionListener {
                     int y = object.y;
                     listBombbang.add(new Bombbang(x,y,800,Bomber.bombSize,!((Bomb) object).impactRightBomb, !((Bomb) object).impactLeftBomb, !((Bomb) object).impactDownBomb, !((Bomb) object).impactUpBomb));
                     ite.remove();
+                    TEST.bomber.currentBomb--;
 
                 }
             }

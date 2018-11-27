@@ -40,6 +40,8 @@ public class Bomber extends Character implements CanMove {
     private Image imageRight5 = new ImageIcon(getClass().getResource("/Character/bomber_right_5.png")).getImage();
     private Image imageRight6 = new ImageIcon(getClass().getResource("/Character/bomber_right_6.png")).getImage();
     public static int huong = 1;
+    public int currentBomb = 0;
+    public int maxBomb = 1;
 
     private Image[] imageUp = {imageUp2, imageUp3, imageUp4, imageUp5, imageUp6};
     private Image[] imageDown = {imageDown2, imageDown3, imageDown4, imageDown5, imageDown6};

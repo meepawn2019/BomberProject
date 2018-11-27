@@ -24,54 +24,12 @@ public class Oneal extends Monster implements CanMove{
 
     @Override
     public void move() {
-        /*if(isCrossWay()){
-            turn++;
-            if(turn % 2 == 0){
-                {
-                    random();
-                    this.x+=dx;
-                    this.y+=dy;
-                    if(this.x + dx < 0 || this.x + image.getWidth(null) + dx > 45*31 || collision()){
-                        this.x -= dx;
-                        this.y -= dy;
-                        random();
-                    }
-                }
-            }
-        }
-        else {
-            this.x += dx;
-            this.y += dy;
-            if(this.x + dx < 0 || this.x + image.getWidth(null) + dx > 45*31 || collision()){
-                this.x -= dx;
-                this.y -= dy;
-                random();
-            }
-        }*/
         int tempX = TEST.bomber.x - this.x;
         int tempY = TEST.bomber.y - this.y;
-        if(Math.abs(tempX) > Math.abs(tempY)){
-            if(tempX < 0){
-                dx = -1;
-                dy = 0;
-            }
-            else{
-                dx = 1;
-                dy = 0;
-            }
-        } else if(Math.abs(tempX) < Math.abs(tempY)){
-            if(tempY < 0){
-                dy = -1;
-                dx = 0;
-            } else{
-                dy = 1;
-                dx = 0;
-            }
-        } else if(tempX == 0){
-            this.dx = TEST.bomber.dx;
-            this.dy = TEST.bomber.dy;
-        }
-
+        if(tempX < 0) dx = -1;
+        else dx = 1;
+        if(tempY < 0) dy = -1;
+        else dy = 1;
         this.x += dx;
         this.y += dy;
         if(this.x + dx < 0 || this.x + image.getWidth(null) + dx > 45*31 || collision()){
@@ -93,62 +51,15 @@ public class Oneal extends Monster implements CanMove{
         return new Rectangle(x, y, image.getWidth(null), image.getHeight(null)-23);
     }
 
-/*    private boolean isCrossWay(){
-        if(dx == 0){
-            this.x+=1;
-            if(!collision()){
-                this.x-=1;
-                return true;
-            }
-            this.x-=1;
-            this.x-=1;
-            if(!collision()){
-                this.x+=1;
-                return true;
-            }
-            this.x+=1;
-        }
-        else if(dy==0){
-            this.y+=1;
-            if(!collision()){
-                this.y-=1;
-                return true;
-            }
-            this.y-=1;
-            this.y-=1;
-            if(!collision()){
-                this.y+=1;
-                return true;
-            }
-            this.y+=1;
-        }
-        return false;
-    }*/
-/*    private void random(){
-        Random random = new Random();
-        int randomInt = random.nextInt(4) + 1;
-        if(randomInt == 1) {
-            dx = 0;
-            dy = -1;
-        }
-        if(randomInt == 2){
-            dx = 0;
-            dy = 1;
-        }
-        if(randomInt == 3){
-            dx = -1;
-            dy = 0;
-        }
-        if(randomInt == 4){
-            dx = 1;
-            dy = 0;
-        }
-    }*/
-
     public void doiHuong(){
         if(dx == 0 && dy > 0) this.image = new ImageIcon(getClass().getResource("/Character/monster_down.png")).getImage();
         if(dx == 0 && dy < 0) this.image = new ImageIcon(getClass().getResource("/Character/monster_up.png")).getImage();
         if(dx > 0 && dy == 0) this.image = new ImageIcon(getClass().getResource("/Character/monster_right.png")).getImage();
         if(dx < 0 && dy == 0) this.image = new ImageIcon(getClass().getResource("/Character/monster_left.png")).getImage();
+    }
+
+    public boolean impactBomber(){
+        if(getBound().intersects(TEST.bomber.getBound())) return true;
+        else return false;
     }
 }

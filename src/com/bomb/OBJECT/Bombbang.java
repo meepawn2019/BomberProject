@@ -2,6 +2,7 @@ package com.bomb.OBJECT;
 
 import com.bomb.character.Ballom;
 import com.bomb.character.Character;
+import com.bomb.character.Monster;
 import com.bomb.gui.TEST;
 import item.item;
 import java.awt.*;
@@ -182,13 +183,13 @@ public class Bombbang extends OBJECT {
         }
     }
 
-    private void removeMonster(ArrayList<Character> list, Ballom ballom) {
+    private void removeMonster(ArrayList<Character> list, Monster monster) {
         Iterator<Character> ite = list.iterator();
         Character character;
         while (ite.hasNext()) {
             character = ite.next();
-            if (character instanceof Ballom) {
-                if (character.equals(ballom)) {
+            if (character instanceof Monster) {
+                if (character.equals(monster)) {
                     ite.remove();
                     break;
                 }
@@ -307,16 +308,16 @@ public class Bombbang extends OBJECT {
 
     @Override
     public void drawObject(Graphics2D g2) {
-        if (lifeTime <= 800 && lifeTime > 600) {
+        if (lifeTime <= 400 && lifeTime > 300) {
             g2.drawImage(img_center_2, x, y, 45, 45, null);
         }
-        if (lifeTime <= 600 && lifeTime > 400) {
+        if (lifeTime <= 300 && lifeTime > 200) {
             g2.drawImage(img_center_3, x, y, 45, 45, null);
         }
-        if (lifeTime <= 400 && lifeTime > 200) {
+        if (lifeTime <= 200 && lifeTime > 100) {
             g2.drawImage(img_center_4, x, y, 45, 45, null);
         }
-        if (lifeTime <= 200) {
+        if (lifeTime <= 100) {
             g2.drawImage(img_center_5, x, y, 45, 45, null);
         }
         int i;
@@ -390,11 +391,11 @@ public class Bombbang extends OBJECT {
         Rectangle rec2 = new Rectangle(this.x, this.y - 45*tempUp, img_down_2.getWidth(null), img_down_2.getHeight(null) * tempUp);
         Rectangle rec3 = new Rectangle(this.x+45, this.y, img_down_2.getWidth(null) * tempRight, img_down_2.getHeight(null));
         Rectangle rec4 = new Rectangle(this.x - 45*tempLeft, this.y, img_down_2.getWidth(null) * tempLeft, img_down_2.getHeight(null));
-        Rectangle rec5 = rec1.intersection(TEST.bomber.getBound());
+       /* Rectangle rec5 = rec1.intersection(TEST.bomber.getBound());
         Rectangle rec6 = rec2.intersection(TEST.bomber.getBound());
         Rectangle rec7 = rec3.intersection(TEST.bomber.getBound());
-        Rectangle rec8 = rec4.intersection(TEST.bomber.getBound());
-        if (rec5.getHeight() > 10 || rec6.getHeight() > 10 || rec7.getWidth() > 10 || rec8.getWidth() > 10) {
+        Rectangle rec8 = rec4.intersection(TEST.bomber.getBound());*/
+        if (rec1.intersects(TEST.bomber.getBound()) || rec2.intersects(TEST.bomber.getBound()) || rec3.intersects(TEST.bomber.getBound()) || rec4.intersects(TEST.bomber.getBound())) {
             System.out.println("chet");
         }
     }
@@ -413,13 +414,13 @@ public class Bombbang extends OBJECT {
     }
     public void impactWithMonster() {
         Rectangle rec1 = new Rectangle(this.x, this.y + 45, img_down_2.getWidth(null), img_down_2.getHeight(null) * tempDown);
-        Rectangle rec2 = new Rectangle(this.x, this.y - 45*tempUp, img_down_2.getWidth(null), img_down_2.getHeight(null) * tempUp);
+        Rectangle rec2 = new Rectangle(this.x, this.y - 45*tempUp, img_up_2.getWidth(null), img_up_2.getHeight(null) * tempUp);
         Rectangle rec3 = new Rectangle(this.x+45, this.y, img_down_2.getWidth(null) * tempRight, img_down_2.getHeight(null));
         Rectangle rec4 = new Rectangle(this.x - 45*tempLeft, this.y, img_down_2.getWidth(null) * tempLeft, img_down_2.getHeight(null));
         for(Character character : listMonster){
-            if(character instanceof Ballom){
-                if (rec1.intersects(((Ballom) character).getBound()) || rec2.intersects(((Ballom) character).getBound()) || rec3.intersects(((Ballom) character).getBound()) || rec4.intersects(((Ballom) character).getBound())) {
-                    removeMonster(listMonster, (Ballom) character);
+            if(character instanceof Monster){
+                if (rec1.intersects(((Monster) character).getBound()) || rec2.intersects(((Monster) character).getBound()) || rec3.intersects(((Monster) character).getBound()) || rec4.intersects(((Monster) character).getBound())) {
+                    removeMonster(listMonster, (Monster) character);
                     break;
                 }
             }

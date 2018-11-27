@@ -75,7 +75,7 @@ public class TEST extends JPanel implements ActionListener {
                             break;
                         }
                         case '1': {
-                            listMonster.add(new Oneal(row*ix, line*iy));
+                            listMonster.add(new Ballom(row*ix, line*iy));
                             break;
                         }
                         case 'p': {
@@ -217,7 +217,7 @@ public class TEST extends JPanel implements ActionListener {
                 {
                     int x = object.x;
                     int y = object.y;
-                    listBombbang.add(new Bombbang(x,y,800,Bomber.bombSize,!((Bomb) object).impactRightBomb, !((Bomb) object).impactLeftBomb, !((Bomb) object).impactDownBomb, !((Bomb) object).impactUpBomb));
+                    listBombbang.add(new Bombbang(x,y,400,Bomber.bombSize,!((Bomb) object).impactRightBomb, !((Bomb) object).impactLeftBomb, !((Bomb) object).impactDownBomb, !((Bomb) object).impactUpBomb));
                     ite.remove();
                     TEST.bomber.currentBomb--;
 

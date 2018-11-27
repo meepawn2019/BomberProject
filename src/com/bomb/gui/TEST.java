@@ -208,7 +208,7 @@ public class TEST extends JPanel implements ActionListener {
                 {
                     int x = object.x;
                     int y = object.y;
-                    listBombbang.add(new Bombbang(x,y,800,5,!((Bomb) object).impactRightBomb, !((Bomb) object).impactLeftBomb, !((Bomb) object).impactDownBomb, !((Bomb) object).impactUpBomb));
+                    listBombbang.add(new Bombbang(x,y,800,3,!((Bomb) object).impactRightBomb, !((Bomb) object).impactLeftBomb, !((Bomb) object).impactDownBomb, !((Bomb) object).impactUpBomb));
                     ite.remove();
 
                 }
@@ -262,6 +262,8 @@ public class TEST extends JPanel implements ActionListener {
         }
         for(Bombbang object : listBombbang){
                 object.impactWithBomber();
+                object.impactWithItems();
+                object.impactWithMonster();
         }
         bomber.move();
         bomber.doiHuong(huong);

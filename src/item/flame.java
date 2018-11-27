@@ -1,8 +1,7 @@
 
 package item;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,6 +23,4 @@ public class flame extends item{
     public void drawItem(Graphics2D g2) {
         g2.drawImage(this.image, this.x, this.y,45 ,45, null);
     }
-
-    
 }

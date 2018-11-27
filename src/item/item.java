@@ -5,7 +5,7 @@
  */
 package item;
 
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
@@ -18,4 +18,8 @@ public abstract class item {
     BufferedImage image;
 
     public abstract void drawItem(Graphics2D g2);
+
+    public Rectangle getBound(){
+        return new Rectangle(x, y, image.getWidth(),image.getHeight());
+    }
 }

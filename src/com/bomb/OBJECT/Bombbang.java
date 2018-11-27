@@ -14,6 +14,8 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import static com.bomb.gui.TEST.listMonster;
+
 public class Bombbang extends OBJECT {
 
     public int framesBombb = 0;
@@ -196,7 +198,7 @@ public class Bombbang extends OBJECT {
 
     
 
-    public void monsterRight(ArrayList<Character> list, int x, int y, int size) {
+/*    public void monsterRight(ArrayList<Character> list, int x, int y, int size) {
         for (Character c : list) {
             if (c instanceof Ballom) {
                 if (((Ballom) c).y == y) {
@@ -246,7 +248,8 @@ public class Bombbang extends OBJECT {
                 }
             }
         }
-    }
+    }*/
+    
     public void removeItem(ArrayList<item> list, item i) {
         Iterator<item> ite = list.iterator();
         while (ite.hasNext()) {
@@ -258,7 +261,7 @@ public class Bombbang extends OBJECT {
         }
     }
 
-    public void itemDown(ArrayList<item> list, int x, int y, int size) {
+ /*   public void itemDown(ArrayList<item> list, int x, int y, int size) {
         for (item i : list) {
             if (i.x == x) {
                 if (i.y <= y + 45 * size+45&&i.y>=y) {
@@ -300,7 +303,7 @@ public class Bombbang extends OBJECT {
                 }
             }
         }
-    }
+    }*/
 
     @Override
     public void drawObject(Graphics2D g2) {
@@ -327,8 +330,6 @@ public class Bombbang extends OBJECT {
                     }
                 } else {
                     g2.drawImage(img_up_2, x, y - 45 * i, 45, 45, null);
-                    monsterUp(TEST.listMonster, this.x, this.y, i);
-                    itemUp(TEST.listItem, this.x, this.y, i);
                 }
 
             } else {
@@ -345,8 +346,6 @@ public class Bombbang extends OBJECT {
                     }
                 } else {
                     g2.drawImage(img_down_2, x, y + 45 * i, 45, 45, null);
-                    monsterDown(TEST.listMonster, this.x, this.y, i);
-                    itemDown(TEST.listItem, this.x, this.y, i);
                 }
 
             } else {
@@ -363,8 +362,6 @@ public class Bombbang extends OBJECT {
                     }
                 } else {
                     g2.drawImage(img_right_2, x + 45 * i, y, 45, 45, null);
-                    monsterRight(TEST.listMonster, this.x, this.y, i);
-                    itemRight(TEST.listItem, this.x, this.y, i);
                 }
             } else {
                 break;
@@ -380,8 +377,6 @@ public class Bombbang extends OBJECT {
                     }
                 } else {
                     g2.drawImage(img_left_2, x - 45 * i, y, 45, 45, null);
-                    monsterLeft(TEST.listMonster, this.x, this.y, i);
-                    itemLeft(TEST.listItem, this.x, this.y, i);
                 }
 
             } else {
@@ -392,10 +387,42 @@ public class Bombbang extends OBJECT {
 
     public void impactWithBomber() {
         Rectangle rec1 = new Rectangle(this.x, this.y + 45, img_down_2.getWidth(null), img_down_2.getHeight(null) * tempDown);
-        Rectangle rec2 = rec1.intersection(TEST.bomber.getBound());
-        System.out.println(rec2.getWidth());
-        if (rec2.getWidth() > 10) {
+        Rectangle rec2 = new Rectangle(this.x, this.y - 45*tempUp, img_down_2.getWidth(null), img_down_2.getHeight(null) * tempUp);
+        Rectangle rec3 = new Rectangle(this.x+45, this.y, img_down_2.getWidth(null) * tempRight, img_down_2.getHeight(null));
+        Rectangle rec4 = new Rectangle(this.x - 45*tempLeft, this.y, img_down_2.getWidth(null) * tempLeft, img_down_2.getHeight(null));
+        Rectangle rec5 = rec1.intersection(TEST.bomber.getBound());
+        Rectangle rec6 = rec2.intersection(TEST.bomber.getBound());
+        Rectangle rec7 = rec3.intersection(TEST.bomber.getBound());
+        Rectangle rec8 = rec4.intersection(TEST.bomber.getBound());
+        if (rec5.getWidth() > 10 || rec6.getWidth() > 10 || rec7.getHeight() > 10 || rec8.getHeight() > 10) {
             System.out.println("Chet");
+        }
+    }
+
+    public void impactWithItems() {
+        Rectangle rec1 = new Rectangle(this.x, this.y + 45, img_down_2.getWidth(null), img_down_2.getHeight(null) * tempDown);
+        Rectangle rec2 = new Rectangle(this.x, this.y - 45*tempUp, img_down_2.getWidth(null), img_down_2.getHeight(null) * tempUp);
+        Rectangle rec3 = new Rectangle(this.x+45, this.y, img_down_2.getWidth(null) * tempRight, img_down_2.getHeight(null));
+        Rectangle rec4 = new Rectangle(this.x - 45*tempLeft, this.y, img_down_2.getWidth(null) * tempLeft, img_down_2.getHeight(null));
+        for(item item : TEST.listItem){
+            if(rec1.intersects(item.getBound()) || rec2.intersects(item.getBound()) || rec3.intersects(item.getBound()) || rec4.intersects(item.getBound()  )){
+                removeItem(TEST.listItem, item);
+                break;
+            }
+        }
+    }
+    public void impactWithMonster() {
+        Rectangle rec1 = new Rectangle(this.x, this.y + 45, img_down_2.getWidth(null), img_down_2.getHeight(null) * tempDown);
+        Rectangle rec2 = new Rectangle(this.x, this.y - 45*tempUp, img_down_2.getWidth(null), img_down_2.getHeight(null) * tempUp);
+        Rectangle rec3 = new Rectangle(this.x+45, this.y, img_down_2.getWidth(null) * tempRight, img_down_2.getHeight(null));
+        Rectangle rec4 = new Rectangle(this.x - 45*tempLeft, this.y, img_down_2.getWidth(null) * tempLeft, img_down_2.getHeight(null));
+        for(Character character : listMonster){
+            if(character instanceof Ballom){
+                if (rec1.intersects(((Ballom) character).getBound()) || rec2.intersects(((Ballom) character).getBound()) || rec3.intersects(((Ballom) character).getBound()) || rec4.intersects(((Ballom) character).getBound())) {
+                    removeMonster(listMonster, (Ballom) character);
+                    break;
+                }
+            }
         }
     }
 }

@@ -42,18 +42,25 @@ public class TEST extends JPanel implements ActionListener {
     static public int framesDown=0;
     static public int framesLeft=0;
     static public int framesRight=0;
-    public static int bombSize=2;
+    
+    
+    
     public static boolean isKeyPressed = false;
     private int dem = 0;
     int demBomb = 0;
 
     TEST(){
+        loadMap("map1.txt");
+        Timer timer = new Timer(20, this);
+        timer.start();
+    }
+    private void loadMap(String map){
         BufferedReader br;
         String s;
 
         int i,row=0,line=0;
         try {
-            br=new BufferedReader(new FileReader("map1.txt"));
+            br=new BufferedReader(new FileReader(map));
             s=br.readLine();
             while(s!=null){
                 row=0;
@@ -94,8 +101,6 @@ public class TEST extends JPanel implements ActionListener {
         } catch (IOException ex) {
             Logger.getLogger(TEST.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Timer timer = new Timer(20, this);
-        timer.start();
     }
     protected void paintComponent(Graphics g){
         Graphics2D g2d = (Graphics2D) g;
@@ -209,7 +214,7 @@ public class TEST extends JPanel implements ActionListener {
                 {
                     int x = object.x;
                     int y = object.y;
-                    listBombbang.add(new Bombbang(x,y,800,bombSize,!((Bomb) object).impactRightBomb, !((Bomb) object).impactLeftBomb, !((Bomb) object).impactDownBomb, !((Bomb) object).impactUpBomb));
+                    listBombbang.add(new Bombbang(x,y,800,Bomber.bombSize,!((Bomb) object).impactRightBomb, !((Bomb) object).impactLeftBomb, !((Bomb) object).impactDownBomb, !((Bomb) object).impactUpBomb));
                     ite.remove();
 
                 }
@@ -234,7 +239,7 @@ public class TEST extends JPanel implements ActionListener {
             ((Ballom)character).move();
         }
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         if(isKeyPressed){
@@ -260,6 +265,13 @@ public class TEST extends JPanel implements ActionListener {
             if(ballom instanceof Ballom){
                 ((Ballom) ballom).doiHuong();
             }
+        }
+        for(item it:listItem){
+            if(bomber.insertItem(it)){
+                 Bombbang.removeItem(listItem, it);
+                 break;
+            }
+            
         }
         for(Bombbang object : listBombbang){
                 object.impactWithBomber();

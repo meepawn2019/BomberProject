@@ -36,21 +36,21 @@ public class TEST extends JPanel implements ActionListener {
     public static ArrayList<Bombbang> listBombbang = new ArrayList<>();
     public static ArrayList<Character> listMonster = new ArrayList<>();
     public static ArrayList<item> listItem =new ArrayList<>();
+    public static ArrayList<Portal> listPortal=new ArrayList<>();
     private Camera camera = new Camera(0, 0);
     private int huong;
     static public int framesUp=0;
     static public int framesDown=0;
     static public int framesLeft=0;
     static public int framesRight=0;
-    
-    
+    public boolean asd=false;
     
     public static boolean isKeyPressed = false;
     private int dem = 0;
     int demBomb = 0;
-
-    TEST(){
-        loadMap("map1.txt");
+    
+    TEST(String map){
+        loadMap(map);
         Timer timer = new Timer(20, this);
         timer.start();
     }
@@ -90,6 +90,18 @@ public class TEST extends JPanel implements ActionListener {
                             listItem.add(new speed(row*ix,line*iy));
                             break;
                         }
+                        case 'b': {
+                            listItem.add(new NumberBomb(row*ix,line*iy));
+                            break;
+                        }
+                        case '2':{
+                            listMonster.add(new Oneal(row*ix,line*iy));
+                            break;
+                        }
+                        case 'x':{
+                            listPortal.add(new Portal(row*ix,line*iy));
+                            break;
+                        }
 
                     }
                     row++;
@@ -102,6 +114,7 @@ public class TEST extends JPanel implements ActionListener {
             Logger.getLogger(TEST.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
     protected void paintComponent(Graphics g){
         Graphics2D g2d = (Graphics2D) g;
         super.paintComponent(g);
@@ -119,6 +132,8 @@ public class TEST extends JPanel implements ActionListener {
             if(object instanceof Wall)
                 object.drawObject(g2d);
         }
+        for(Portal p:listPortal)p.drawPortal(g);
+        
         for(Character character : listMonster){
             ((Monster) character).drawCharacter(g2d);
         }
@@ -276,6 +291,12 @@ public class TEST extends JPanel implements ActionListener {
                  break;
             }
             
+        }
+        for(Portal p: listPortal){
+            if(bomber.isInsertPortal(p)) {
+                asd=true;
+                break;
+            }
         }
         for(Bombbang object : listBombbang){
                 object.impactWithBomber();

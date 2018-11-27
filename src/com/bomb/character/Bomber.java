@@ -6,6 +6,8 @@ import com.bomb.OBJECT.OBJECT;
 import com.bomb.gui.TEST;
 import static com.bomb.gui.TEST.bomber;
 import static com.bomb.gui.TEST.listItem;
+import item.NumberBomb;
+import item.Portal;
 import item.flame;
 import item.item;
 import item.speed;
@@ -156,23 +158,28 @@ public class Bomber extends Character implements CanMove {
     }
 
     public boolean insertItem(item it) {
-        Rectangle rec1 = new Rectangle(it.x, it.y, 45, 45);
+        Rectangle rec1 =it.getBound();
         if (rec1.intersects(getBound())) {
             if(it instanceof flame ) bombSize++;
             if(it instanceof speed) MOVE++;
+            if(it instanceof NumberBomb) maxBomb++;
             return true;
         }
         return false;
     }
-    public void inserSpeed(speed s){
-        Rectangle rec1 = new Rectangle(s.x, s.y, 45, 45);
-        if (rec1.intersects(getBound())) {
-            MOVE++;
-            Bombbang.removeItem(listItem, s);
-
-        }
+    public static void init(){
+        TEST.listObject.clear();
+        TEST.listPortal.clear();
+        TEST.listMonster.clear();
+        TEST.listItem.clear();
     }
-
+    public boolean isInsertPortal(Portal p){
+        Rectangle rec=p.getBound();
+        if(rec.intersects(getBound())){
+            return true;
+        }
+        return false;
+    }
     @Override
     public int getX() {
         return super.getX();

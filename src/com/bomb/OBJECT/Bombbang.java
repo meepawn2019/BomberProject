@@ -249,7 +249,7 @@ public class Bombbang extends OBJECT {
             }
         }
     }*/
-    
+
     public void removeItem(ArrayList<item> list, item i) {
         Iterator<item> ite = list.iterator();
         while (ite.hasNext()) {

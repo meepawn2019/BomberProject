@@ -42,6 +42,7 @@ public class TEST extends JPanel implements ActionListener {
     static public int framesDown=0;
     static public int framesLeft=0;
     static public int framesRight=0;
+    public static int bombSize=2;
     public static boolean isKeyPressed = false;
     private int dem = 0;
     int demBomb = 0;
@@ -208,7 +209,7 @@ public class TEST extends JPanel implements ActionListener {
                 {
                     int x = object.x;
                     int y = object.y;
-                    listBombbang.add(new Bombbang(x,y,800,3,!((Bomb) object).impactRightBomb, !((Bomb) object).impactLeftBomb, !((Bomb) object).impactDownBomb, !((Bomb) object).impactUpBomb));
+                    listBombbang.add(new Bombbang(x,y,800,bombSize,!((Bomb) object).impactRightBomb, !((Bomb) object).impactLeftBomb, !((Bomb) object).impactDownBomb, !((Bomb) object).impactUpBomb));
                     ite.remove();
 
                 }

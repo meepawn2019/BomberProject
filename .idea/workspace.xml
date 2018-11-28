@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="53c7505c-4a4b-434e-b86f-91d9eeff9296" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/com/bomb/character/Bomber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bomb/character/Bomber.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bomb/gui/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bomb/gui/GUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/bomb/gui/TEST.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bomb/gui/TEST.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -57,13 +55,14 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/bomb/gui/TEST.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="97" column="30" selection-start-line="97" selection-start-column="28" selection-end-line="100" selection-end-column="36" />
+            <state relative-caret-position="207">
+              <caret line="370" column="51" lean-forward="true" selection-start-line="370" selection-start-column="51" selection-end-line="370" selection-end-column="51" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#6477#6478#0" expanded="true" />
-                <element signature="e#6517#6518#0" expanded="true" />
-                <element signature="e#6571#6572#0" expanded="true" />
+                <element signature="e#6217#6218#0" expanded="true" />
+                <element signature="e#6279#6280#0" expanded="true" />
+                <element signature="e#6323#6324#0" expanded="true" />
+                <element signature="e#6377#6378#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -314,7 +313,7 @@
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17750533" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17750533" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -323,7 +322,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.1588785" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.1588785" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39771548" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -555,13 +554,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bomb/gui/TEST.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="97" column="30" selection-start-line="97" selection-start-column="28" selection-end-line="100" selection-end-column="36" />
+        <state relative-caret-position="207">
+          <caret line="370" column="51" lean-forward="true" selection-start-line="370" selection-start-column="51" selection-end-line="370" selection-end-column="51" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#6477#6478#0" expanded="true" />
-            <element signature="e#6517#6518#0" expanded="true" />
-            <element signature="e#6571#6572#0" expanded="true" />
+            <element signature="e#6217#6218#0" expanded="true" />
+            <element signature="e#6279#6280#0" expanded="true" />
+            <element signature="e#6323#6324#0" expanded="true" />
+            <element signature="e#6377#6378#0" expanded="true" />
           </folding>
         </state>
       </provider>

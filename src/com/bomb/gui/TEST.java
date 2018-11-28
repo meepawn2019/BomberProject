@@ -295,7 +295,6 @@ public class TEST extends JPanel implements ActionListener {
             public void init(){
                 bomber.maxBomb = 1;
                 bomber.speed = 1;
-                bomber.speed = 1;
                 Bomber.MOVE = 1;
                 bomber = new Bomber(bx, by);
             }
@@ -361,13 +360,13 @@ public class TEST extends JPanel implements ActionListener {
                     object.impactWithItems();
                     object.impactWithMonster();
                 }
-                for (Bombbang object : listBombbang) {
+               /* for (Bombbang object : listBombbang) {
                     if (object.impactWithBomber()) {
                         bomber.maxBomb = 1;
                         bomber.speed = 1;
                         Bomber.MOVE = 1;
                         bomber = new Bomber(bx, by);
-                    }
+                    }*/
                     for (Character m : listMonster) {
                         if (m instanceof Monster) {
                             if (bomber.impactWithMonster((Monster) m)) {
@@ -381,6 +380,7 @@ public class TEST extends JPanel implements ActionListener {
                     camera.moveCamera(bomber);
                     moveMonster();
                     if (asd) {
+                        asd = false;
                         listObject.clear();
                         listMonster.clear();
                         listItem.clear();
@@ -391,21 +391,4 @@ public class TEST extends JPanel implements ActionListener {
                     checkBombbang();
                     repaint();
                 }
-
-/*    public static void music(){
-        AudioPlayer MGP = AudioPlayer.player;
-        AudioStream BGM;
-        AudioData MD;
-        ContinuousAudioDataStream loop = null;
-        try{
-            BGM = new AudioStream(new FileInputStream("C:\\test\\ha.wav"));
-            MD = BGM.getData();
-            loop = new ContinuousAudioDataStream(MD);
-        }catch(IOException error){
-            System.out.print("file not found");
-        }
-
-        MGP.start(loop);
-    }*/
             }
-        }

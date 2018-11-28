@@ -51,6 +51,9 @@ public class TEST extends JPanel implements ActionListener {
     public static boolean isKeyPressed = false;
     private int dem = 0;
     private int demBomb = 0;
+    
+    String[] map={"map1.txt","map2.txt","map3.txt","map4.txt"};
+    int numberMap=1;
 
     TEST(String map) {
         loadMap(map);

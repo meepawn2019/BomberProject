@@ -11,7 +11,7 @@ public class GUI extends JFrame {
     public GUI() {
         //setSize(WIDTHJF, HEI`GHTJF);
         String[] map={"map1.txt","map2.txt","map3.txt","map4.txt"};
-        test = new TEST(map[1]);
+        test = new TEST(map[0]);
         add(test);
         pack();
         setLocationRelativeTo(null);

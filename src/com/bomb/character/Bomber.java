@@ -22,7 +22,8 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 public class Bomber extends Character implements CanMove {
-
+    public int frameDead = 1;
+    public boolean isAlive = true;
     static public int MOVE = 2;
     public int bombSize = 1;
     public int dx = 0;
@@ -47,6 +48,17 @@ public class Bomber extends Character implements CanMove {
     private Image imageRight4 = new ImageIcon(getClass().getResource("/Character/bomber_right_4.png")).getImage();
     private Image imageRight5 = new ImageIcon(getClass().getResource("/Character/bomber_right_5.png")).getImage();
     private Image imageRight6 = new ImageIcon(getClass().getResource("/Character/bomber_right_6.png")).getImage();
+    private Image img_dead_1 = new ImageIcon(getClass().getResource("/Character/tile000.png")).getImage();
+    private Image img_dead_2 = new ImageIcon(getClass().getResource("/Character/tile001.png")).getImage();
+    private Image img_dead_3 = new ImageIcon(getClass().getResource("/Character/tile002.png")).getImage();
+    private Image img_dead_4 = new ImageIcon(getClass().getResource("/Character/tile003.png")).getImage();
+    private Image img_dead_5 = new ImageIcon(getClass().getResource("/Character/tile004.png")).getImage();
+    private Image img_dead_6 = new ImageIcon(getClass().getResource("/Character/tile005.png")).getImage();
+    private Image img_dead_7 = new ImageIcon(getClass().getResource("/Character/tile006.png")).getImage();
+    private Image img_dead_8 = new ImageIcon(getClass().getResource("/Character/tile007.png")).getImage();
+    private Image img_dead_9 = new ImageIcon(getClass().getResource("/Character/tile008.png")).getImage();
+    private Image img_dead_10 = new ImageIcon(getClass().getResource("/Character/tile009.png")).getImage();
+    private Image img_dead_11 = new ImageIcon(getClass().getResource("/Character/tile010.png")).getImage();
     public static int huong = 1;
     public int currentBomb = 0;
     public int maxBomb = 1;
@@ -106,69 +118,83 @@ public class Bomber extends Character implements CanMove {
     }
     @Override
     public void drawCharacter(Graphics2D g2) {
-        if (TEST.framesUp == 0 && TEST.framesDown == 0 && TEST.framesLeft == 0 && TEST.framesRight == 0 && !TEST.isKeyPressed) {
-            g2.drawImage(image, this.x, this.y - 20, null);
-        } else {
-            if (huong == 1) {
-                if (TEST.framesUp % 4 == 0) {
-                    g2.drawImage(imageUp[0], this.x, this.y - 20, null);
+        if(isAlive){
+            if (TEST.framesUp == 0 && TEST.framesDown == 0 && TEST.framesLeft == 0 && TEST.framesRight == 0 && !TEST.isKeyPressed) {
+                g2.drawImage(image, this.x, this.y - 20, null);
+            } else {
+                if (huong == 1) {
+                    if (TEST.framesUp % 4 == 0) {
+                        g2.drawImage(imageUp[0], this.x, this.y - 20, null);
+                    }
+                    if (TEST.framesUp % 4 == 1) {
+                        g2.drawImage(imageUp[1], this.x, this.y - 20, null);
+                    }
+                    //if(TEST.framesUp % 5 == 2) g2.drawImage(imageUp[2], this.x,this.y-20, null);
+                    if (TEST.framesUp % 4 == 2) {
+                        g2.drawImage(imageUp[3], this.x, this.y - 20, null);
+                    }
+                    if (TEST.framesUp % 4 == 3) {
+                        g2.drawImage(imageUp[4], this.x, this.y - 20, null);
+                    }
                 }
-                if (TEST.framesUp % 4 == 1) {
-                    g2.drawImage(imageUp[1], this.x, this.y - 20, null);
+                if (huong == 2) {
+                    if (TEST.framesDown % 4 == 0) {
+                        g2.drawImage(imageDown[0], this.x, this.y - 20, null);
+                    }
+                    if (TEST.framesDown % 4 == 1) {
+                        g2.drawImage(imageDown[1], this.x, this.y - 20, null);
+                    }
+                    //if(TEST.framesDown % 5 == 2) g2.drawImage(imageDown[2], this.x,this.y-20, null);
+                    if (TEST.framesDown % 4 == 2) {
+                        g2.drawImage(imageDown[3], this.x, this.y - 20, null);
+                    }
+                    if (TEST.framesDown % 4 == 3) {
+                        g2.drawImage(imageDown[4], this.x, this.y - 20, null);
+                    }
                 }
-                //if(TEST.framesUp % 5 == 2) g2.drawImage(imageUp[2], this.x,this.y-20, null);
-                if (TEST.framesUp % 4 == 2) {
-                    g2.drawImage(imageUp[3], this.x, this.y - 20, null);
+                if (huong == 3) {
+                    if (TEST.framesLeft % 4 == 0) {
+                        g2.drawImage(imageLeft[0], this.x, this.y - 20, null);
+                    }
+                    if (TEST.framesLeft % 4 == 1) {
+                        g2.drawImage(imageLeft[1], this.x, this.y - 20, null);
+                    }
+                    //if(TEST.framesLeft % 5 == 2) g2.drawImage(imageLeft[2], this.x,this.y-20, null);
+                    if (TEST.framesLeft % 4 == 2) {
+                        g2.drawImage(imageLeft[3], this.x, this.y - 20, null);
+                    }
+                    if (TEST.framesLeft % 4 == 3) {
+                        g2.drawImage(imageLeft[4], this.x, this.y - 20, null);
+                    }
                 }
-                if (TEST.framesUp % 4 == 3) {
-                    g2.drawImage(imageUp[4], this.x, this.y - 20, null);
+                if (huong == 4) {
+                    if (TEST.framesRight % 4 == 0) {
+                        g2.drawImage(imageRight[0], this.x, this.y - 20, null);
+                    }
+                    if (TEST.framesRight % 4 == 1) {
+                        g2.drawImage(imageRight[1], this.x, this.y - 20, null);
+                    }
+                    //if(TEST.framesRight % 5 == 2) g2.drawImage(imageRight[2], this.x,this.y-20, null);
+                    if (TEST.framesRight % 4 == 2) {
+                        g2.drawImage(imageRight[3], this.x, this.y - 20, null);
+                    }
+                    if (TEST.framesRight % 4 == 3) {
+                        g2.drawImage(imageRight[4], this.x, this.y - 20, null);
+                    }
                 }
             }
-            if (huong == 2) {
-                if (TEST.framesDown % 4 == 0) {
-                    g2.drawImage(imageDown[0], this.x, this.y - 20, null);
-                }
-                if (TEST.framesDown % 4 == 1) {
-                    g2.drawImage(imageDown[1], this.x, this.y - 20, null);
-                }
-                //if(TEST.framesDown % 5 == 2) g2.drawImage(imageDown[2], this.x,this.y-20, null);
-                if (TEST.framesDown % 4 == 2) {
-                    g2.drawImage(imageDown[3], this.x, this.y - 20, null);
-                }
-                if (TEST.framesDown % 4 == 3) {
-                    g2.drawImage(imageDown[4], this.x, this.y - 20, null);
-                }
-            }
-            if (huong == 3) {
-                if (TEST.framesLeft % 4 == 0) {
-                    g2.drawImage(imageLeft[0], this.x, this.y - 20, null);
-                }
-                if (TEST.framesLeft % 4 == 1) {
-                    g2.drawImage(imageLeft[1], this.x, this.y - 20, null);
-                }
-                //if(TEST.framesLeft % 5 == 2) g2.drawImage(imageLeft[2], this.x,this.y-20, null);
-                if (TEST.framesLeft % 4 == 2) {
-                    g2.drawImage(imageLeft[3], this.x, this.y - 20, null);
-                }
-                if (TEST.framesLeft % 4 == 3) {
-                    g2.drawImage(imageLeft[4], this.x, this.y - 20, null);
-                }
-            }
-            if (huong == 4) {
-                if (TEST.framesRight % 4 == 0) {
-                    g2.drawImage(imageRight[0], this.x, this.y - 20, null);
-                }
-                if (TEST.framesRight % 4 == 1) {
-                    g2.drawImage(imageRight[1], this.x, this.y - 20, null);
-                }
-                //if(TEST.framesRight % 5 == 2) g2.drawImage(imageRight[2], this.x,this.y-20, null);
-                if (TEST.framesRight % 4 == 2) {
-                    g2.drawImage(imageRight[3], this.x, this.y - 20, null);
-                }
-                if (TEST.framesRight % 4 == 3) {
-                    g2.drawImage(imageRight[4], this.x, this.y - 20, null);
-                }
-            }
+        } else{
+            if(frameDead % 12 == 1) g2.drawImage(img_dead_1, this.x, this.y - 20, null);
+            if(frameDead % 12 == 2) g2.drawImage(img_dead_2, this.x, this.y - 20, null);
+            if(frameDead % 12 == 3) g2.drawImage(img_dead_3, this.x, this.y - 20, null);
+            if(frameDead % 12 == 4) g2.drawImage(img_dead_4, this.x, this.y - 20, null);
+            if(frameDead % 12 == 5) g2.drawImage(img_dead_5, this.x, this.y - 20, null);
+            if(frameDead % 12 == 6) g2.drawImage(img_dead_6, this.x, this.y - 20, null);
+            if(frameDead % 12 == 7) g2.drawImage(img_dead_7, this.x, this.y - 20, null);
+            if(frameDead % 12 == 8) g2.drawImage(img_dead_8, this.x, this.y - 20, null);
+            if(frameDead % 12 == 9) g2.drawImage(img_dead_9, this.x, this.y - 20, null);
+            if(frameDead % 12 == 10) g2.drawImage(img_dead_10, this.x, this.y - 20, null);
+            if(frameDead % 12 == 11) g2.drawImage(img_dead_11, this.x, this.y - 20, null);
         }
     }
 

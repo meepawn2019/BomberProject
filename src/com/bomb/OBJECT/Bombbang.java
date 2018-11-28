@@ -396,7 +396,6 @@ public class Bombbang extends OBJECT {
         Rectangle rec7 = rec3.intersection(TEST.bomber.getBound());
         Rectangle rec8 = rec4.intersection(TEST.bomber.getBound());*/
         if (rec1.intersects(TEST.bomber.getBound()) || rec2.intersects(TEST.bomber.getBound()) || rec3.intersects(TEST.bomber.getBound()) || rec4.intersects(TEST.bomber.getBound())) {
-            System.out.println("chet");
             return true;
         }
         return false;

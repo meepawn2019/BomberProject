@@ -351,6 +351,7 @@ public class TEST extends JPanel implements ActionListener {
             for (item it : listItem){
                 it.frames++;
             }
+            if(!bomber.isAlive) bomber.frameDead++;
         }
         for (Character character : listMonster) {
             if (character instanceof Monster) {
@@ -371,7 +372,7 @@ public class TEST extends JPanel implements ActionListener {
             }
         }
         for (Bombbang object : listBombbang) {
-            object.impactWithBomber();
+            //object.impactWithBomber();
             object.impactWithItems();
             object.impactWithMonster();
         }

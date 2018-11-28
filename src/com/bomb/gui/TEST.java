@@ -11,12 +11,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import sun.audio.*;
 
 import static com.bomb.character.Bomber.MOVE;
 
@@ -47,7 +49,7 @@ public class TEST extends JPanel implements ActionListener {
     
     public static boolean isKeyPressed = false;
     private int dem = 0;
-    int demBomb = 0;
+    private int demBomb = 0;
     
     TEST(String map){
         loadMap(map);
@@ -79,8 +81,13 @@ public class TEST extends JPanel implements ActionListener {
                             break;
                         }
                         case 'p': {
-                            bomber = new Bomber(row*ix,line*iy);
-                            break;
+                            if(bomber==null) {
+                                bomber = new Bomber(row*ix,line*iy);
+                                break;
+                            } else {
+                                bomber.x = row*ix;
+                                bomber.y = row*iy;
+                            }
                         }
                         case 'f': {
                             listItem.add(new flame(row*ix,line*iy));
@@ -261,7 +268,13 @@ public class TEST extends JPanel implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+        if(asd) {
+            listObject.clear();
+            listMonster.clear();
+            listItem.clear();
+            listPortal.clear();
+            //loadMap("map2.txt");
+        }
         if(isKeyPressed){
             dem++;
             if(dem >= 10){
@@ -308,16 +321,25 @@ public class TEST extends JPanel implements ActionListener {
         bomber.doiHuong(huong);
         camera.moveCamera(bomber);
         moveMonster();
-        if(asd) {
-            listObject.clear();
-            listMonster.clear();
-            listItem.clear();
-            listPortal.clear();
-            loadMap("map2.txt");
-        }
         checkBomb();
         checkBombbang();
         repaint();
+    }
+
+    public static void music(){
+        AudioPlayer MGP = AudioPlayer.player;
+        AudioStream BGM;
+        AudioData MD;
+        ContinuousAudioDataStream loop = null;
+        try{
+            BGM = new AudioStream(new FileInputStream("C:\\test\\ha.wav"));
+            MD = BGM.getData();
+            loop = new ContinuousAudioDataStream(MD);
+        }catch(IOException error){
+            System.out.print("file not found");
+        }
+
+        MGP.start(loop);
     }
 }
 

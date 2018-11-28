@@ -6,7 +6,7 @@ import javax.swing.*;
 public class GUI extends JFrame {
 
     //private TEST test = new TEST();
-    TEST test;
+    private TEST test;
 
     public GUI() {
         //setSize(WIDTHJF, HEI`GHTJF);
@@ -17,15 +17,13 @@ public class GUI extends JFrame {
         setLocationRelativeTo(null);
         addKeyListener(test.myAdapter);
         
-        if(test.asd) test=new TEST(map[1]);
+        //if(test.asd) test=new TEST(map[1]);
         add(test);
         pack();
         setLocationRelativeTo(null);
         addKeyListener(test.myAdapter);
         setResizable(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE) ;
-        
-
     }
 
     public static void main(String[] args) {

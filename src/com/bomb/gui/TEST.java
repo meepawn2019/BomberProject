@@ -374,11 +374,8 @@ public class TEST extends JPanel implements ActionListener {
         }
         for (Bombbang object : listBombbang) {
             if (object.impactWithBomber()) {
-                bomber.maxBomb = 1;
-                bomber.speed = 1;
-                Bomber.MOVE = 1;
-                bomber.x = bomberX;
-                bomber.y = bomberY;
+                init();
+                break;
             }
         }
         for (Character m : listMonster) {
@@ -399,7 +396,8 @@ public class TEST extends JPanel implements ActionListener {
             listMonster.clear();
             listItem.clear();
             listPortal.clear();
-            loadMap("map2.txt");
+            loadMap(map[numberMap]);
+            numberMap++;
         }
         checkBomb();
         checkBombbang();

@@ -380,12 +380,12 @@ public class TEST extends JPanel implements ActionListener {
                 bomber.x = bomberX;
                 bomber.y = bomberY;
             }
-            for (Character m : listMonster) {
-                if (m instanceof Monster) {
-                    if (bomber.impactWithMonster((Monster) m)) {
-                        init();
-                        break;
-                    }
+        }
+        for (Character m : listMonster) {
+            if (m instanceof Monster) {
+                if (bomber.impactWithMonster((Monster) m)) {
+                    init();
+                    break;
                 }
             }
         }

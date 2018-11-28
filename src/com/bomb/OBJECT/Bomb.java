@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Bomb extends OBJECT {
-
+    public boolean canMove = false;
     public int c;
     public int lifeTime;
     public int framesBomb = 0;
@@ -35,6 +35,10 @@ public class Bomb extends OBJECT {
     public Bomb(int x, int y, int lifeTime){
         this(x, y);
         this.lifeTime = lifeTime;
+    }
+
+    public void move(){
+        
     }
 
     public void explose(){

@@ -26,7 +26,7 @@ public class TEST extends JPanel implements ActionListener {
 
     Container container;
     static final int D_W = 905;
-    public static final int D_H = 610;
+    public static final int D_H = 620;
     private int bomberX, bomberY;
     private static final int ix = 45;
     private static final int iy = 45;
@@ -347,6 +347,9 @@ public class TEST extends JPanel implements ActionListener {
                 if (object instanceof Bomb) {
                     ((Bomb) object).framesBomb++;
                 }
+            }
+            for (item it : listItem){
+                it.frames++;
             }
         }
         for (Character character : listMonster) {

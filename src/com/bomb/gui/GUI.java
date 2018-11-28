@@ -8,7 +8,7 @@ public class GUI extends JFrame {
 
     //private TEST test = new TEST();
     public static final int WIDTHJF = 905;
-    public static final int HEIGHTJF = 610;
+    public static final int HEIGHTJF = 620;
     private TEST test;
     private Container container;
 

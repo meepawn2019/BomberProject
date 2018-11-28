@@ -16,6 +16,7 @@ public abstract class item {
 
     public int x, y;
     BufferedImage image;
+    public int frames = 0;
 
     public abstract void drawItem(Graphics2D g2);
 

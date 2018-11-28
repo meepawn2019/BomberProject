@@ -386,7 +386,7 @@ public class Bombbang extends OBJECT {
         }
     }
 
-    public void impactWithBomber() {
+    public boolean  impactWithBomber() {
         Rectangle rec1 = new Rectangle(this.x, this.y + 45, img_down_2.getWidth(null), img_down_2.getHeight(null) * tempDown);
         Rectangle rec2 = new Rectangle(this.x, this.y - 45*tempUp, img_down_2.getWidth(null), img_down_2.getHeight(null) * tempUp);
         Rectangle rec3 = new Rectangle(this.x+45, this.y, img_down_2.getWidth(null) * tempRight, img_down_2.getHeight(null));
@@ -397,7 +397,9 @@ public class Bombbang extends OBJECT {
         Rectangle rec8 = rec4.intersection(TEST.bomber.getBound());*/
         if (rec1.intersects(TEST.bomber.getBound()) || rec2.intersects(TEST.bomber.getBound()) || rec3.intersects(TEST.bomber.getBound()) || rec4.intersects(TEST.bomber.getBound())) {
             System.out.println("chet");
+            return true;
         }
+        return false;
     }
 
     public void impactWithItems() {

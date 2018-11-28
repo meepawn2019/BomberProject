@@ -1,5 +1,6 @@
 package com.bomb.gui;
 
+import GameSound.GameSound;
 import com.bomb.BackGround.Background;
 import com.bomb.OBJECT.*;
 import com.bomb.character.*;
@@ -28,7 +29,7 @@ public class TEST extends JPanel implements ActionListener {
 
     static final int D_W = 905;
     public static final int D_H = 610;
-
+    private int bomberX, bomberY;
     private static final int ix = 45;
     private static final int iy = 45;
     public static Bomber bomber;
@@ -51,9 +52,9 @@ public class TEST extends JPanel implements ActionListener {
     public static boolean isKeyPressed = false;
     private int dem = 0;
     private int demBomb = 0;
-    
-    String[] map={"map1.txt","map2.txt","map3.txt","map4.txt"};
-    int numberMap=1;
+
+    String[] map = {"map1.txt", "map2.txt", "map3.txt", "map4.txt"};
+    int numberMap = 1;
 
     TEST(String map) {
         loadMap(map);
@@ -62,6 +63,8 @@ public class TEST extends JPanel implements ActionListener {
     }
 
     private void loadMap(String map) {
+        GameSound gameSound = new GameSound("./src/GameSound/test.wav");
+        gameSound.loop();
         BufferedReader br;
         String s;
 
@@ -86,12 +89,16 @@ public class TEST extends JPanel implements ActionListener {
                             break;
                         }
                         case 'p': {
-                            if(bomber==null) {
-                                bomber = new Bomber(row*ix,line*iy);
+                            if (bomber == null) {
+                                bomberX = row * ix;
+                                bomberY = row * iy;
+                                bomber = new Bomber(row * ix, line * iy);
                                 break;
                             } else {
-                                bomber.x = row*ix;
-                                bomber.y = row*iy;
+                                bomberX = row * ix;
+                                bomberY = row * iy;
+                                bomber.x = row * ix;
+                                bomber.y = row * iy;
                                 break;
                             }
                         }
@@ -128,267 +135,274 @@ public class TEST extends JPanel implements ActionListener {
         }
     }
 
-    protected void paintComponent(Graphics g){
-            Graphics2D g2d = (Graphics2D) g;
-            super.paintComponent(g);
-            g2d.setStroke(new java.awt.BasicStroke(2));
-            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g2d.translate(camera.getX(), camera.getY());
-            background.drawBackGround(g2d);
-            for (OBJECT object : listObject) {
-                if (object instanceof Brick || object instanceof Bomb) {
-                    object.drawObject(g2d);
-                }
+    protected void paintComponent(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        super.paintComponent(g);
+        g2d.setStroke(new java.awt.BasicStroke(2));
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.translate(camera.getX(), camera.getY());
+        background.drawBackGround(g2d);
+        for (OBJECT object : listObject) {
+            if (object instanceof Brick || object instanceof Bomb) {
+                object.drawObject(g2d);
             }
-            for (Bombbang bombb : listBombbang) {
-                bombb.drawObject(g2d);
+        }
+        for (Bombbang bombb : listBombbang) {
+            bombb.drawObject(g2d);
+        }
+        for (item i : listItem) {
+            i.drawItem(g2d);
+        }
+        for (OBJECT object : listObject) {
+            if (object instanceof Wall) {
+                object.drawObject(g2d);
             }
-            for (item i : listItem) {
-                i.drawItem(g2d);
-            }
-            for (OBJECT object : listObject) {
-                if (object instanceof Wall) {
-                    object.drawObject(g2d);
-                }
-            }
-            for (Portal p : listPortal) p.drawPortal(g);
+        }
+        for (Portal p : listPortal) p.drawPortal(g);
 
-            for (Character character : listMonster) {
-                character.drawCharacter(g2d);
-                for (Portal p : listPortal) {
-                    p.drawPortal(g);
-                }
+        for (Character character : listMonster) {
+            character.drawCharacter(g2d);
+            for (Portal p : listPortal) {
+                p.drawPortal(g);
             }
-                for (Character character : listMonster) {
-                    ((Monster) character).drawCharacter(g2d);
-                }
-                bomber.drawCharacter(g2d);
-                for (Bombbang object : listBombbang) {
-                    if (object.impactWithBomber()) {
-                        bomber.drawDead(g2d);
-                        break;
-                    }
-
-                }
-                g2d.translate(-camera.getX(), -camera.getY());
+        }
+        for (Character character : listMonster) {
+            ((Monster) character).drawCharacter(g2d);
+        }
+        bomber.drawCharacter(g2d);
+        for (Bombbang object : listBombbang) {
+            if (object.impactWithBomber()) {
+                bomber.drawDead(g2d);
+                break;
             }
 
-            @Override
+        }
+        g2d.translate(-camera.getX(), -camera.getY());
+    }
 
-            public Dimension getPreferredSize () {
-                return new Dimension(D_W, D_H);
+    @Override
+
+    public Dimension getPreferredSize() {
+        return new Dimension(D_W, D_H);
+    }
+
+    private void addObject(OBJECT object) {
+        listObject.add(object);
+    }
+
+    KeyAdapter myAdapter = new KeyAdapter() {
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if (e.getKeyCode() != KeyEvent.VK_SPACE) {
+                isKeyPressed = true;
             }
-
-            void addObject(OBJECT object){
-                listObject.add(object);
+            if (e.getKeyCode() == KeyEvent.VK_UP) {
+                Bomber.huong = 1;
+                huong = Character.TREN;
+                bomber.dy = -MOVE;
             }
+            if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                Bomber.huong = 2;
+                huong = Character.DUOI;
+                bomber.dy = MOVE;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                Bomber.huong = 3;
+                huong = Character.TRAI;
+                bomber.dx = -MOVE;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                Bomber.huong = 4;
+                huong = Character.PHAI;
+                bomber.dx = MOVE;
+            }
+        }
 
-            KeyAdapter myAdapter = new KeyAdapter() {
-                @Override
-                public void keyPressed(KeyEvent e) {
-                    if (e.getKeyCode() != KeyEvent.VK_SPACE) {
-                        isKeyPressed = true;
-                    }
-                    if (e.getKeyCode() == KeyEvent.VK_UP) {
-                        Bomber.huong = 1;
-                        huong = Character.TREN;
-                        bomber.dy = -MOVE;
-                    }
-                    if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                        Bomber.huong = 2;
-                        huong = Character.DUOI;
-                        bomber.dy = MOVE;
-                    }
-                    if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                        Bomber.huong = 3;
-                        huong = Character.TRAI;
-                        bomber.dx = -MOVE;
-                    }
-                    if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                        Bomber.huong = 4;
-                        huong = Character.PHAI;
-                        bomber.dx = MOVE;
-                    }
-                }
-
-                @Override
-                public void keyReleased(KeyEvent e) {
-                    if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                        boolean isDraw = true;
-                        Bomb bomb = new com.bomb.OBJECT.Bomb(bomber.x + bomber.getWidth() / 2, bomber.y + bomber.getHeight() / 2, 3000);
-                        for (OBJECT object : listObject) {
-                            if (object instanceof Bomb) {
-                                if (object.x == bomb.x && object.y == bomb.y) {
-                                    isDraw = false;
-                                }
-                            }
-                        }
-
-                        if (isDraw && TEST.bomber.currentBomb < TEST.bomber.maxBomb) {
-                            addObject(bomb);
-                            TEST.bomber.currentBomb++;
-                        }
-                    }
-                    if (e.getKeyCode() == KeyEvent.VK_UP) {
-                        dem = 10;
-                        isKeyPressed = false;
-                        framesUp = 0;
-                        bomber.dy = 0;
-                    }
-                    if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                        dem = 10;
-                        isKeyPressed = false;
-                        framesDown = 0;
-                        bomber.dy = 0;
-                    }
-                    if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                        dem = 10;
-                        isKeyPressed = false;
-                        framesLeft = 0;
-                        bomber.dx = 0;
-                    }
-                    if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                        dem = 10;
-                        isKeyPressed = false;
-                        framesRight = 0;
-                        bomber.dx = 0;
-                    }
-                }
-            };
-
-            public void checkBomb() {
-                Iterator<OBJECT> ite = listObject.iterator();
-                while (ite.hasNext()) {
-                    OBJECT object = ite.next();
+        @Override
+        public void keyReleased(KeyEvent e) {
+            if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                GameSound gameSound = new GameSound("./src/GameSound/newbomb.wav");
+                boolean isDraw = true;
+                Bomb bomb = new com.bomb.OBJECT.Bomb(bomber.x + bomber.getWidth() / 2, bomber.y + bomber.getHeight() / 2, 3000);
+                for (OBJECT object : listObject) {
                     if (object instanceof Bomb) {
-                        ((Bomb) object).explose();
-                        if (((Bomb) object).lifeTime <= 0) {
-                            int x = object.x;
-                            int y = object.y;
-                            listBombbang.add(new Bombbang(x, y, 400, bomber.bombSize, !((Bomb) object).impactRightBomb, !((Bomb) object).impactLeftBomb, !((Bomb) object).impactDownBomb, !((Bomb) object).impactUpBomb));
-                            ite.remove();
-                            TEST.bomber.currentBomb--;
-
+                        if (object.x == bomb.x && object.y == bomb.y) {
+                            isDraw = false;
                         }
                     }
                 }
-            }
 
-            public void checkBombbang() {
-                Iterator<Bombbang> ite = listBombbang.iterator();
-                while (ite.hasNext()) {
-                    Bombbang bombb = ite.next();
-                    bombb.remove();
-                    if (bombb.lifeTime <= 0) {
-                        bombb.isRemove = true;
-                        ite.remove();
-                    }
+                if (isDraw && TEST.bomber.currentBomb < TEST.bomber.maxBomb) {
+                    gameSound.play();
+                    addObject(bomb);
+                    TEST.bomber.currentBomb++;
                 }
             }
+            if (e.getKeyCode() == KeyEvent.VK_UP) {
+                dem = 10;
+                isKeyPressed = false;
+                framesUp = 0;
+                bomber.dy = 0;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                dem = 10;
+                isKeyPressed = false;
+                framesDown = 0;
+                bomber.dy = 0;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                dem = 10;
+                isKeyPressed = false;
+                framesLeft = 0;
+                bomber.dx = 0;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                dem = 10;
+                isKeyPressed = false;
+                framesRight = 0;
+                bomber.dx = 0;
+            }
+        }
+    };
 
-            public void moveMonster() {
-                for (Character character : listMonster) {
-                    ((Monster) character).move();
+    public void checkBomb() {
+        Iterator<OBJECT> ite = listObject.iterator();
+        while (ite.hasNext()) {
+            OBJECT object = ite.next();
+            if (object instanceof Bomb) {
+                ((Bomb) object).explose();
+                if (((Bomb) object).lifeTime <= 0) {
+                    int x = object.x;
+                    int y = object.y;
+                    listBombbang.add(new Bombbang(x, y, 400, bomber.bombSize, !((Bomb) object).impactRightBomb, !((Bomb) object).impactLeftBomb, !((Bomb) object).impactDownBomb, !((Bomb) object).impactUpBomb));
+                    ite.remove();
+                    TEST.bomber.currentBomb--;
+
                 }
             }
+        }
+    }
 
-            public void init(){
+    public void checkBombbang() {
+        Iterator<Bombbang> ite = listBombbang.iterator();
+        while (ite.hasNext()) {
+            Bombbang bombb = ite.next();
+            bombb.remove();
+            if (bombb.lifeTime <= 0) {
+                bombb.isRemove = true;
+                ite.remove();
+                GameSound gameSound = new GameSound("./src/GameSound/bomb_bang.wav");
+                gameSound.play();
+            }
+        }
+    }
+
+    public void moveMonster() {
+        for (Character character : listMonster) {
+            ((Monster) character).move();
+        }
+    }
+
+    public void init() {
+        bomber.maxBomb = 1;
+        bomber.speed = 1;
+        Bomber.MOVE = 1;
+        bomber.x = bomberX;
+        bomber.y = bomberY;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (asd) {
+            asd = false;
+            listObject.clear();
+            listMonster.clear();
+            listItem.clear();
+            listPortal.clear();
+            loadMap("map2.txt");
+        }
+
+        if (isKeyPressed) {
+            dem++;
+            if (dem >= 10) {
+                dem = 0;
+                if (Bomber.huong == 1) {
+                    framesUp++;
+                }
+                if (Bomber.huong == 2) {
+                    framesDown++;
+                }
+                if (Bomber.huong == 3) {
+                    framesLeft++;
+                }
+                if (Bomber.huong == 4) {
+                    framesRight++;
+                }
+            }
+        }
+        demBomb++;
+        if (demBomb == 20) {
+            demBomb = 0;
+            for (OBJECT object : listObject) {
+                if (object instanceof Bomb) {
+                    ((Bomb) object).framesBomb++;
+                }
+            }
+        }
+        for (Character character : listMonster) {
+            if (character instanceof Monster) {
+                ((Monster) character).doiHuong();
+            }
+        }
+        for (item it : listItem) {
+            if (bomber.insertItem(it)) {
+                Bombbang.removeItem(listItem, it);
+                break;
+            }
+
+        }
+        for (Portal p : listPortal) {
+            if (bomber.isInsertPortal(p)) {
+                asd = true;
+                break;
+            }
+        }
+        for (Bombbang object : listBombbang) {
+            object.impactWithBomber();
+            object.impactWithItems();
+            object.impactWithMonster();
+        }
+        for (Bombbang object : listBombbang) {
+            if (object.impactWithBomber()) {
                 bomber.maxBomb = 1;
                 bomber.speed = 1;
                 Bomber.MOVE = 1;
-                bomber = new Bomber(bx, by);
+                bomber.x = bomberX;
+                bomber.y = bomberY;
             }
-
-            @Override
-            public void actionPerformed (ActionEvent e){
-                if (asd) {
-                    asd = false;
-                    listObject.clear();
-                    listMonster.clear();
-                    listItem.clear();
-                    listPortal.clear();
-                    loadMap("map2.txt");
-                }
-
-                if (isKeyPressed) {
-                    dem++;
-                    if (dem >= 10) {
-                        dem = 0;
-                        if (Bomber.huong == 1) {
-                            framesUp++;
-                        }
-                        if (Bomber.huong == 2) {
-                            framesDown++;
-                        }
-                        if (Bomber.huong == 3) {
-                            framesLeft++;
-                        }
-                        if (Bomber.huong == 4) {
-                            framesRight++;
-                        }
-                    }
-                }
-                demBomb++;
-                if (demBomb == 20) {
-                    demBomb = 0;
-                    for (OBJECT object : listObject) {
-                        if (object instanceof Bomb) {
-                            ((Bomb) object).framesBomb++;
-                        }
-                    }
-                }
-                for (Character character : listMonster) {
-                    if (character instanceof Monster) {
-                        ((Monster) character).doiHuong();
-                    }
-                }
-                for (item it : listItem) {
-                    if (bomber.insertItem(it)) {
-                        Bombbang.removeItem(listItem, it);
-                        break;
-                    }
-
-                }
-                for (Portal p : listPortal) {
-                    if (bomber.isInsertPortal(p)) {
-                        asd = true;
+            for (Character m : listMonster) {
+                if (m instanceof Monster) {
+                    if (bomber.impactWithMonster((Monster) m)) {
+                        init();
                         break;
                     }
                 }
-                for (Bombbang object : listBombbang) {
-                    object.impactWithBomber();
-                    object.impactWithItems();
-                    object.impactWithMonster();
-                }
-               /* for (Bombbang object : listBombbang) {
-                    if (object.impactWithBomber()) {
-                        bomber.maxBomb = 1;
-                        bomber.speed = 1;
-                        Bomber.MOVE = 1;
-                        bomber = new Bomber(bx, by);
-                    }*/
-                    for (Character m : listMonster) {
-                        if (m instanceof Monster) {
-                            if (bomber.impactWithMonster((Monster) m)) {
-                                init();
-                                break;
-                            }
-                        }
-                    }
-                    bomber.move();
-                    bomber.doiHuong(huong);
-                    camera.moveCamera(bomber);
-                    moveMonster();
-                    if (asd) {
-                        asd = false;
-                        listObject.clear();
-                        listMonster.clear();
-                        listItem.clear();
-                        listPortal.clear();
-                        loadMap("map2.txt");
-                    }
-                    checkBomb();
-                    checkBombbang();
-                    repaint();
-                }
             }
+        }
+        bomber.move();
+        bomber.doiHuong(huong);
+        camera.moveCamera(bomber);
+        moveMonster();
+        if (asd) {
+            asd = false;
+            listObject.clear();
+            listMonster.clear();
+            listItem.clear();
+            listPortal.clear();
+            loadMap("map2.txt");
+        }
+        checkBomb();
+        checkBombbang();
+        repaint();
+    }
+}

@@ -1,5 +1,6 @@
 package com.bomb.character;
 
+import GameSound.GameSound;
 import com.bomb.OBJECT.Bomb;
 import com.bomb.OBJECT.Bombbang;
 import com.bomb.OBJECT.OBJECT;
@@ -178,6 +179,8 @@ public class Bomber extends Character implements CanMove {
     public boolean insertItem(item it) {
         Rectangle rec1 =it.getBound();
         if (rec1.intersects(getBound())) {
+            GameSound gameSound = new GameSound("./src/GameSound/item.wav");
+            gameSound.play();
             if(it instanceof flame ) bombSize++;
             if(it instanceof speed) MOVE++;
             if(it instanceof NumberBomb) maxBomb++;

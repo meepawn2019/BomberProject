@@ -28,6 +28,7 @@ public class Camera {
 
     public void moveCamera(Bomber bomber){
         if(bomber.getX() > TEST.D_W/2 && bomber.getX() + TEST.D_W/2 - Bomber.MOVE <45*31) this.x = -bomber.getX() + TEST.D_W/2;
+        else if(bomber.getX() <= TEST.D_W/2)    this.x = 0;
         //else if(bomber.getX() + TEST.D_W/2 > 45*31) this.x = this.x;
         //else this.x = 0;
     }

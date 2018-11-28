@@ -17,8 +17,8 @@ public class GUI extends JFrame {
         setLocationRelativeTo(null);
         addKeyListener(test.myAdapter);
         
-        if(test.asd) test=new TEST(map[1]);
-        add(test);
+/*        if(test.asd) test=new TEST(map[1]);
+        add(test);*/
         pack();
         setLocationRelativeTo(null);
         addKeyListener(test.myAdapter);

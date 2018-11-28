@@ -81,17 +81,18 @@ public class TEST extends JPanel implements ActionListener {
                             break;
                         }
                         case 'p': {
-                            /*if(bomber==null) {
+                            if(bomber==null) {
                                 bomber = new Bomber(row*ix,line*iy);
                                 break;
                             } else {
                                 bomber.x = row*ix;
                                 bomber.y = row*iy;
-                            }*/
-                            bomber = new Bomber(row*ix,line*iy);
+                                break;
+                            }
+                            /*bomber = new Bomber(row*ix,line*iy);
                             bx=row*ix;
                             by=line*iy;
-                            break;
+                            break;*/
                         }
                         case 'f': {
                             listItem.add(new flame(row*ix,line*iy));
@@ -146,7 +147,7 @@ public class TEST extends JPanel implements ActionListener {
         for(Portal p:listPortal)p.drawPortal(g);
         
         for(Character character : listMonster){
-            ((Monster) character).drawCharacter(g2d);
+            character.drawCharacter(g2d);
         }
         bomber.drawCharacter(g2d);
         g2d.translate(-camera.getX(), -camera.getY());
@@ -157,7 +158,6 @@ public class TEST extends JPanel implements ActionListener {
 
     public Dimension getPreferredSize() {
         return new Dimension(D_W, D_H);
-
     }
 
     void addObject(OBJECT object){
@@ -273,11 +273,12 @@ public class TEST extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(asd) {
+            asd=false;
             listObject.clear();
             listMonster.clear();
             listItem.clear();
             listPortal.clear();
-            //loadMap("map2.txt");
+            loadMap("map2.txt");
         }
         if(isKeyPressed){
             dem++;
@@ -324,7 +325,6 @@ public class TEST extends JPanel implements ActionListener {
         for(Bombbang object : listBombbang){
                 if(object.impactWithBomber()) {
                     bomber.maxBomb=1;
-                    bomber.speed=1;
                     bomber.speed=1;
                     Bomber.MOVE=1;
                     bomber=new Bomber(bx,by);

@@ -14,6 +14,11 @@ import item.speed;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 public class Bomber extends Character implements CanMove {
 
@@ -88,7 +93,16 @@ public class Bomber extends Character implements CanMove {
                 break;
         }
     }
-
+    
+    public void drawDead(Graphics2D g2){
+        BufferedImage img=null;
+        try {
+            img = ImageIO.read(getClass().getResourceAsStream("/Character/bomber_dead.png"));
+        } catch (IOException ex) {
+            Logger.getLogger(Bomber.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        g2.drawImage(img, this.x,this.y,  null);
+    }
     @Override
     public void drawCharacter(Graphics2D g2) {
         if (TEST.framesUp == 0 && TEST.framesDown == 0 && TEST.framesLeft == 0 && TEST.framesRight == 0 && !TEST.isKeyPressed) {
@@ -157,6 +171,10 @@ public class Bomber extends Character implements CanMove {
         }
     }
 
+    public boolean impactWithMonster(Monster monster){
+        Rectangle rec=monster.getBound();
+        return (rec.intersects(getBound()));
+    }
     public boolean insertItem(item it) {
         Rectangle rec1 =it.getBound();
         if (rec1.intersects(getBound())) {

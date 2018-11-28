@@ -18,7 +18,7 @@ import java.awt.*;
 public class Bomber extends Character implements CanMove {
 
     static public int MOVE = 2;
-    public static int bombSize = 1;
+    public int bombSize = 1;
     public int dx = 0;
     public int dy = 0;
     private Image imageUp2 = new ImageIcon(getClass().getResource("/Character/bomber_up_2.png")).getImage();
@@ -67,7 +67,7 @@ public class Bomber extends Character implements CanMove {
         this.y = y;
         image = new ImageIcon(getClass().getResource("/Character/bomber_down_1.png")).getImage();
     }
-
+    
     public void doiHuong(int huong) {
         switch (huong) {
             case TREN:

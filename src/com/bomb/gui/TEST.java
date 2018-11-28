@@ -30,7 +30,8 @@ public class TEST extends JPanel implements ActionListener {
     private static final int ix=45;
     private static final int iy=45;
     public static Bomber bomber;
-
+    int bx=0;
+    int by=0;
     private Background background = new Background();
     public static ArrayList<OBJECT> listObject = new ArrayList<>();
     public static ArrayList<Bombbang> listBombbang = new ArrayList<>();
@@ -80,6 +81,8 @@ public class TEST extends JPanel implements ActionListener {
                         }
                         case 'p': {
                             bomber = new Bomber(row*ix,line*iy);
+                            bx=row*ix;
+                            by=line*iy;
                             break;
                         }
                         case 'f': {
@@ -232,7 +235,7 @@ public class TEST extends JPanel implements ActionListener {
                 {
                     int x = object.x;
                     int y = object.y;
-                    listBombbang.add(new Bombbang(x,y,400,Bomber.bombSize,!((Bomb) object).impactRightBomb, !((Bomb) object).impactLeftBomb, !((Bomb) object).impactDownBomb, !((Bomb) object).impactUpBomb));
+                    listBombbang.add(new Bombbang(x,y,400,bomber.bombSize,!((Bomb) object).impactRightBomb, !((Bomb) object).impactLeftBomb, !((Bomb) object).impactDownBomb, !((Bomb) object).impactUpBomb));
                     ite.remove();
                     TEST.bomber.currentBomb--;
 
@@ -303,6 +306,16 @@ public class TEST extends JPanel implements ActionListener {
                 object.impactWithBomber();
                 object.impactWithItems();
                 object.impactWithMonster();
+        }
+        for(Bombbang object : listBombbang){
+                if(object.impactWithBomber()) {
+                    bomber.maxBomb=1;
+                    bomber.speed=1;
+                    bomber.speed=1;
+                    Bomber.MOVE=1;
+                    bomber=new Bomber(bx,by);
+                } 
+                
         }
         bomber.move();
         bomber.doiHuong(huong);

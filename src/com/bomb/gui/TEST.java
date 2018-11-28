@@ -7,10 +7,7 @@ import com.bomb.character.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileReader;
@@ -27,6 +24,7 @@ import item.*;
 
 public class TEST extends JPanel implements ActionListener {
 
+    Container container;
     static final int D_W = 905;
     public static final int D_H = 610;
     private int bomberX, bomberY;
@@ -56,15 +54,15 @@ public class TEST extends JPanel implements ActionListener {
     String[] map = {"map1.txt", "map2.txt", "map3.txt", "map4.txt"};
     int numberMap = 1;
 
-    TEST(String map) {
+    TEST(String map, Container container) {
+        this.container = container;
+        addKeyListener(this.myAdapter);
         loadMap(map);
         Timer timer = new Timer(20, this);
         timer.start();
     }
 
     private void loadMap(String map) {
-        GameSound gameSound = new GameSound("./src/GameSound/test.wav");
-        gameSound.loop();
         BufferedReader br;
         String s;
 
@@ -263,6 +261,8 @@ public class TEST extends JPanel implements ActionListener {
                 bomber.dx = 0;
             }
         }
+
+
     };
 
     public void checkBomb() {

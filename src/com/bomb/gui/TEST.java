@@ -214,10 +214,6 @@ public class TEST extends JPanel implements ActionListener {
                 huong = Character.PHAI;
                 bomber.dx = MOVE;
             }
-        }
-
-        @Override
-        public void keyReleased(KeyEvent e) {
             if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                 GameSound gameSound = new GameSound("./src/GameSound/newbomb.wav");
                 boolean isDraw = true;
@@ -236,29 +232,30 @@ public class TEST extends JPanel implements ActionListener {
                     TEST.bomber.currentBomb++;
                 }
             }
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+
             if (e.getKeyCode() == KeyEvent.VK_UP) {
                 dem = 10;
                 isKeyPressed = false;
-                framesUp = 0;
-                bomber.dy = 0;
+                if(bomber.dy == - MOVE)bomber.dy = 0;
             }
             if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                 dem = 10;
                 isKeyPressed = false;
-                framesDown = 0;
-                bomber.dy = 0;
+                if(bomber.dy == MOVE)bomber.dy = 0;
             }
             if (e.getKeyCode() == KeyEvent.VK_LEFT) {
                 dem = 10;
                 isKeyPressed = false;
-                framesLeft = 0;
-                bomber.dx = 0;
+                if(bomber.dx == -MOVE) bomber.dx = 0;
             }
             if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                 dem = 10;
                 isKeyPressed = false;
-                framesRight = 0;
-                bomber.dx = 0;
+                if(bomber.dx == MOVE)bomber.dx = 0;
             }
         }
 
@@ -277,7 +274,6 @@ public class TEST extends JPanel implements ActionListener {
                     listBombbang.add(new Bombbang(x, y, 400, bomber.bombSize, !((Bomb) object).impactRightBomb, !((Bomb) object).impactLeftBomb, !((Bomb) object).impactDownBomb, !((Bomb) object).impactUpBomb));
                     ite.remove();
                     TEST.bomber.currentBomb--;
-
                 }
             }
         }
@@ -304,6 +300,8 @@ public class TEST extends JPanel implements ActionListener {
     }
 
     public void init() {
+        bomber.restart = false;
+        bomber.isAlive = true;
         bomber.maxBomb = 1;
         bomber.speed = 1;
         Bomber.MOVE = 1;
@@ -313,6 +311,7 @@ public class TEST extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(bomber.restart) init();
         if (asd) {
             asd = false;
             listObject.clear();
@@ -378,7 +377,7 @@ public class TEST extends JPanel implements ActionListener {
         }
         for (Bombbang object : listBombbang) {
             if (object.impactWithBomber()) {
-                init();
+                bomber.isAlive = false;
                 break;
             }
         }

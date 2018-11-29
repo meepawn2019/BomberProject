@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 public class Bomber extends Character implements CanMove {
+    public boolean restart = false;
     public int frameDead = 1;
     public boolean isAlive = true;
     static public int MOVE = 2;
@@ -70,13 +71,15 @@ public class Bomber extends Character implements CanMove {
 
     @Override
     public void move() {
-        this.x += dx;
-        if (this.x + dx < 0 || this.x + image.getWidth(null) + dx > 45 * 31 || collision()) {
-            this.x -= dx;
-        }
-        this.y += dy;
-        if (this.y + dy < 0 || this.y + image.getHeight(null) + dy > TEST.D_H || collision()) {
-            this.y -= dy;
+        if(isAlive){
+            this.x += dx;
+            if (this.x + dx < 0 || this.x + image.getWidth(null) + dx > 45 * 31 || collision()) {
+                this.x -= dx;
+            }
+            this.y += dy;
+            if (this.y + dy < 0 || this.y + image.getHeight(null) + dy > TEST.D_H || collision()) {
+                this.y -= dy;
+            }
         }
     }
 
@@ -119,7 +122,7 @@ public class Bomber extends Character implements CanMove {
     @Override
     public void drawCharacter(Graphics2D g2) {
         if(isAlive){
-            if (TEST.framesUp == 0 && TEST.framesDown == 0 && TEST.framesLeft == 0 && TEST.framesRight == 0 && !TEST.isKeyPressed) {
+            if (dx == 0 && !TEST.isKeyPressed || dy == 0 && !TEST.isKeyPressed) {
                 g2.drawImage(image, this.x, this.y - 20, null);
             } else {
                 if (huong == 1) {
@@ -184,17 +187,22 @@ public class Bomber extends Character implements CanMove {
                 }
             }
         } else{
-            if(frameDead % 12 == 1) g2.drawImage(img_dead_1, this.x, this.y - 20, null);
-            if(frameDead % 12 == 2) g2.drawImage(img_dead_2, this.x, this.y - 20, null);
-            if(frameDead % 12 == 3) g2.drawImage(img_dead_3, this.x, this.y - 20, null);
-            if(frameDead % 12 == 4) g2.drawImage(img_dead_4, this.x, this.y - 20, null);
-            if(frameDead % 12 == 5) g2.drawImage(img_dead_5, this.x, this.y - 20, null);
-            if(frameDead % 12 == 6) g2.drawImage(img_dead_6, this.x, this.y - 20, null);
-            if(frameDead % 12 == 7) g2.drawImage(img_dead_7, this.x, this.y - 20, null);
-            if(frameDead % 12 == 8) g2.drawImage(img_dead_8, this.x, this.y - 20, null);
-            if(frameDead % 12 == 9) g2.drawImage(img_dead_9, this.x, this.y - 20, null);
-            if(frameDead % 12 == 10) g2.drawImage(img_dead_10, this.x, this.y - 20, null);
-            if(frameDead % 12 == 11) g2.drawImage(img_dead_11, this.x, this.y - 20, null);
+            if(frameDead % 11 == 0) g2.drawImage(img_dead_1, this.x, this.y - 60, null);
+            if(frameDead % 11 == 1) g2.drawImage(img_dead_2, this.x, this.y - 60, null);
+            if(frameDead % 11 == 2) g2.drawImage(img_dead_3, this.x, this.y - 60, null);
+            if(frameDead % 11 == 3) g2.drawImage(img_dead_4, this.x, this.y - 60, null);
+            if(frameDead % 11 == 4) g2.drawImage(img_dead_5, this.x, this.y - 60, null);
+            if(frameDead % 11 == 5) g2.drawImage(img_dead_6, this.x, this.y - 60, null);
+            if(frameDead % 11 == 6) g2.drawImage(img_dead_7, this.x, this.y - 60, null);
+            if(frameDead % 11 == 7) g2.drawImage(img_dead_8, this.x, this.y - 60, null);
+            if(frameDead % 11 == 8) g2.drawImage(img_dead_9, this.x, this.y - 60, null);
+            if(frameDead % 11 == 9) g2.drawImage(img_dead_10, this.x, this.y - 60, null);
+            if(frameDead % 11 == 10) {
+                g2.drawImage(img_dead_11, this.x, this.y - 60, null);
+                isAlive = true;
+                restart = true;
+                frameDead++;
+            }
         }
     }
 

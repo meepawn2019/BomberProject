@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 
+import static com.bomb.character.Bomber.MOVE;
+
 public class Ballom extends Monster implements CanMove {
 
     private int dx = 1;

@@ -27,11 +27,11 @@ public class Oneal extends Monster implements CanMove{
     public void move() {
         int tempX = TEST.bomber.x - this.x;
         int tempY = TEST.bomber.y - this.y;
-        if(tempX < 0) dx = -MOVE;
-        else if(tempX > 0) dx = MOVE;
+        if(tempX < 0) dx = MOVE;
+        else if(tempX > 0) dx = -MOVE;
         else dx = 0;
-        if(tempY < 0) dy = -MOVE;
-        else if(tempY > 0) dy = MOVE;
+        if(tempY < 0) dy = MOVE;
+        else if(tempY > 0) dy = -MOVE;
         else dy = 0;
         this.x += dx;
         if(this.x + dx < 0 || this.x + image.getWidth(null) + dx > 45*31 || collision()) this.x -=dx;

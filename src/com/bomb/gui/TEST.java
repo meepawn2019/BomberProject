@@ -65,7 +65,7 @@ public class TEST extends JPanel implements ActionListener {
         BufferedReader br;
         String s;
 
-        int i, row = 0, line = 0;
+        int i, row, line = 0;
         try {
             br = new BufferedReader(new FileReader(map));
             s = br.readLine();
@@ -88,14 +88,14 @@ public class TEST extends JPanel implements ActionListener {
                         case 'p': {
                             if (bomber == null) {
                                 bomberX = row * ix;
-                                bomberY = row * iy;
+                                bomberY = line * iy;
                                 bomber = new Bomber(row * ix, line * iy);
                                 break;
                             } else {
                                 bomberX = row * ix;
-                                bomberY = row * iy;
+                                bomberY = line * iy;
                                 bomber.x = row * ix;
-                                bomber.y = row * iy;
+                                bomber.y = line * iy;
                                 break;
                             }
                         }
@@ -164,7 +164,7 @@ public class TEST extends JPanel implements ActionListener {
             }
         }
         for (Character character : listMonster) {
-            ((Monster) character).drawCharacter(g2d);
+            character.drawCharacter(g2d);
         }
         bomber.drawCharacter(g2d);
         g2d.translate(-camera.getX(), -camera.getY());
@@ -180,7 +180,7 @@ public class TEST extends JPanel implements ActionListener {
         listObject.add(object);
     }
 
-    KeyAdapter myAdapter = new KeyAdapter() {
+    private KeyAdapter myAdapter = new KeyAdapter() {
         @Override
         public void keyPressed(KeyEvent e) {
             if (e.getKeyCode() != KeyEvent.VK_SPACE) {
@@ -304,14 +304,15 @@ public class TEST extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(bomber.restart) init();
-/*        if (asd) {
+        if (asd) {
             asd = false;
             listObject.clear();
             listMonster.clear();
             listItem.clear();
             listPortal.clear();
-            loadMap("map2.txt");
-        }*/
+            loadMap(map[numberMap]);
+            numberMap++;
+        }
 
         if (isKeyPressed) {
             dem++;
@@ -363,7 +364,6 @@ public class TEST extends JPanel implements ActionListener {
             }
         }
         for (Bombbang object : listBombbang) {
-            //object.impactWithBomber();
             object.impactWithItems();
             object.impactWithMonster();
         }
@@ -385,15 +385,7 @@ public class TEST extends JPanel implements ActionListener {
         bomber.doiHuong(huong);
         camera.moveCamera(bomber);
         moveMonster();
-        if (asd) {
-            asd = false;
-            listObject.clear();
-            listMonster.clear();
-            listItem.clear();
-            listPortal.clear();
-            loadMap(map[numberMap]);
-            numberMap++;
-        }
+
         checkBomb();
         checkBombbang();
         repaint();

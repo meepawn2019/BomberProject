@@ -8,8 +8,9 @@ import java.awt.*;
 import java.util.Random;
 
 public class Oneal extends Monster implements CanMove{
-    private int dx = 1;
+    private int dx = 0;
     private int dy = 0;
+    private int MOVE = -4;
     int turn = 0;
 
     public Oneal(int x, int y){
@@ -26,16 +27,20 @@ public class Oneal extends Monster implements CanMove{
     public void move() {
         int tempX = TEST.bomber.x - this.x;
         int tempY = TEST.bomber.y - this.y;
-        if(tempX < 0) dx = -1;
-        else dx = 1;
-        if(tempY < 0) dy = -1;
-        else dy = 1;
+        if(tempX < 0) dx = -MOVE;
+        else if(tempX > 0) dx = MOVE;
+        else dx = 0;
+        if(tempY < 0) dy = -MOVE;
+        else if(tempY > 0) dy = MOVE;
+        else dy = 0;
         this.x += dx;
+        if(this.x + dx < 0 || this.x + image.getWidth(null) + dx > 45*31 || collision()) this.x -=dx;
         this.y += dy;
-        if(this.x + dx < 0 || this.x + image.getWidth(null) + dx > 45*31 || collision()){
+        if(this.x + dx < 0 || this.x + image.getWidth(null) + dx > 45*31 || collision()) this.y -=dy;
+        /*if(this.x + dx < 0 || this.x + image.getWidth(null) + dx > 45*31 || collision()){
             this.x -= dx;
             this.y -= dy;
-        }
+        }*/
 
     }
 

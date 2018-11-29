@@ -29,7 +29,6 @@ public class Container extends JPanel {
         add(mMenu, TAG_MENU);
         test = new TEST(map[0], this);
         add(test, TAG_PLAYGAME);
-        //addKeyListener(test.myAdapter);
         showMenu();
     }
 

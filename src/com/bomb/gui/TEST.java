@@ -3,13 +3,17 @@ package com.bomb.gui;
 import GameSound.GameSound;
 import com.bomb.BackGround.Background;
 import com.bomb.OBJECT.*;
+import com.bomb.character.Character;
 import com.bomb.character.*;
+import item.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,20 +23,14 @@ import java.util.logging.Logger;
 
 import static com.bomb.character.Bomber.MOVE;
 
-import com.bomb.character.Character;
-import item.*;
-
 public class TEST extends JPanel implements ActionListener {
-
     Container container;
-    static final int D_W = 905;
+    static final int D_W = 805;
     public static final int D_H = 620;
     private int bomberX, bomberY;
     private static final int ix = 45;
     private static final int iy = 45;
     public static Bomber bomber;
-    int bx = 0;
-    int by = 0;
     private Background background = new Background();
     public static ArrayList<OBJECT> listObject = new ArrayList<>();
     public static ArrayList<Bombbang> listBombbang = new ArrayList<>();
@@ -51,12 +49,13 @@ public class TEST extends JPanel implements ActionListener {
     private int dem = 0;
     private int demBomb = 0;
 
-    String[] map = {"map1.txt", "map2.txt", "map3.txt", "map4.txt"};
-    int numberMap = 1;
+    private String[] map = {"map1.txt", "map2.txt", "map3.txt", "map4.txt"};
+    private int numberMap = 1;
 
     TEST(String map, Container container) {
         this.container = container;
         addKeyListener(this.myAdapter);
+        setLayout(null);
         loadMap(map);
         Timer timer = new Timer(20, this);
         timer.start();
@@ -168,13 +167,6 @@ public class TEST extends JPanel implements ActionListener {
             ((Monster) character).drawCharacter(g2d);
         }
         bomber.drawCharacter(g2d);
-        for (Bombbang object : listBombbang) {
-            if (object.impactWithBomber()) {
-                bomber.drawDead(g2d);
-                break;
-            }
-
-        }
         g2d.translate(-camera.getX(), -camera.getY());
     }
 
@@ -312,14 +304,14 @@ public class TEST extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(bomber.restart) init();
-        if (asd) {
+/*        if (asd) {
             asd = false;
             listObject.clear();
             listMonster.clear();
             listItem.clear();
             listPortal.clear();
             loadMap("map2.txt");
-        }
+        }*/
 
         if (isKeyPressed) {
             dem++;
@@ -365,7 +357,7 @@ public class TEST extends JPanel implements ActionListener {
 
         }
         for (Portal p : listPortal) {
-            if (bomber.isInsertPortal(p)) {
+            if (bomber.isInsertPortal(p) && listMonster.isEmpty()) {
                 asd = true;
                 break;
             }

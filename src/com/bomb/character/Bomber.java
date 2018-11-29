@@ -110,7 +110,7 @@ public class Bomber extends Character implements CanMove {
         }
     }
     
-    public void drawDead(Graphics2D g2){
+    /*public void drawDead(Graphics2D g2){
         BufferedImage img=null;
         try {
             img = ImageIO.read(getClass().getResourceAsStream("/Character/bomber_dead.png"));
@@ -118,7 +118,7 @@ public class Bomber extends Character implements CanMove {
             Logger.getLogger(Bomber.class.getName()).log(Level.SEVERE, null, ex);
         }
         g2.drawImage(img, this.x,this.y,  null);
-    }
+    }*/
     @Override
     public void drawCharacter(Graphics2D g2) {
         if(isAlive){

@@ -357,7 +357,7 @@ public class TEST extends JPanel implements ActionListener {
 
         }
         for (Portal p : listPortal) {
-            if (bomber.isInsertPortal(p) && listMonster.isEmpty()) {
+            if (bomber.isInsertPortal(p) /*&& listMonster.isEmpty()*/) {
                 asd = true;
                 break;
             }

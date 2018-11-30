@@ -25,7 +25,7 @@ public class Bomber extends Character implements CanMove {
     public boolean restart = false;
     public int frameDead = 1;
     public boolean isAlive = true;
-    static public int MOVE = 5;
+    static public int MOVE = 1;
     public int bombSize = 1;
     public int dx = 0;
     public int dy = 0;

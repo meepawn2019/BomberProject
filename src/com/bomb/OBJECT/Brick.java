@@ -1,9 +1,11 @@
 
 package com.bomb.OBJECT;
 
+import item.item;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,7 +34,10 @@ public class Brick extends OBJECT{
     public void drawObject(Graphics2D g2) {
         g2.drawImage(this.image, this.x, this.y,this.image.getWidth() ,this.image.getHeight(), null);
     }
-
+    public boolean isItemInside(item i){
+        Rectangle rec=this.getBound();
+        return rec.intersects(i.getBound());
+    }
     
     
 }

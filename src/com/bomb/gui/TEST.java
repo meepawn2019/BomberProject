@@ -119,6 +119,21 @@ public class TEST extends JPanel implements ActionListener {
                             listPortal.add(new Portal(row * ix, line * iy));
                             break;
                         }
+                        case 'S': {
+                            listItem.add(new speed(row*ix,line*iy));
+                            this.addObject(new Brick(row*ix,line*iy));
+                            break;
+                        }
+                        case 'F': {
+                            listItem.add(new flame(row*ix,line*iy));
+                            this.addObject(new Brick(row*ix,line*iy));
+                            break;
+                        }
+                        case 'B':{
+                            listItem.add(new NumberBomb(row*ix,line*iy));
+                            this.addObject(new Brick(row*ix,line*iy));
+                            break;
+                        }
 
                     }
                     row++;
@@ -139,6 +154,9 @@ public class TEST extends JPanel implements ActionListener {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.translate(camera.getX(), camera.getY());
         background.drawBackGround(g2d);
+        for (item i : listItem) {
+            i.drawItem(g2d);
+        }
         for (OBJECT object : listObject) {
             if (object instanceof Brick || object instanceof Bomb) {
                 object.drawObject(g2d);
@@ -147,9 +165,7 @@ public class TEST extends JPanel implements ActionListener {
         for (Bombbang bombb : listBombbang) {
             bombb.drawObject(g2d);
         }
-        for (item i : listItem) {
-            i.drawItem(g2d);
-        }
+        
         for (OBJECT object : listObject) {
             if (object instanceof Wall) {
                 object.drawObject(g2d);

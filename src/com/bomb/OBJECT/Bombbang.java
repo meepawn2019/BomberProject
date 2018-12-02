@@ -402,13 +402,22 @@ public class Bombbang extends OBJECT {
     }
 
     public void impactWithItems() {
+        boolean b=false;
         Rectangle rec1 = new Rectangle(this.x, this.y + 45, img_down_2.getWidth(null), img_down_2.getHeight(null) * tempDown);
         Rectangle rec2 = new Rectangle(this.x, this.y - 45*tempUp, img_down_2.getWidth(null), img_down_2.getHeight(null) * tempUp);
         Rectangle rec3 = new Rectangle(this.x+45, this.y, img_down_2.getWidth(null) * tempRight, img_down_2.getHeight(null));
         Rectangle rec4 = new Rectangle(this.x - 45*tempLeft, this.y, img_down_2.getWidth(null) * tempLeft, img_down_2.getHeight(null));
         for(item item : TEST.listItem){
             if(rec1.intersects(item.getBound()) || rec2.intersects(item.getBound()) || rec3.intersects(item.getBound()) || rec4.intersects(item.getBound()  )){
-                removeItem(TEST.listItem, item);
+                for(OBJECT obj : TEST.listObject){
+                    if(obj instanceof Brick){
+                        if(((Brick) obj).isItemInside(item)) {
+                            b=true;
+                            break;
+                        }
+                    }
+                }
+                if(b)removeItem(TEST.listItem, item);
                 break;
             }
         }

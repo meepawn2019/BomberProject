@@ -134,6 +134,10 @@ public class TEST extends JPanel implements ActionListener {
                             this.addObject(new Brick(row*ix,line*iy));
                             break;
                         }
+                        case 'm':{
+                            listItem.add(new MaxBoomb(row*ix,line*iy));
+                            break;
+                        }
 
                     }
                     row++;

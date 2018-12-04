@@ -2,11 +2,9 @@ package com.bomb.character;
 
 import GameSound.GameSound;
 import com.bomb.OBJECT.Bomb;
-import com.bomb.OBJECT.Bombbang;
 import com.bomb.OBJECT.OBJECT;
 import com.bomb.gui.TEST;
-import static com.bomb.gui.TEST.bomber;
-import static com.bomb.gui.TEST.listItem;
+import item.MaxBoomb;
 import item.NumberBomb;
 import item.Portal;
 import item.flame;
@@ -15,11 +13,6 @@ import item.speed;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 
 public class Bomber extends Character implements CanMove {
     public boolean restart = false;
@@ -218,6 +211,7 @@ public class Bomber extends Character implements CanMove {
             if(it instanceof flame ) bombSize++;
             if(it instanceof speed) MOVE++;
             if(it instanceof NumberBomb) maxBomb++;
+            if(it instanceof MaxBoomb) bombSize=9;
             return true;
         }
         return false;

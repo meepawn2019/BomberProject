@@ -27,7 +27,7 @@ public class Ballom extends Monster implements CanMove {
 
     @Override
     public void move() {
-        if(isCrossWay()){
+        if(isCrossWay() && this.x % 45 == 0 || isCrossWay() && this.y % 45 == 0){
             turn++;
             if(turn % 2 == 0){
                 {
@@ -66,6 +66,15 @@ public class Ballom extends Monster implements CanMove {
     }
 
     private boolean isCrossWay(){
+        /*this.x += MOVE;
+        this.y += MOVE;
+        if(!collision()) {
+            this.x -=MOVE;
+            this.y -=MOVE;
+            return false;
+        }
+        this.x -= MOVE;
+        this.y -= MOVE;*/
         if(dx == 0){
             this.x+=1;
             if(!collision()){

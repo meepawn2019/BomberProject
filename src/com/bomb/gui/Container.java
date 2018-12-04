@@ -27,7 +27,7 @@ public class Container extends JPanel {
         setLayout(mCardLayout);
         mMenu = new Menu(this);
         add(mMenu, TAG_MENU);
-        test = new TEST(map[0], this);
+        test = new TEST(map[3], this);
         add(test, TAG_PLAYGAME);
         showMenu();
     }
@@ -40,8 +40,8 @@ public class Container extends JPanel {
     public void showGame(){
         mCardLayout.show(Container.this, TAG_PLAYGAME);
         test.requestFocus();
-        GameSound gameSound = new GameSound("./src/GameSound/test.wav");
-        gameSound.loop();
+        /*GameSound gameSound = new GameSound("./src/GameSound/test.wav");
+        gameSound.loop();*/
     }
 
 }

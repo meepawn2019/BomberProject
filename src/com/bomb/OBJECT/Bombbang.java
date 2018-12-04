@@ -170,19 +170,6 @@ public class Bombbang extends OBJECT {
         return false;
     }
 
-    public void removeBomb(ArrayList<OBJECT> list, Bomb bomb) {
-        Iterator<OBJECT> ite = list.iterator();
-        while (ite.hasNext()) {
-            OBJECT object = ite.next();
-            if (object instanceof Bomb) {
-                if (bomb.equals(object)) {
-                    ite.remove();
-                    break;
-                }
-            }
-        }
-    }
-
     private void removeMonster(ArrayList<Character> list, Monster monster) {
         Iterator<Character> ite = list.iterator();
         Character character;
@@ -196,61 +183,6 @@ public class Bombbang extends OBJECT {
             }
         }
     }
-
-    
-
-/*    public void monsterRight(ArrayList<Character> list, int x, int y, int size) {
-        for (Character c : list) {
-            if (c instanceof Ballom) {
-                if (((Ballom) c).y == y) {
-                    if (((Ballom) c).x <= x + 45 * size && ((Ballom) c).x >= x) {
-                        removeMonster(list, (Ballom) c);
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
-    public void monsterLeft(ArrayList<Character> list, int x, int y, int size) {
-        for (Character c : list) {
-            if (c instanceof Ballom) {
-                if (((Ballom) c).y == y) {
-                    if (((Ballom) c).x >= x - 45 * size && ((Ballom) c).x <= x) {
-                        removeMonster(list, (Ballom) c);
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
-    public void monsterUp(ArrayList<Character> list, int x, int y, int size) {
-        for (Character c : list) {
-            if (c instanceof Ballom) {
-                if (((Ballom) c).x == x) {
-                    if (((Ballom) c).y <= y - 45 * size && ((Ballom) c).y >= y) {
-                        removeMonster(list, (Ballom) c);
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
-    public void monsterDown(ArrayList<Character> list, int x, int y, int size) {
-        for (Character c : list) {
-            if (c instanceof Ballom) {
-                if (((Ballom) c).x == x) {
-                    if (((Ballom) c).y >= y + 45 * size && ((Ballom) c).y <= y) {
-                        removeMonster(list, (Ballom) c);
-                        break;
-                    }
-                }
-            }
-        }
-    }*/
-
     public static void removeItem(ArrayList<item> list, item i) {
         Iterator<item> ite = list.iterator();
         while (ite.hasNext()) {
@@ -261,50 +193,6 @@ public class Bombbang extends OBJECT {
             }
         }
     }
-
- /*   public void itemDown(ArrayList<item> list, int x, int y, int size) {
-        for (item i : list) {
-            if (i.x == x) {
-                if (i.y <= y + 45 * size+45&&i.y>=y) {
-                    removeItem(list, i);
-                    break;
-                }
-            }
-        }
-    }
-
-    public void itemUp(ArrayList<item> list, int x, int y, int size) {
-        for (item i : list) {
-            if (i.x == x) {
-                if (i.y >= y - 45 * size&&i.y<=y) {
-                    removeItem(list, i);
-                    break;
-                }
-            }
-        }
-    }
-
-    public void itemRight(ArrayList<item> list, int x, int y, int size) {
-        for (item i : list) {
-            if (i.y == y) {
-                if (i.x <= x + 45 * size&&i.y>=y) {
-                    removeItem(list, i);
-                    break;
-                }
-            }
-        }
-    }
-
-    public void itemLeft(ArrayList<item> list, int x, int y, int size) {
-        for (item i : list) {
-            if (i.y == y) {
-                if (i.x >= x - 45 * size&&i.y<=y) {
-                    removeItem(list, i);
-                    break;
-                }
-            }
-        }
-    }*/
 
     @Override
     public void drawObject(Graphics2D g2) {
@@ -391,10 +279,6 @@ public class Bombbang extends OBJECT {
         Rectangle rec2 = new Rectangle(this.x, this.y - 45*tempUp, img_down_2.getWidth(null), img_down_2.getHeight(null) * tempUp);
         Rectangle rec3 = new Rectangle(this.x+45, this.y, img_down_2.getWidth(null) * tempRight, img_down_2.getHeight(null));
         Rectangle rec4 = new Rectangle(this.x - 45*tempLeft, this.y, img_down_2.getWidth(null) * tempLeft, img_down_2.getHeight(null));
-       /* Rectangle rec5 = rec1.intersection(TEST.bomber.getBound());
-        Rectangle rec6 = rec2.intersection(TEST.bomber.getBound());
-        Rectangle rec7 = rec3.intersection(TEST.bomber.getBound());
-        Rectangle rec8 = rec4.intersection(TEST.bomber.getBound());*/
         if (rec1.intersects(TEST.bomber.getBound()) || rec2.intersects(TEST.bomber.getBound()) || rec3.intersects(TEST.bomber.getBound()) || rec4.intersects(TEST.bomber.getBound())) {
             return true;
         }

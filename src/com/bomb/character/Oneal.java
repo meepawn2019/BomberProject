@@ -10,7 +10,7 @@ import java.util.Random;
 public class Oneal extends Monster implements CanMove{
     private int dx = 0;
     private int dy = 0;
-    private int MOVE = -4;
+    private int MOVE = -2;
     int turn = 0;
 
     public Oneal(int x, int y){

@@ -40,8 +40,8 @@ public class Container extends JPanel {
     public void showGame(){
         mCardLayout.show(Container.this, TAG_PLAYGAME);
         test.requestFocus();
-        /*GameSound gameSound = new GameSound("./src/GameSound/test.wav");
-        gameSound.loop();*/
+        GameSound gameSound = new GameSound("./src/GameSound/Village.wav");
+        gameSound.loop();
     }
 
 }

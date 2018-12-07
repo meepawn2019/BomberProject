@@ -2,31 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="53c7505c-4a4b-434e-b86f-91d9eeff9296" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bomberman/Character/background_option.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bomberman/Character/bomb.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bomberman/Character/bombbang.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bomberman/Character/bombbang_down_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bomberman/Character/bombbang_down_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bomberman/Character/bombbang_left_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bomberman/Character/bombbang_left_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bomberman/Character/bombbang_right_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bomberman/Character/bombbang_right_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bomberman/Character/bombbang_up_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bomberman/Character/bombbang_up_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bomberman/Character/bomber_dead.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bomberman/Character/portal0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bomberman/META-INF/Bomberman.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bomberman/com/bomb/OBJECT/Bombbang.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bomberman/com/bomb/OBJECT/Bombbang.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bomberman/com/bomb/OBJECT/Brick.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bomberman/com/bomb/OBJECT/Brick.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bomberman/com/bomb/character/Ballom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bomberman/com/bomb/character/Ballom.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bomberman/com/bomb/character/Bomber.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bomberman/com/bomb/character/Bomber.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bomberman/com/bomb/character/Oneal.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bomberman/com/bomb/character/Oneal.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bomberman/com/bomb/gui/Container.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bomberman/com/bomb/gui/Container.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bomberman/com/bomb/gui/TEST$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bomberman/com/bomb/gui/TEST$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bomberman/com/bomb/gui/TEST.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bomberman/com/bomb/gui/TEST.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bomb/character/Oneal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bomb/character/Oneal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/bomb/gui/Container.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bomb/gui/Container.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/bomb/gui/TEST.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/bomb/gui/TEST.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -46,20 +22,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/bomb/gui/TEST.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2070">
-              <caret line="159" column="35" selection-start-line="159" selection-start-column="35" selection-end-line="159" selection-end-column="35" />
+            <state relative-caret-position="591">
+              <caret line="395" column="41" lean-forward="true" selection-start-line="395" selection-start-column="41" selection-end-line="395" selection-end-column="41" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/bomb/character/Ballom.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
-              <caret line="29" column="38" lean-forward="true" selection-start-line="29" selection-start-column="38" selection-end-line="29" selection-end-column="38" />
+            <state relative-caret-position="315">
+              <caret line="30" column="19" lean-forward="true" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -94,8 +70,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/bomb/gui/Container.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="21" lean-forward="true" selection-start-column="21" selection-end-column="21" />
+            <state relative-caret-position="555">
+              <caret line="42" column="72" selection-start-line="42" selection-start-column="72" selection-end-line="42" selection-end-column="72" />
             </state>
           </provider>
         </entry>
@@ -175,12 +151,12 @@
         <option value="$PROJECT_DIR$/src/com/bomb/gui/Menu.java" />
         <option value="$PROJECT_DIR$/src/com/bomb/OBJECT/Bomb.java" />
         <option value="$PROJECT_DIR$/src/com/bomb/gui/Play.java" />
-        <option value="$PROJECT_DIR$/src/com/bomb/gui/TEST.java" />
         <option value="$PROJECT_DIR$/src/com/bomb/character/Bomber.java" />
         <option value="$PROJECT_DIR$/src/com/bomb/OBJECT/Bombbang.java" />
         <option value="$PROJECT_DIR$/src/com/bomb/character/Oneal.java" />
-        <option value="$PROJECT_DIR$/src/com/bomb/gui/Container.java" />
         <option value="$PROJECT_DIR$/src/com/bomb/character/Ballom.java" />
+        <option value="$PROJECT_DIR$/src/com/bomb/gui/Container.java" />
+        <option value="$PROJECT_DIR$/src/com/bomb/gui/TEST.java" />
       </list>
     </option>
   </component>
@@ -518,13 +494,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/bomb/gui/TEST.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2070">
-          <caret line="159" column="35" selection-start-line="159" selection-start-column="35" selection-end-line="159" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bomb/gui/Camera.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -541,15 +510,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bomb/gui/Container.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="21" lean-forward="true" selection-start-column="21" selection-end-column="21" />
+        <state relative-caret-position="555">
+          <caret line="42" column="72" selection-start-line="42" selection-start-column="72" selection-end-line="42" selection-end-column="72" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bomb/character/Ballom.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="29" column="38" lean-forward="true" selection-start-line="29" selection-start-column="38" selection-end-line="29" selection-end-column="38" />
+        <state relative-caret-position="315">
+          <caret line="30" column="19" lean-forward="true" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/bomb/gui/TEST.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="591">
+          <caret line="395" column="41" lean-forward="true" selection-start-line="395" selection-start-column="41" selection-end-line="395" selection-end-column="41" />
         </state>
       </provider>
     </entry>

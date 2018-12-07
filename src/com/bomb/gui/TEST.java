@@ -396,7 +396,8 @@ public class TEST extends JPanel implements ActionListener {
         for (Character m : listMonster) {
             if (m instanceof Monster) {
                 if (bomber.impactWithMonster((Monster) m)) {
-                    init();
+                    bomber.isAlive = false;
+                    //init();
                     break;
                 }
             }

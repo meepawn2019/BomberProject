@@ -25,7 +25,7 @@ public class Container extends JPanel {
         setLayout(mCardLayout);
         mMenu = new Menu(this);
         add(mMenu, TAG_MENU);
-        test = new TEST(map[0   ], this);
+        test = new TEST(map[0  ], this);
         add(test, TAG_PLAYGAME);
         showMenu();
     }

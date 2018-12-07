@@ -8,8 +8,6 @@ import java.awt.*;
 public class Container extends JPanel {
     private static final String TAG_PLAYGAME = "tag_playgame";
     private static final String TAG_MENU = "tag_menu";
-    private static final String TAG_OPTION = "tag_option";
-    private static final String TAG_HIGHTSCORE = "tag_hightscore";
     private CardLayout mCardLayout;
     private GUI gui;
     private Menu mMenu;
@@ -27,7 +25,7 @@ public class Container extends JPanel {
         setLayout(mCardLayout);
         mMenu = new Menu(this);
         add(mMenu, TAG_MENU);
-        test = new TEST(map[3], this);
+        test = new TEST(map[0   ], this);
         add(test, TAG_PLAYGAME);
         showMenu();
     }

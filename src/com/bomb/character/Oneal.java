@@ -16,11 +16,11 @@ public class Oneal extends Monster implements CanMove{
     public Oneal(int x, int y){
         this.x = x;
         this.y = y;
-        image = new ImageIcon(getClass().getResource("/Character/monster_down.png")).getImage();
+        image = new ImageIcon(getClass().getResource("/Character/AI_down.png")).getImage();
     }
     @Override
     public void drawCharacter(Graphics2D g2) {
-        g2.drawImage(image, x, y-23, null);
+        g2.drawImage(image, x, y,45, 45, null);
     }
 
     @Override
@@ -37,10 +37,6 @@ public class Oneal extends Monster implements CanMove{
         if(this.x + dx < 0 || this.x + image.getWidth(null) + dx > 45*31 || collision()) this.x -=dx;
         this.y += dy;
         if(this.x + dx < 0 || this.x + image.getWidth(null) + dx > 45*31 || collision()) this.y -=dy;
-        /*if(this.x + dx < 0 || this.x + image.getWidth(null) + dx > 45*31 || collision()){
-            this.x -= dx;
-            this.y -= dy;
-        }*/
 
     }
 
@@ -53,18 +49,14 @@ public class Oneal extends Monster implements CanMove{
         return false;
     }
     public Rectangle getBound() {
-        return new Rectangle(x, y, image.getWidth(null), image.getHeight(null)-23);
+        return new Rectangle(x, y, 45, 45);
     }
 
     public void doiHuong(){
-        if(dx == 0 && dy > 0) this.image = new ImageIcon(getClass().getResource("/Character/monster_down.png")).getImage();
-        if(dx == 0 && dy < 0) this.image = new ImageIcon(getClass().getResource("/Character/monster_up.png")).getImage();
-        if(dx > 0 && dy == 0) this.image = new ImageIcon(getClass().getResource("/Character/monster_right.png")).getImage();
-        if(dx < 0 && dy == 0) this.image = new ImageIcon(getClass().getResource("/Character/monster_left.png")).getImage();
+        if(dx == 0 && dy > 0) this.image = new ImageIcon(getClass().getResource("/Character/AI_down.png")).getImage();
+        if(dx == 0 && dy < 0) this.image = new ImageIcon(getClass().getResource("/Character/AI_up.png")).getImage();
+        if(dx > 0 && dy == 0) this.image = new ImageIcon(getClass().getResource("/Character/AI_right.png")).getImage();
+        if(dx < 0 && dy == 0) this.image = new ImageIcon(getClass().getResource("/Character/AI_left.png")).getImage();
     }
 
-    public boolean impactBomber(){
-        if(getBound().intersects(TEST.bomber.getBound())) return true;
-        else return false;
-    }
 }
